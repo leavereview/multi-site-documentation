@@ -1,0 +1,25 @@
+# Site directories (each has its own git repo)
+mydojo.software/
+petcare.software/
+mydriveschool.software/
+mytattoo.software/
+
+# Legacy content
+wordpress-images/
+wp-exports/
+content-plan/
+
+# System files
+.DS_Store
+*.png
+*.jpg
+*.jpeg
+
+# Tools
+tools/
+
+# Keep only documentation and shared resources
+!README.md
+!CLAUDE.md
+!*.md
+!*.sh
