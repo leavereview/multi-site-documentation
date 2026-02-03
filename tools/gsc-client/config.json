@@ -1,0 +1,29 @@
+{
+  "serviceAccountPath": "../../petcare-481007-9f7c4f20cf39.json",
+  "domains": [
+    {
+      "name": "mydojo.software",
+      "gscProperty": "https://mydojo.software/",
+      "enabled": true
+    },
+    {
+      "name": "petcare.software",
+      "gscProperty": "https://petcare.software/",
+      "enabled": true
+    },
+    {
+      "name": "mydriveschool.software",
+      "gscProperty": "https://mydriveschool.software/",
+      "enabled": true
+    },
+    {
+      "name": "mytattoo.software",
+      "gscProperty": "https://mytattoo.software/",
+      "enabled": true
+    }
+  ],
+  "defaults": {
+    "dateRangeDays": 28,
+    "outputPath": "~/seo-reports"
+  }
+}

@@ -17,6 +17,7 @@ content-plan/
 
 # Tools
 tools/
+!tools/gsc-client/
 
 # Keep only documentation and shared resources
 !README.md

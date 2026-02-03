@@ -1,0 +1,22 @@
+{
+  "name": "gsc-client",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Google Search Console API client for SEO monitoring",
+  "main": "src/index.js",
+  "scripts": {
+    "check": "node src/index.js",
+    "check:mydojo": "node src/index.js --domain=mydojo.software",
+    "report": "node src/report-all.js",
+    "report:weekly": "node src/report-all.js --days=7"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "date-fns": "^3.3.1",
+    "exceljs": "^4.4.0",
+    "googleapis": "^134.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
