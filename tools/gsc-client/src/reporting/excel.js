@@ -17,6 +17,7 @@ export async function generateExcelReport(allDomainsData, outputPath) {
     workbook.created = new Date();
 
     // Create worksheets
+    createGrowthPotentialAnalysis(workbook, allDomainsData);
     createExecutiveSummary(workbook, allDomainsData);
     createDomainPerformance(workbook, allDomainsData);
     createTopQueries(workbook, allDomainsData);
@@ -33,6 +34,255 @@ export async function generateExcelReport(allDomainsData, outputPath) {
     console.error(chalk.red('✗ Failed to generate Excel report:'), error.message);
     throw error;
   }
+}
+
+/**
+ * Analyze commercial intent keywords and growth potential
+ */
+function analyzeCommercialIntent(queries) {
+  const commercialKeywords = [
+    'software', 'app', 'tool', 'system', 'platform', 'solution',
+    'management', 'booking', 'scheduling', 'crm', 'calculator',
+    'pricing', 'cost', 'best', 'top', 'vs', 'alternative',
+    'review', 'comparison', 'how to', 'guide'
+  ];
+
+  const highIntentTerms = ['buy', 'price', 'pricing', 'cost', 'calculator', 'demo', 'trial', 'sign up'];
+
+  return queries.map(query => {
+    const queryLower = query.query.toLowerCase();
+
+    // Commercial intent score
+    let intentScore = 0;
+    commercialKeywords.forEach(keyword => {
+      if (queryLower.includes(keyword)) intentScore += 1;
+    });
+
+    // High intent bonus
+    highIntentTerms.forEach(term => {
+      if (queryLower.includes(term)) intentScore += 3;
+    });
+
+    // Position bonus (closer to page 1 = higher potential)
+    const positionScore = query.position <= 20 ? (20 - query.position) : 0;
+
+    // Impression value (shows demand)
+    const impressionScore = Math.log10(query.impressions + 1) * 2;
+
+    // Calculate total growth potential
+    const growthPotential = (intentScore * 10) + positionScore + impressionScore;
+
+    return {
+      ...query,
+      intentScore,
+      growthPotential,
+      isCommercial: intentScore > 0
+    };
+  });
+}
+
+/**
+ * Create Growth Potential Analysis worksheet
+ */
+function createGrowthPotentialAnalysis(workbook, allDomainsData) {
+  const sheet = workbook.addWorksheet('Growth Potential Analysis', { state: 'visible', tabColor: { argb: 'FFFF6B6B' } });
+
+  // Title
+  sheet.mergeCells('A1:G1');
+  sheet.getCell('A1').value = '🚀 WHICH APPLICATION TO BUILD FIRST?';
+  sheet.getCell('A1').font = { size: 16, bold: true, color: { argb: 'FFFFFFFF' } };
+  sheet.getCell('A1').fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FFFF6B6B' }
+  };
+  sheet.getCell('A1').alignment = { horizontal: 'center', vertical: 'middle' };
+  sheet.getRow(1).height = 35;
+
+  // Subtitle
+  sheet.mergeCells('A2:G2');
+  sheet.getCell('A2').value = 'Analysis of commercial intent keywords and traffic growth potential';
+  sheet.getCell('A2').font = { size: 11, italic: true };
+  sheet.getCell('A2').alignment = { horizontal: 'center' };
+  sheet.getRow(2).height = 20;
+
+  // Analyze each domain
+  const domainAnalysis = allDomainsData.map(domainData => {
+    const analyzedQueries = analyzeCommercialIntent(domainData.topQueries || []);
+
+    // Commercial keywords only
+    const commercialQueries = analyzedQueries.filter(q => q.isCommercial);
+
+    // Top opportunities (high intent + good position)
+    const topOpportunities = analyzedQueries
+      .filter(q => q.isCommercial && q.position <= 30)
+      .sort((a, b) => b.growthPotential - a.growthPotential)
+      .slice(0, 10);
+
+    // Calculate scores
+    const commercialImpressions = commercialQueries.reduce((sum, q) => sum + q.impressions, 0);
+    const commercialClicks = commercialQueries.reduce((sum, q) => sum + q.clicks, 0);
+    const avgCommercialPosition = commercialQueries.length > 0
+      ? commercialQueries.reduce((sum, q) => sum + q.position, 0) / commercialQueries.length
+      : 999;
+
+    const growthScore = topOpportunities.reduce((sum, q) => sum + q.growthPotential, 0);
+
+    return {
+      domain: domainData.domain,
+      commercialQueryCount: commercialQueries.length,
+      commercialImpressions,
+      commercialClicks,
+      avgCommercialPosition,
+      growthScore,
+      topOpportunities
+    };
+  });
+
+  // Sort by growth score
+  domainAnalysis.sort((a, b) => b.growthScore - a.growthScore);
+
+  // Recommendation section
+  sheet.addRow([]);
+  sheet.mergeCells('A4:G4');
+  const recCell = sheet.getCell('A4');
+  recCell.value = `🏆 RECOMMENDATION: Build ${domainAnalysis[0].domain.toUpperCase()} First`;
+  recCell.font = { size: 14, bold: true, color: { argb: 'FFFFFFFF' } };
+  recCell.fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FF6BCF7F' }
+  };
+  recCell.alignment = { horizontal: 'center', vertical: 'middle' };
+  sheet.getRow(4).height = 30;
+
+  // Domain comparison table
+  sheet.addRow([]);
+  sheet.addRow([]);
+  const headerRow = sheet.addRow(['Rank', 'Domain', 'Commercial Keywords', 'Commercial Impressions', 'Avg Position', 'Growth Score', 'Priority']);
+  headerRow.font = { bold: true, color: { argb: 'FFFFFFFF' } };
+  headerRow.fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FF1A1A2E' }
+  };
+  headerRow.height = 25;
+
+  domainAnalysis.forEach((analysis, index) => {
+    const priority = index === 0 ? '⭐ HIGH' : index === 1 ? 'MEDIUM' : 'LOW';
+
+    const row = sheet.addRow([
+      index + 1,
+      analysis.domain,
+      analysis.commercialQueryCount,
+      analysis.commercialImpressions,
+      analysis.avgCommercialPosition.toFixed(1),
+      Math.round(analysis.growthScore),
+      priority
+    ]);
+
+    if (index === 0) {
+      row.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFCFF4D2' }
+      };
+      row.font = { bold: true };
+    }
+  });
+
+  // Detailed analysis for top domain
+  sheet.addRow([]);
+  sheet.addRow([]);
+  sheet.mergeCells(`A${sheet.rowCount + 1}:G${sheet.rowCount + 1}`);
+  const detailHeader = sheet.getCell(`A${sheet.rowCount}`);
+  detailHeader.value = `📊 WHY ${domainAnalysis[0].domain.toUpperCase()}?`;
+  detailHeader.font = { size: 12, bold: true };
+  detailHeader.fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FFE8E8E8' }
+  };
+  sheet.getRow(sheet.rowCount).height = 25;
+
+  // Top opportunities for #1 domain
+  sheet.addRow([]);
+  const oppHeaderRow = sheet.addRow(['Query', 'Position', 'Impressions', 'Clicks', 'Intent Score', 'Growth Potential', 'Action']);
+  oppHeaderRow.font = { bold: true };
+  oppHeaderRow.fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FFFFD93D' }
+  };
+
+  domainAnalysis[0].topOpportunities.slice(0, 10).forEach(opp => {
+    const action = opp.position <= 10 ? 'Optimize to top 3' :
+                   opp.position <= 20 ? 'Push to page 1' : 'Build content';
+
+    sheet.addRow([
+      opp.query,
+      opp.position.toFixed(1),
+      opp.impressions,
+      opp.clicks,
+      opp.intentScore,
+      Math.round(opp.growthPotential),
+      action
+    ]);
+  });
+
+  // Reasoning section
+  sheet.addRow([]);
+  sheet.addRow([]);
+  sheet.mergeCells(`A${sheet.rowCount + 1}:G${sheet.rowCount + 1}`);
+  const reasonHeader = sheet.getCell(`A${sheet.rowCount}`);
+  reasonHeader.value = '💡 KEY INSIGHTS';
+  reasonHeader.font = { size: 12, bold: true };
+  reasonHeader.fill = {
+    type: 'pattern',
+    pattern: 'solid',
+    fgColor: { argb: 'FFE8E8E8' }
+  };
+  sheet.getRow(sheet.rowCount).height = 25;
+
+  // Add insights
+  const insights = [
+    ['Metric', 'Finding', 'Impact'],
+  ];
+
+  const topDomain = domainAnalysis[0];
+  insights.push(
+    ['Commercial Intent', `${topDomain.commercialQueryCount} commercial keywords tracked`, 'High buying intent from searchers'],
+    ['Market Demand', `${topDomain.commercialImpressions.toLocaleString()} impressions on commercial terms`, 'Proven search demand exists'],
+    ['Competition Gap', `Average position ${topDomain.avgCommercialPosition.toFixed(1)}`, topDomain.avgCommercialPosition < 30 ? 'Low competition, easier to rank' : 'Need SEO investment'],
+    ['Growth Potential', `Score: ${Math.round(topDomain.growthScore)}`, 'Highest opportunity for quick wins']
+  );
+
+  insights.forEach((insight, index) => {
+    const row = sheet.addRow(insight);
+    if (index === 0) {
+      row.font = { bold: true };
+      row.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFFFD93D' }
+      };
+    }
+  });
+
+  // Column widths
+  sheet.getColumn(1).width = 8;
+  sheet.getColumn(2).width = 35;
+  sheet.getColumn(3).width = 20;
+  sheet.getColumn(4).width = 20;
+  sheet.getColumn(5).width = 15;
+  sheet.getColumn(6).width = 15;
+  sheet.getColumn(7).width = 25;
+
+  // Number formatting
+  sheet.getColumn(4).numFmt = '#,##0';
+
+  // Freeze panes
+  sheet.views = [{ state: 'frozen', xSplit: 0, ySplit: 7 }];
 }
 
 /**
