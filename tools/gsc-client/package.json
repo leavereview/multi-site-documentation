@@ -7,10 +7,13 @@
   "scripts": {
     "check": "node src/index.js",
     "check:mydojo": "node src/index.js --domain=mydojo.software",
+    "check:ga4": "node src/index-with-ga4.js --with-analytics",
+    "check:mydojo:ga4": "node src/index-with-ga4.js --domain=mydojo.software --with-analytics",
     "report": "node src/report-all.js",
     "report:weekly": "node src/report-all.js --days=7"
   },
   "dependencies": {
+    "@google-analytics/data": "^5.2.1",
     "chalk": "^5.3.0",
     "date-fns": "^3.3.1",
     "exceljs": "^4.4.0",

@@ -4,26 +4,35 @@
     {
       "name": "mydojo.software",
       "gscProperty": "https://mydojo.software/",
+      "ga4PropertyId": "518326472",
       "enabled": true
     },
     {
       "name": "petcare.software",
       "gscProperty": "https://petcare.software/",
+      "ga4PropertyId": "506153996",
       "enabled": true
     },
     {
       "name": "mydriveschool.software",
       "gscProperty": "https://mydriveschool.software/",
+      "ga4PropertyId": "517695357",
       "enabled": true
     },
     {
       "name": "mytattoo.software",
       "gscProperty": "https://mytattoo.software/",
+      "ga4PropertyId": "521481169",
       "enabled": true
     }
   ],
   "defaults": {
     "dateRangeDays": 28,
     "outputPath": "~/seo-reports"
+  },
+  "features": {
+    "ga4Enabled": true,
+    "includeEngagementMetrics": true,
+    "includeConversionData": true
   }
 }
