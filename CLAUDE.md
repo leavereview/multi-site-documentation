@@ -117,6 +117,20 @@ npm run build
 Test config: `sudo nginx -t`
 Reload: `sudo systemctl reload nginx`
 
+## Content Quality Standard (REQUIRED)
+
+When creating blog posts or pillar pages, **always prioritise depth and quality over speed or quantity**. A handful of comprehensive, authoritative articles will outrank dozens of thin posts.
+
+Every piece of content should:
+- **Target a specific keyword** with clear search intent (informational, transactional, or navigational)
+- **Be comprehensive** — cover the topic more thoroughly than the top 3 competitors (aim for 2,500–4,000+ words for blog posts)
+- **Include real structure** — H2/H3 hierarchy, comparison tables, numbered steps, FAQs, practical examples
+- **Link strategically** — internal links to relevant pillar pages + related posts; external links to authoritative sources
+- **Have a clear CTA** — every post should drive readers toward a relevant pillar page or trial signup
+- **Use the [Benefit] + [Data] + [CTA] formula** for meta descriptions
+
+Do not create placeholder content, short posts, or stubs. If there isn't enough time to write a complete article, schedule it rather than publishing thin content.
+
 ## SEO Changelog (REQUIRED)
 
 After making **any** SEO-related changes to site content — blog posts, pillar pages, meta tags, internal links, schema, technical fixes — always log the change:
