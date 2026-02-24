@@ -251,5 +251,16 @@
     "reason": "Homepage ranking pos 16.3 for 'driving test student management software' (61 impressions) — wrong page winning. Pricing page at pos 14.1 for 'driving school software pricing' with weak title.",
     "expectedImpact": "Move management page to top 10 for student management query; pricing page to top 10 for pricing query",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-02-24",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "meta",
+    "description": "Fixed homepage title from 'Home' to keyword-rich title; updated meta titles for 3 pillar pages (tattoo-studio-software, tattoo-booking-software, tattoo-artist-software) removing 'Guide (2026)' framing; improved all 4 meta descriptions with [Benefit]+[Data]+[CTA] formula",
+    "reason": "Homepage title was literally 'Home' — no keyword signal at all. Pillar pages had 'Guide (2026)' framing which is weak for query matching. All positions 70-90 so need every on-page signal possible.",
+    "expectedImpact": "Better keyword-to-title match for tattoo studio software, tattoo booking software, tattoo artist software queries; improved CTR from more compelling descriptions",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
