@@ -117,6 +117,27 @@ npm run build
 Test config: `sudo nginx -t`
 Reload: `sudo systemctl reload nginx`
 
+## SEO Changelog (REQUIRED)
+
+After making **any** SEO-related changes to site content — blog posts, pillar pages, meta tags, internal links, schema, technical fixes — always log the change:
+
+```bash
+cd /Users/john/Projects/Front-end-sites/tools/gsc-client
+node src/enhanced-report.js \
+  --log-change="What you changed" \
+  --sites=mydriveschool.software \
+  --category=content \
+  --reason="Why you made the change" \
+  --expected-impact="What metric should improve" \
+  --expected-timeline="2-4 weeks"
+```
+
+**Categories:** `content` | `technical` | `meta` | `links` | `schema` | `analytics` | `conversion` | `performance`
+
+**Sites:** comma-separated domains (e.g. `mydojo.software,petcare.software`) or omit for `all`
+
+This feeds the **Recent Changes** section in `/seo-check`, which correlates metric movements with specific actions. Do not skip this step.
+
 ## Legacy WordPress Sites (Content Reference)
 
 These are the original WordPress sites hosted on separate Bitnami instances. Use these to extract content when building out the new Astro sites.
