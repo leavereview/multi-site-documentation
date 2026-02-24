@@ -10,7 +10,9 @@
     "check:ga4": "node src/index-with-ga4.js --with-analytics",
     "check:mydojo:ga4": "node src/index-with-ga4.js --domain=mydojo.software --with-analytics",
     "report": "node src/report-all.js",
-    "report:weekly": "node src/report-all.js --days=7"
+    "report:weekly": "node src/report-all.js --days=7",
+    "enhanced": "node src/enhanced-report.js --with-analytics",
+    "enhanced:domain": "node src/enhanced-report.js --with-analytics --domain="
   },
   "dependencies": {
     "@google-analytics/data": "^5.2.1",

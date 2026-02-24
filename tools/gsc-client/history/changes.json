@@ -1,0 +1,233 @@
+[
+  {
+    "date": "2026-01-15",
+    "sites": [
+      "all"
+    ],
+    "category": "content",
+    "description": "Launched all 4 Astro sites with WordPress content migrated",
+    "reason": "Replace legacy WordPress sites with fast static Astro sites for better Core Web Vitals and SEO",
+    "expectedImpact": "Initial Google crawling and indexing of all pages",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-01-17",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Added blog templates, OG images, custom 404 pages, and real founder photo",
+    "reason": "Improve E-E-A-T signals and social sharing appearance",
+    "expectedImpact": "Better CTR from social shares, improved E-E-A-T",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-01-18",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Added breadcrumbs, sitemaps, and tag pages across all sites",
+    "reason": "Fix crawlability issues and provide Google with proper site structure",
+    "expectedImpact": "Better indexing, richer search results with breadcrumbs",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-01-21",
+    "sites": [
+      "all"
+    ],
+    "category": "schema",
+    "description": "Fixed FAQPage, CollectionPage, breadcrumb schemas; shortened titles/descriptions to spec",
+    "reason": "Resolve 172 SEO issues flagged in audit - schemas incorrect, titles too long",
+    "expectedImpact": "Fewer GSC errors, potential rich results for FAQ pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-01-21",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Consolidated blog tags from 79 down to 15 strategic categories",
+    "reason": "Too many thin tag pages diluting crawl budget and causing duplicate content",
+    "expectedImpact": "Fewer indexed thin pages, stronger tag page authority",
+    "expectedTimeline": "4-6 weeks"
+  },
+  {
+    "date": "2026-01-26",
+    "sites": [
+      "all"
+    ],
+    "category": "analytics",
+    "description": "Added cookie consent banner with conditional GA4 loading (GDPR compliant)",
+    "reason": "Comply with GDPR and start collecting engagement data for SEO decisions",
+    "expectedImpact": "Clean GA4 data for bounce rate / engagement analysis",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-01-26",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Comprehensive performance optimizations - target 90+ PageSpeed scores",
+    "reason": "Core Web Vitals are a Google ranking signal; poor performance hurts CTR and conversions",
+    "expectedImpact": "Improved CWV scores, potential rankings boost",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-01-30",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Fixed robots.txt and sitemaps on all 4 sites; fixed SSL on mydriveschool.software",
+    "reason": "Broken robots.txt and sitemaps blocking proper crawling",
+    "expectedImpact": "Better crawl coverage, correct sitemap discovery",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-02-02",
+    "sites": [
+      "all"
+    ],
+    "category": "links",
+    "description": "Added 107+ automated internal pillar links to blog posts across all sites (299 total links)",
+    "reason": "Only 39% of planned internal linking was in place - pillar pages not getting enough link equity",
+    "expectedImpact": "61% reduction in missing internal links, improved pillar page authority",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-02-02",
+    "sites": [
+      "all"
+    ],
+    "category": "conversion",
+    "description": "Added revenue calculators to all 4 sites with UTM tracking and cross-site links",
+    "reason": "Increase on-site engagement and provide a conversion touchpoint for the SaaS products",
+    "expectedImpact": "Lower bounce rate, increased time on site, lead generation",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-02-02",
+    "sites": [
+      "all"
+    ],
+    "category": "schema",
+    "description": "Added SoftwareApplication schema and UTM tracking to all calculator pages",
+    "reason": "Help Google understand the products; track traffic sources accurately",
+    "expectedImpact": "Potential rich results for software products in SERPs",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-02-09",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Phase 1: Comprehensive SEO improvements - Organization schema, meta descriptions, robots.txt",
+    "reason": "Baseline audit found missing/incomplete schema, generic meta descriptions, and technical issues",
+    "expectedImpact": "Better SERP appearance, correct schema recognition",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-02-09",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "content",
+    "description": "Phase 2: Consolidated 5 karate belt articles into 1 guide (4,113 words) and merged 2 martial arts type articles",
+    "reason": "Keyword cannibalization - multiple thin articles competing for same queries",
+    "expectedImpact": "Eliminate cannibalization, single authoritative page per topic ranks higher",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-02-09",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Phase 3: Added descriptive alt text to blog images across all sites",
+    "reason": "Most images had empty or generic alt text - missing image SEO signal",
+    "expectedImpact": "Image search visibility, improved accessibility",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-02-09",
+    "sites": [
+      "all"
+    ],
+    "category": "meta",
+    "description": "Phase 4: Rewrote 16 blog post meta descriptions using [Benefit] + [Data] + [CTA] formula",
+    "reason": "CTR across all sites critically low (0.05-0.33%) - generic descriptions not compelling",
+    "expectedImpact": "10-20% CTR improvement from existing impressions",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-02-09",
+    "sites": [
+      "all"
+    ],
+    "category": "links",
+    "description": "Phase 5: Added 6 contextual internal links across all sites",
+    "reason": "Key pillar pages not getting enough contextual link support from related posts",
+    "expectedImpact": "Improved topical authority and pillar page rankings",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-02-09",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Rewrote PetCare homepage and key pages with honest feature positioning",
+    "reason": "Original copy made claims about features not yet built - needed to reflect actual MVP honestly",
+    "expectedImpact": "Better conversion from visitors who understand the real product",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-02-11",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Updated marketing site to reflect actual app features with optimised screenshots",
+    "reason": "Site content didn't accurately represent the real product - misalignment with app",
+    "expectedImpact": "Better qualified visitors, improved conversion from search traffic",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-02-12",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "conversion",
+    "description": "Added Founding Member early access programme page with Formspree form (survey = 3 months free, call = 6 months + 50% off)",
+    "reason": "Need to capture early users for the SaaS product before full launch",
+    "expectedImpact": "Lead capture from search traffic, early user signups",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-02-12",
+    "sites": [
+      "all"
+    ],
+    "category": "technical",
+    "description": "Fixed all 4 broken sitemaps in Google Search Console - submitted sitemap-index.xml",
+    "reason": "PetCare using stale WordPress sitemap (only 2 pages indexed); other 3 sites had wrong filename (sitemap_index.xml with underscore = 404)",
+    "expectedImpact": "Major - PetCare should see large impressions increase as Google discovers 69 previously invisible pages",
+    "expectedTimeline": "1-3 weeks"
+  },
+  {
+    "date": "2026-02-21",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Added DVSA 27 Driving Skills content cluster (Phases 1-6), localised homepage for UK ADI audience, added blog featured banner",
+    "reason": "Target the 27 DVSA driving skills keywords - high-intent searches from UK driving instructors",
+    "expectedImpact": "New keyword cluster targeting UK-specific high-volume searches",
+    "expectedTimeline": "4-12 weeks"
+  }
+]
