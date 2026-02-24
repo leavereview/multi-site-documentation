@@ -262,5 +262,16 @@
     "reason": "Homepage title was literally 'Home' — no keyword signal at all. Pillar pages had 'Guide (2026)' framing which is weak for query matching. All positions 70-90 so need every on-page signal possible.",
     "expectedImpact": "Better keyword-to-title match for tattoo studio software, tattoo booking software, tattoo artist software queries; improved CTR from more compelling descriptions",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-02-24",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Created tattoo-apprenticeship-guide.md — 4,063-word comprehensive UK guide targeting 'tattoo apprenticeship' (6,600 vol, KD 26). Covers portfolio requirements, how to approach shops, UK costs/fees, phase-by-phase timeline (4 phases), UK licensing requirements, red flags, and post-apprenticeship paths.",
+    "reason": "'tattoo apprenticeship' is the highest-volume keyword on the site (6,600/mo, KD 26). Existing post was ~1,500 words, US-focused, not competitive.",
+    "expectedImpact": "Rank in top 10-20 for 'tattoo apprenticeship' and related long-tail queries; major impression volume increase",
+    "expectedTimeline": "6-12 weeks"
   }
 ]
