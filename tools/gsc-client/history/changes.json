@@ -240,5 +240,16 @@
     "reason": "Driving school software keyword at position 61 with 307 impressions - biggest single opportunity across all sites. Blog post was stale (2025 title), lacked UK signals, included irrelevant AU/CA competitors.",
     "expectedImpact": "Move blog post from low ranking to top 10 for best driving school software UK; improve pillar page from pos 61 toward pos 20-30 for driving school software",
     "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-02-24",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "meta",
+    "description": "Updated meta titles/H1 for 2 striking distance queries: (1) driving-school-management-software.astro — title now includes 'student management software', H1 updated to match, description updated with driving test readiness signals; (2) pricing.astro — title now includes 'driving school software pricing' explicitly",
+    "reason": "Homepage ranking pos 16.3 for 'driving test student management software' (61 impressions) — wrong page winning. Pricing page at pos 14.1 for 'driving school software pricing' with weak title.",
+    "expectedImpact": "Move management page to top 10 for student management query; pricing page to top 10 for pricing query",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
