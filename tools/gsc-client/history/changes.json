@@ -229,5 +229,16 @@
     "reason": "Target the 27 DVSA driving skills keywords - high-intent searches from UK driving instructors",
     "expectedImpact": "New keyword cluster targeting UK-specific high-volume searches",
     "expectedTimeline": "4-12 weeks"
+  },
+  {
+    "date": "2026-02-24",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Updated best-driving-school-software.md: 2026 title, UK ADI requirements section, replaced AU/CA tools with UK alternatives (DSO, Total Drive), added DVSA tracking column to comparison table, 3 UK-specific FAQs, internal links to DVSA skills. 2,818 → 3,752 words. Also updated driving-school-software.astro meta title/description with UK/ADI/DVSA signals.",
+    "reason": "Driving school software keyword at position 61 with 307 impressions - biggest single opportunity across all sites. Blog post was stale (2025 title), lacked UK signals, included irrelevant AU/CA competitors.",
+    "expectedImpact": "Move blog post from low ranking to top 10 for best driving school software UK; improve pillar page from pos 61 toward pos 20-30 for driving school software",
+    "expectedTimeline": "4-8 weeks"
   }
 ]
