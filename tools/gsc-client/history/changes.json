@@ -273,5 +273,16 @@
     "reason": "'tattoo apprenticeship' is the highest-volume keyword on the site (6,600/mo, KD 26). Existing post was ~1,500 words, US-focused, not competitive.",
     "expectedImpact": "Rank in top 10-20 for 'tattoo apprenticeship' and related long-tail queries; major impression volume increase",
     "expectedTimeline": "6-12 weeks"
+  },
+  {
+    "date": "2026-02-24",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Rewrote what-is-a-pup-cup.md from ~1,200 words to 2,328 words. Fixed critical search intent mismatch: original was written for pet business owners; rewrite leads with pet owner needs (what's in it, is it safe, where to get it UK/US, dairy alternatives, home recipes), then transitions to business angle. New title: 'What Is a Pup Cup? Everything Dog Owners Need to Know'.",
+    "reason": "'pup cup' is 14,800/mo vol, KD 27 — highest single keyword opportunity across all 4 sites. Original article had wrong primary audience (pet businesses not pet owners), would not rank competitively.",
+    "expectedImpact": "Rank in top 10-20 for 'pup cup', 'puppuccino', 'is pup cup safe for dogs' and related queries; major impression volume increase for petcare.software",
+    "expectedTimeline": "6-12 weeks"
   }
 ]
