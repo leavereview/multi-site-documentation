@@ -15,6 +15,18 @@ content-plan/
 *.jpg
 *.jpeg
 
+# Credentials and secrets
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+
+# Local files
+backups/
+*.log
+*.code-workspace
+.vscode/
+
 # Tools
 tools/
 !tools/gsc-client/
