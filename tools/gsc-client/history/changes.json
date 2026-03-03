@@ -284,5 +284,27 @@
     "reason": "'pup cup' is 14,800/mo vol, KD 27 — highest single keyword opportunity across all 4 sites. Original article had wrong primary audience (pet businesses not pet owners), would not rank competitively.",
     "expectedImpact": "Rank in top 10-20 for 'pup cup', 'puppuccino', 'is pup cup safe for dogs' and related queries; major impression volume increase for petcare.software",
     "expectedTimeline": "6-12 weeks"
+  },
+  {
+    "date": "2026-02-25",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Removed Revelation Pets competitor mentions from 5 comparison blog posts (cattery-complete-guide, kennel-complete-guide, dog-boarding-complete-guide, dog-daycare-complete-guide, is-cattery-software-worth-it). Replaced with PetLinx. Fixed Privacy Policy entity name (PetCare Software Ltd → LEAVE.REVIEW LTD). Deleted stale .backup file from src/pages/.",
+    "reason": "Conflict of interest: site was recommending a brand the founder sold. Legal entity name inconsistency in privacy policy.",
+    "expectedImpact": "Removes brand confusion, eliminates competitor promotion, fixes legal accuracy",
+    "expectedTimeline": "Immediate (no indexing delay needed)"
+  },
+  {
+    "date": "2026-02-25",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Rewrote about page Revelation Pets references to clearly frame as past achievement (built 2015, sold 2022) — testimonials now explicitly historical, CTA reframed as lessons-learned narrative",
+    "reason": "Previous copy implied current involvement with Revelation Pets; needed to accurately reflect that it was built, grown, and sold (2015-2022)",
+    "expectedImpact": "Improved EEAT credibility — clear founder narrative with proven exit is more trustworthy to both users and Google",
+    "expectedTimeline": "2-4 weeks"
   }
 ]

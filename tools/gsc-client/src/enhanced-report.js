@@ -16,8 +16,10 @@ import chalk from 'chalk';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
-import { authenticate } from './auth.js';
+import { authenticate, getJwtAuth } from './auth.js';
 import { loadConfig, expandPath } from './utils/config.js';
+import { getSitemapStatus } from './api/sitemaps.js';
+import { inspectUrls } from './api/url-inspection.js';
 import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
 import GA4Client from './analytics/ga4-client.js';
 import CombinedReportGenerator from './reports/combined-report.js';
@@ -32,6 +34,7 @@ function parseArgs() {
     days: 28,
     domain: null,
     withAnalytics: false,
+    withCoverage: false,
     logChange: null,
     logSites: null,
     logCategory: null,
@@ -47,6 +50,8 @@ function parseArgs() {
       options.domain = arg.split('=')[1];
     } else if (arg === '--with-analytics') {
       options.withAnalytics = true;
+    } else if (arg === '--with-coverage') {
+      options.withCoverage = true;
     } else if (arg.startsWith('--log-change=')) {
       options.logChange = arg.split('=').slice(1).join('=');
     } else if (arg.startsWith('--sites=')) {
@@ -76,6 +81,7 @@ function showHelp() {
   console.log('  --domain=<domain>             Check specific domain (default: all)');
   console.log('  --days=<number>               Date range in days (default: 28)');
   console.log('  --with-analytics              Include GA4 engagement metrics');
+  console.log('  --with-coverage               Include sitemaps health + URL inspection (slower, ~30s extra)');
   console.log('  --log-change=<description>    Log an SEO change to the changelog');
   console.log('  --sites=<domain,domain,...>   Sites affected (default: all)');
   console.log('  --category=<type>             Change category: content|technical|meta|links|schema|analytics|conversion|performance');
@@ -86,6 +92,7 @@ function showHelp() {
   console.log('Examples:');
   console.log('  node src/enhanced-report.js');
   console.log('  node src/enhanced-report.js --domain=mydojo.software --with-analytics');
+  console.log('  node src/enhanced-report.js --with-analytics --with-coverage');
   console.log('  node src/enhanced-report.js --log-change="Added 3 new blog posts" --sites=mydojo.software --category=content\n');
 }
 
@@ -573,9 +580,162 @@ function generateRecommendations(domainData, contentGaps, history) {
 }
 
 /**
+ * Get key pages to inspect for a domain (top-level .astro pages only)
+ * @param {string} domain - Domain name (e.g., 'mydojo.software')
+ * @returns {string[]} Full URLs to inspect
+ */
+function getKeyPages(domain) {
+  try {
+    const pagesDir = resolve(__dirname, '../../../', domain, 'src/pages');
+    if (!existsSync(pagesDir)) return [`https://${domain}/`];
+
+    const urls = [];
+    for (const file of readdirSync(pagesDir)) {
+      if (!file.endsWith('.astro')) continue;
+      if (file.startsWith('[') || file.startsWith('_')) continue;
+      if (file === '404.astro') continue;
+
+      if (file === 'index.astro') {
+        urls.push(`https://${domain}/`);
+      } else {
+        const slug = file.replace('.astro', '');
+        urls.push(`https://${domain}/${slug}/`);
+      }
+    }
+
+    return urls.slice(0, 7);
+  } catch {
+    return [`https://${domain}/`];
+  }
+}
+
+/**
+ * Print sitemaps health section
+ */
+function printSitemapsHealth(sitemaps) {
+  console.log(chalk.bold('\n🗺️  SITEMAPS HEALTH\n'));
+
+  if (!sitemaps || sitemaps.length === 0) {
+    console.log(chalk.yellow('  No sitemaps found in GSC'));
+    return;
+  }
+
+  for (const sm of sitemaps) {
+    const name = sm.path.split('/').pop() || sm.path;
+    const lastFetched = sm.lastDownloaded ? sm.lastDownloaded.slice(0, 10) : 'never';
+    const pending = sm.isPending ? chalk.yellow(' [PENDING]') : '';
+    let status;
+    if (sm.errors > 0) {
+      status = chalk.red(`${sm.errors} error${sm.errors > 1 ? 's' : ''}`);
+    } else if (sm.warnings > 0) {
+      status = chalk.yellow(`${sm.warnings} warning${sm.warnings > 1 ? 's' : ''}  ⚠️`);
+    } else {
+      status = chalk.green('✅');
+    }
+    console.log(`  ${name.padEnd(30)} Last fetched: ${lastFetched}  ${status}${pending}`);
+  }
+}
+
+/**
+ * Print URL inspection / index coverage section
+ */
+function printIndexCoverage(urlResults) {
+  if (!urlResults || urlResults.length === 0) return;
+
+  console.log(chalk.bold('\n📋 INDEX COVERAGE (key pages)\n'));
+
+  for (const result of urlResults) {
+    const path = result.url.replace(/^https?:\/\/[^/]+/, '') || '/';
+    const lastCrawl = result.lastCrawlTime ? result.lastCrawlTime.slice(0, 10) : 'never';
+    const isIndexed = result.verdict === 'PASS' || (result.coverageState || '').toLowerCase().includes('indexed');
+    const stateStr = result.coverageState || result.verdict;
+    const statusIcon = isIndexed ? chalk.green('✅') : chalk.yellow('⚠️');
+    const stateColor = isIndexed ? 'green' : 'yellow';
+
+    console.log(`  ${path.padEnd(38)} ${chalk[stateColor](stateStr.slice(0, 32).padEnd(33))} Crawl: ${lastCrawl}  ${statusIcon}`);
+  }
+}
+
+/**
+ * Print query position movers vs previous run
+ */
+function printQueryMovers(currentQueries, history) {
+  if (!history || history.length === 0) return;
+
+  const prevEntry = history[history.length - 1];
+  if (!prevEntry?.topQueries || prevEntry.topQueries.length === 0) return;
+  if (!currentQueries || currentQueries.length === 0) return;
+
+  const prevMap = new Map(prevEntry.topQueries.map(q => [q.query, q]));
+
+  const movers = [];
+  for (const curr of currentQueries.slice(0, 20)) {
+    const prev = prevMap.get(curr.query);
+    if (!prev) continue;
+    const diff = prev.position - curr.position; // positive = improved ranking
+    if (Math.abs(diff) >= 1) {
+      movers.push({ query: curr.query, prevPos: prev.position, currPos: curr.position, diff });
+    }
+  }
+
+  if (movers.length === 0) return;
+
+  movers.sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff));
+
+  console.log(chalk.bold('\n📈 QUERY MOVERS (vs last check)\n'));
+  movers.slice(0, 10).forEach(m => {
+    const arrow = m.diff > 0 ? '↑' : '↓';
+    const color = m.diff > 0 ? 'green' : 'red';
+    const posChange = m.diff > 0 ? `+${m.diff.toFixed(1)}` : m.diff.toFixed(1);
+    const queryPadded = m.query.length > 44 ? m.query.slice(0, 41) + '...' : m.query.padEnd(44);
+    console.log(chalk[color](`  ${arrow} ${queryPadded}  pos ${m.prevPos.toFixed(1)} → ${m.currPos.toFixed(1)} (${posChange})`));
+  });
+}
+
+/**
+ * Print index gap estimate (published pages vs GSC-visible pages)
+ */
+function printIndexGap(domain, topPages) {
+  try {
+    const pagesDir = resolve(__dirname, '../../../', domain, 'src/pages');
+    const blogDir = resolve(__dirname, '../../../', domain, 'src/content/blog');
+
+    let pageCount = 0;
+    let blogCount = 0;
+
+    if (existsSync(pagesDir)) {
+      for (const file of readdirSync(pagesDir)) {
+        if (file.endsWith('.astro') && !file.startsWith('[') && !file.startsWith('_') && file !== '404.astro') {
+          pageCount++;
+        }
+      }
+    }
+
+    if (existsSync(blogDir)) {
+      for (const file of readdirSync(blogDir)) {
+        if (file.endsWith('.md') || file.endsWith('.mdx')) blogCount++;
+      }
+    }
+
+    const totalPublished = pageCount + blogCount;
+    if (totalPublished === 0) return;
+
+    const gscVisible = topPages ? topPages.length : 0;
+    const pct = Math.round((gscVisible / totalPublished) * 100);
+    const notIndexed = Math.max(0, totalPublished - gscVisible);
+    const pctColor = pct >= 70 ? 'green' : pct >= 40 ? 'yellow' : 'red';
+
+    console.log(chalk.bold('\n📊 INDEX GAP\n'));
+    console.log(`  Published: ${chalk.blue(totalPublished)} pages   GSC-visible: ${chalk[pctColor](gscVisible + ' (' + pct + '%)')}   Not yet indexed: ~${chalk.yellow(notIndexed)}`);
+  } catch {
+    // skip silently if filesystem access fails
+  }
+}
+
+/**
  * Print enhanced report for a single domain
  */
-function printDomainReport(domainData, contentGaps, history, ga4Data = null, changelog = []) {
+function printDomainReport(domainData, contentGaps, history, ga4Data = null, changelog = [], sitemapResults = null, urlInspectionResults = null) {
   const domain = domainData.domain;
   const metrics = domainData.metrics;
 
@@ -604,6 +764,22 @@ function printDomainReport(domainData, contentGaps, history, ga4Data = null, cha
     console.log(`  Impressions:  ${trendIcon(impressionTrend.trend)} ${chalk[trendColor(impressionTrend.trend)](impressionTrend.change > 0 ? '+' + impressionTrend.change : impressionTrend.change)} (${impressionTrend.changePercent.toFixed(1)}%)`);
     console.log(`  CTR:          ${trendIcon(ctrTrend.trend)} ${chalk[trendColor(ctrTrend.trend)]((ctrTrend.change * 100).toFixed(2) + '%')}`);
   }
+
+  // Sitemaps Health (--with-coverage only)
+  if (sitemapResults !== null) {
+    printSitemapsHealth(sitemapResults);
+  }
+
+  // Index Coverage (--with-coverage only)
+  if (urlInspectionResults !== null) {
+    printIndexCoverage(urlInspectionResults);
+  }
+
+  // Query Movers (always, when previous run has topQueries)
+  printQueryMovers(domainData.topQueries, history);
+
+  // Index Gap Estimate (always)
+  printIndexGap(domainData.domain, domainData.topPages);
 
   // Content Gap Analysis
   if (contentGaps) {
@@ -716,6 +892,13 @@ async function main() {
     // Authenticate with GSC
     const client = await authenticate(config.serviceAccountPath);
 
+    // Pre-auth the JWT client for URL inspection if --with-coverage
+    let jwtAuth = null;
+    if (options.withCoverage) {
+      console.log(chalk.blue('\n🔍 Coverage mode enabled — will fetch sitemaps + URL inspection'));
+      jwtAuth = await getJwtAuth(config.serviceAccountPath);
+    }
+
     // Determine which domains to check
     const domains = options.domain
       ? config.domains.filter(d => d.name === options.domain && d.enabled)
@@ -748,8 +931,14 @@ async function main() {
       // Load historical data
       const history = loadHistoricalMetrics(domainConfig.name);
 
-      // Save current metrics to history
-      saveHistoricalMetrics(domainConfig.name, aggregateMetrics);
+      // Save current metrics to history (include top 20 queries for position tracking)
+      const top20Queries = topQueries.slice(0, 20).map(q => ({
+        query: q.query,
+        position: q.position,
+        impressions: q.impressions,
+        clicks: q.clicks
+      }));
+      saveHistoricalMetrics(domainConfig.name, { ...aggregateMetrics, topQueries: top20Queries });
 
       // Get content gaps for this domain
       const contentGaps = auditGaps ? auditGaps[domainConfig.name] : null;
@@ -786,8 +975,22 @@ async function main() {
         }
       }
 
+      // Fetch coverage data if --with-coverage
+      let sitemapResults = null;
+      let urlInspectionResults = null;
+      if (options.withCoverage) {
+        console.log(chalk.blue('🗺️  Fetching sitemap health...'));
+        sitemapResults = await getSitemapStatus(client, domainConfig.gscProperty);
+        console.log(chalk.green(`✓ Sitemaps: ${sitemapResults.length} found`));
+
+        const keyPages = getKeyPages(domainConfig.name);
+        console.log(chalk.blue(`🔍 Inspecting ${keyPages.length} key pages...`));
+        urlInspectionResults = await inspectUrls(jwtAuth, domainConfig.gscProperty, keyPages);
+        console.log(chalk.green(`✓ URL inspection complete`));
+      }
+
       // Print enhanced report
-      printDomainReport(domainData, contentGaps, history, ga4Data, changelog);
+      printDomainReport(domainData, contentGaps, history, ga4Data, changelog, sitemapResults, urlInspectionResults);
     }
 
     // Footer
@@ -795,7 +998,12 @@ async function main() {
     console.log(chalk.green.bold('\n✅ Enhanced SEO Report Complete!\n'));
     console.log(chalk.gray('💡 Historical data saved for trend tracking'));
     if (!options.withAnalytics && config.features?.ga4Enabled) {
-      console.log(chalk.yellow('💡 Tip: Add --with-analytics to include GA4 engagement metrics\n'));
+      console.log(chalk.yellow('💡 Tip: Add --with-analytics to include GA4 engagement metrics'));
+    }
+    if (!options.withCoverage) {
+      console.log(chalk.yellow('💡 Tip: Add --with-coverage to check sitemaps health + URL indexing status\n'));
+    } else {
+      console.log();
     }
 
   } catch (error) {

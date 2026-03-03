@@ -39,6 +39,26 @@ export async function authenticate(serviceAccountPath) {
 }
 
 /**
+ * Return the raw JWT auth client (for use with searchconsole v1, etc.)
+ * @param {string} serviceAccountPath - Path to service account JSON file
+ * @returns {Promise<Object>} Authorized Google JWT auth client
+ */
+export async function getJwtAuth(serviceAccountPath) {
+  const fullPath = resolve(__dirname, '../', serviceAccountPath);
+  const credentials = JSON.parse(await readFile(fullPath, 'utf8'));
+
+  const auth = new google.auth.JWT(
+    credentials.client_email,
+    null,
+    credentials.private_key,
+    ['https://www.googleapis.com/auth/webmasters.readonly']
+  );
+
+  await auth.authorize();
+  return auth;
+}
+
+/**
  * Validate that credentials file exists and has required fields
  * @param {string} serviceAccountPath - Path to service account JSON file
  * @returns {Promise<boolean>}
