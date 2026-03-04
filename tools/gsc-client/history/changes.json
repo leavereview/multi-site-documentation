@@ -306,5 +306,50 @@
     "reason": "Previous copy implied current involvement with Revelation Pets; needed to accurately reflect that it was built, grown, and sold (2015-2022)",
     "expectedImpact": "Improved EEAT credibility — clear founder narrative with proven exit is more trustworthy to both users and Google",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Fixed 3 blog→pillar broken links in building-tattoo-client-base.md and flash-booking-tattoo-artists-guide.md; added structured For Studio Owners section to 13 posts; added brief CTA to 4 consumer posts",
+    "reason": "Blog posts were linking to /blog/ variants instead of pillar pages, preventing Google from discovering pillar pages",
+    "expectedImpact": "Pillar pages gain internal link equity; Google discovers and indexes them faster",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "links",
+    "description": "Added For Dojo Owners section to karate-belt-order-complete-guide.md with all 8 pillar page links",
+    "reason": "This was the only blog post (of 17) missing the standard dojo owners section, creating an inconsistency in pillar page link signals",
+    "expectedImpact": "Karate belt order post now sends link equity to all 8 pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mydojo.software",
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Added --submit-sitemaps flag to SEO tool: changed auth scope to webmasters (writable), added submitSitemap() to sitemaps.js, added CLI flag to enhanced-report.js",
+    "reason": "MyDojo and PetCare sitemaps last fetched Feb 12 (3+ weeks stale); new content invisible to Google",
+    "expectedImpact": "Triggers immediate Google re-fetch of all sitemaps; new content discovered faster",
+    "expectedTimeline": "1-3 days"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "MyTattoo homepage: added Specialist Tools section with 4 cards linking to booking, scheduling, app, and artist software pillar pages; footer Software section expanded from 3 to 5 links",
+    "reason": "4 pillar pages had no direct homepage buttons (dropdown-only), reducing crawl signals to these pages",
+    "expectedImpact": "4 under-linked pillar pages gain homepage PageRank and crawl priority",
+    "expectedTimeline": "2-3 weeks"
   }
 ]

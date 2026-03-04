@@ -16,12 +16,12 @@ export async function authenticate(serviceAccountPath) {
     const fullPath = resolve(__dirname, '../', serviceAccountPath);
     const credentials = JSON.parse(await readFile(fullPath, 'utf8'));
 
-    // Create JWT client with Search Console readonly scope
+    // Create JWT client with Search Console scope
     const auth = new google.auth.JWT(
       credentials.client_email,
       null,
       credentials.private_key,
-      ['https://www.googleapis.com/auth/webmasters.readonly']
+      ['https://www.googleapis.com/auth/webmasters']
     );
 
     // Authorize the client
@@ -51,7 +51,7 @@ export async function getJwtAuth(serviceAccountPath) {
     credentials.client_email,
     null,
     credentials.private_key,
-    ['https://www.googleapis.com/auth/webmasters.readonly']
+    ['https://www.googleapis.com/auth/webmasters']
   );
 
   await auth.authorize();

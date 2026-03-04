@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
 import { authenticate, getJwtAuth } from './auth.js';
 import { loadConfig, expandPath } from './utils/config.js';
-import { getSitemapStatus } from './api/sitemaps.js';
+import { getSitemapStatus, submitSitemap } from './api/sitemaps.js';
 import { inspectUrls } from './api/url-inspection.js';
 import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
 import GA4Client from './analytics/ga4-client.js';
@@ -35,6 +35,7 @@ function parseArgs() {
     domain: null,
     withAnalytics: false,
     withCoverage: false,
+    submitSitemaps: false,
     logChange: null,
     logSites: null,
     logCategory: null,
@@ -52,6 +53,8 @@ function parseArgs() {
       options.withAnalytics = true;
     } else if (arg === '--with-coverage') {
       options.withCoverage = true;
+    } else if (arg === '--submit-sitemaps') {
+      options.submitSitemaps = true;
     } else if (arg.startsWith('--log-change=')) {
       options.logChange = arg.split('=').slice(1).join('=');
     } else if (arg.startsWith('--sites=')) {
@@ -82,6 +85,7 @@ function showHelp() {
   console.log('  --days=<number>               Date range in days (default: 28)');
   console.log('  --with-analytics              Include GA4 engagement metrics');
   console.log('  --with-coverage               Include sitemaps health + URL inspection (slower, ~30s extra)');
+  console.log('  --submit-sitemaps             Resubmit sitemap-index.xml to GSC for all (or --domain) sites');
   console.log('  --log-change=<description>    Log an SEO change to the changelog');
   console.log('  --sites=<domain,domain,...>   Sites affected (default: all)');
   console.log('  --category=<type>             Change category: content|technical|meta|links|schema|analytics|conversion|performance');
@@ -975,6 +979,13 @@ async function main() {
         }
       }
 
+      // Submit sitemap if --submit-sitemaps
+      if (options.submitSitemaps) {
+        const feedpath = `https://${domainConfig.name}/sitemap-index.xml`;
+        console.log(chalk.blue(`🗺️  Submitting sitemap: ${feedpath}`));
+        await submitSitemap(client, domainConfig.gscProperty, feedpath);
+      }
+
       // Fetch coverage data if --with-coverage
       let sitemapResults = null;
       let urlInspectionResults = null;
@@ -1001,7 +1012,10 @@ async function main() {
       console.log(chalk.yellow('💡 Tip: Add --with-analytics to include GA4 engagement metrics'));
     }
     if (!options.withCoverage) {
-      console.log(chalk.yellow('💡 Tip: Add --with-coverage to check sitemaps health + URL indexing status\n'));
+      console.log(chalk.yellow('💡 Tip: Add --with-coverage to check sitemaps health + URL indexing status'));
+    }
+    if (!options.submitSitemaps) {
+      console.log(chalk.yellow('💡 Tip: Add --submit-sitemaps to resubmit sitemaps to Google Search Console\n'));
     } else {
       console.log();
     }
