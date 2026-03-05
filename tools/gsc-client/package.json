@@ -12,11 +12,13 @@
     "report": "node src/report-all.js",
     "report:weekly": "node src/report-all.js --days=7",
     "enhanced": "node src/enhanced-report.js --with-analytics",
-    "enhanced:domain": "node src/enhanced-report.js --with-analytics --domain="
+    "enhanced:domain": "node src/enhanced-report.js --with-analytics --domain=",
+    "crawl": "node src/crawl-site.js"
   },
   "dependencies": {
     "@google-analytics/data": "^5.2.1",
     "chalk": "^5.3.0",
+    "cheerio": "^1.0.0",
     "date-fns": "^3.3.1",
     "exceljs": "^4.4.0",
     "googleapis": "^134.0.0"

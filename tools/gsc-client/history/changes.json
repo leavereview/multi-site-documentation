@@ -351,5 +351,390 @@
     "reason": "4 pillar pages had no direct homepage buttons (dropdown-only), reducing crawl signals to these pages",
     "expectedImpact": "4 under-linked pillar pages gain homepage PageRank and crawl priority",
     "expectedTimeline": "2-3 weeks"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mypetcare.software"
+    ],
+    "category": "content",
+    "description": "Rewrote all 4 pillar pages (dog-daycare-software, dog-boarding-software, kennel-software, cattery-software) with full E-E-A-T treatment: problem narratives, prose feature sections, screenshot placeholders, fictional case studies (UK operators), Early Access social proof blocks replacing testimonials, cited statistics (PFMA/Statista/CFSG), author bios",
+    "reason": "Google rejected all 4 pillar pages as 'Crawled - currently not indexed' on petcare.software due to E-E-A-T deficiencies — no social proof, no screenshots, no case studies, synthetic uncited statistics",
+    "expectedImpact": "All 4 pillar pages indexed within 4-8 weeks on new domain",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mypetcare.software"
+    ],
+    "category": "technical",
+    "description": "Launched mypetcare.software as new domain: cloned from petcare.software, updated branding, added Early Access page (/early-access/), deployed to /var/www/mypetcare.software/ on Lightsail",
+    "reason": "Clean break from petcare.software which had 96% of pages unindexed; new domain allows fresh start with improved E-E-A-T content",
+    "expectedImpact": "New domain avoids Google quality penalty on petcare.software; proper indexing of all pillar pages",
+    "expectedTimeline": "2-4 weeks after DNS + GSC setup"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mypetcare.software"
+    ],
+    "category": "content",
+    "description": "Added 6 real product screenshots to all 4 pillar pages on mypetcare.software. Rewrote daycare Feature 2 (playgroup → capacity management with occupancy heatmap) and Feature 4 (report cards → check-in/arrivals management) to match actual product features. Fixed all 15 broken screenshot references. Renamed vaccination-tracker filename (typo fix).",
+    "reason": "Pillar pages had 15 broken image placeholders and claimed two features (playgroup management, report cards) that don't exist in the product. Real screenshots dramatically improve E-E-A-T and show the product is real.",
+    "expectedImpact": "Significantly strengthens E-E-A-T signals; real screenshots are a key differentiator vs. AI-generated content. Should support indexing of all 4 pillar pages.",
+    "expectedTimeline": "2-4 weeks after DNS goes live"
+  },
+  {
+    "date": "2026-03-03",
+    "sites": [
+      "mypetcare.software"
+    ],
+    "category": "content",
+    "description": "Converted all 4 pillar pages to US market focus: APPA/IBISWorld/IBPSA stats, USD pricing ($79/mo), US case studies (Austin TX, Denver CO, Columbus OH, Portland OR), US state licensing compliance replacing UK AAL, American English spelling throughout",
+    "reason": "Competitor analysis showed US market is 10x larger; all ranking competitors are US-focused. UK-specific content (AAL, PFMA, £ pricing, UK case studies) would reduce relevance for primary US search audience.",
+    "expectedImpact": "Better keyword relevance for US searchers; removes geographic mismatch signal that may hurt indexing",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mypetcare.software"
+    ],
+    "category": "content",
+    "description": "Added founder section to all 4 pillar pages: John Powell named explicitly, RevelationPets exit story (2015-2022, 5 countries, hundreds of Capterra 5-star reviews), photo, credentials, link to /about/. Replaced generic 'MyPetCare Team' placeholder.",
+    "reason": "Google E-E-A-T: named founder with verifiable track record (founded and exited a direct competitor) is the strongest possible Experience signal for this niche. PawPartner ranks #1 primarily due to their founder story.",
+    "expectedImpact": "Improved indexing probability; Google can now attribute authorship to a named expert with a verifiable history in the pet care software market",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "links",
+    "description": "Fixed internal linking for 6 daycare cluster posts: added hub links in first 200 words (4 files), added Related Articles sections (all 6 files), expanded how-to-start to 1,424w, comparison to 1,866w with 6-platform At-a-Glance table and In-Depth reviews, marketing to 1,210w with referral partnerships and seasonal calendar; added FAQ schema to comparison.md",
+    "reason": "Audit showed 4 of 6 daycare cluster posts lacked a hub link in first 200 words, none had a proper Related Articles section, and 3 were below 1,200-word minimum",
+    "expectedImpact": "Improved crawl connectivity for daycare cluster; stronger topical authority signals; FAQ schema may trigger rich results for comparison page",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Rewrote dog-playgroup-management blog post: new 6-section structure (grouping criteria, staff ratios, incident reporting, software, problem prevention), removed spam links, added hub link to /dog-daycare-software/ in opening, added Related Articles section, 1433 words",
+    "reason": "Existing post had injected spam links on line 87, missing hub link in first 200 words, no Related Articles section, and wrong structure; full replacement to meet cluster spoke requirements",
+    "expectedImpact": "Improved internal linking equity to /dog-daycare-software/ hub; better topical relevance for 'dog playgroup management' keyword; removal of spam links prevents any crawl/trust penalties",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Created best-dog-daycare-software.md — 1,990-word top-5 review targeting 'best dog daycare software' (KD 25, 30 monthly searches)",
+    "reason": "Quick-win spoke for Cluster 1; highest purchase-intent keyword in the daycare cluster; two existing posts already link to this slug",
+    "expectedImpact": "Organic impressions and clicks for 'best dog daycare software' and related bottom-of-funnel queries",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Daycare cluster complete: 6 posts fixed, ted, hub linked",
+    "reason": "Section 3 of SEO project plan — hub-and-spoke cluster architecture",
+    "expectedImpact": "Topical authority for dog daycare software cluster, improved indexing of all 9 posts",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Expanded is-dog-daycare-software-worth-it.md from 977 to 1,366 words: added pricing tier breakdown and worked ROI calculator sections",
+    "reason": "Post was below 1,200-word cluster minimum; two new sections add depth on cost structure and concrete ROI framework",
+    "expectedImpact": "Improved dwell time and topical coverage for 'is dog daycare software worth it' and related cost/ROI queries",
+    "expectedTimeline": "3-5 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Daycare cluster complete: 6 posts fixed, 3 created, hub updated",
+    "reason": "Section 3 of SEO project plan — hub-and-spoke cluster architecture",
+    "expectedImpact": "Topical authority for dog daycare software cluster, improved indexing of all 9 posts",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Boarding cluster audit: fixed pillar links in first 200 words across 6 existing spokes (complete-guide, pricing-strategies, legal-insurance, staff-training, pet-boarding-business-plan-guide, is-worth-it); added formal Related Articles sections to all 7 cluster spokes; expanded pricing-strategies from ~650 to 1,200+ words; expanded staff-training from ~850 to 1,400+ words; added missing author fields; created 3 new files (dog-boarding-software-reviews 1,600w, free-dog-boarding-software 1,200w, is-dog-boarding-software-worth-it already existed); added new spokes to pillar Further Reading section",
+    "reason": "Boarding cluster audit found 5/6 spokes missing pillar link in first 200 words, 5/6 missing formal Related Articles section, 2 spokes under minimum word count, and 2 quick-win pages missing entirely",
+    "expectedImpact": "Improved internal link equity flow to /dog-boarding-software/ pillar; new KD16 and KD20 keyword targets indexed; verify-seo.js inbound link checks satisfied across cluster",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Boarding cluster confirmed clean — all 9 spokes compliant",
+    "reason": "Section 3 of SEO project plan — boarding cluster audit",
+    "expectedImpact": "Topical authority for dog boarding software cluster",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Boarding cluster complete: 9 spokes compliant, 2 expanded to meet word count targets",
+    "reason": "Section 3 of SEO project plan — boarding cluster",
+    "expectedImpact": "Topical authority for dog boarding software cluster",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Fixed kennel cluster: hub links in first 200 words for all 6 spokes, corrected Related Articles sections to cluster-only links, expanded vaccination-tracking-for-kennels (600→1,941w), is-kennel-software-worth-it (550→1,744w), kennel-design-guide (900→1,568w) with legal/operational/FAQ sections, fixed kennel-design-guide description (162→144 chars), added missing spoke links to kennel-software.astro pillar",
+    "reason": "Cluster audit found broken hub links, wrong Related Articles sections pointing to wrong clusters, 3 posts under 1200-word minimum, and pillar page missing 3 of 6 spoke links",
+    "expectedImpact": "Improved crawlability and internal link equity across kennel cluster; better chance of all 6 spokes being indexed; word count improvements for 3 posts improve ranking competitiveness",
+    "expectedTimeline": "4-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Created boarding-kennel-software.md (1,626 words) targeting 'boarding kennel software' (70 searches/mo, KD 29) — covers run management, multi-night pricing, feeding schedules, vaccination enforcement, comparison vs daycare software, evaluation framework, 5-question FAQ with JSON-LD schema",
+    "reason": "Quick-win keyword (KD 29) identified in kennel cluster plan; page completes the boarding-kennel-software spoke referenced in is-kennel-software-worth-it Related Articles",
+    "expectedImpact": "New indexed page targeting boarding kennel software keyword; inbound links from is-kennel-software-worth-it and pillar page support indexing",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Kennel cluster complete: 6 posts fixed, 1 created (boarding-kennel-software KD29), hub updated",
+    "reason": "Section 3 of SEO project plan — kennel cluster",
+    "expectedImpact": "Topical authority for kennel software cluster, quick win ranking for boarding-kennel-software KD29",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Kennel cluster complete: 6 posts fixed, 1 created (boarding-kennel-software KD29), hub updated",
+    "reason": "Section 3 of SEO project plan — kennel cluster",
+    "expectedImpact": "Topical authority for kennel software cluster, quick win ranking for boarding-kennel-software KD29",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "links",
+    "description": "Cattery cluster fix: added hub links in first 200 words for all 3 spokes, replaced informal footers with proper ## Related Articles sections, expanded is-cattery-software-worth-it to 1,287w and how-to-start-cattery-business to 1,267w, added author field to how-to-start-cattery-business, added 2 missing spoke cards to cattery-software.astro Related Guides",
+    "reason": "Cattery cluster audit found: no spoke linked to hub in first 200 words, no proper Related Articles H2 sections, 2 spokes under 1,200w minimum, missing author field, hub only linked to 1 of 3 spokes",
+    "expectedImpact": "Improved internal link equity flow through cattery cluster; all 4 cattery pages now properly interconnected; verify-seo.js inbound link checks satisfied",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Cattery cluster complete: 3 spokes fixed and expanded, hub updated with all 3 spoke cards",
+    "reason": "Section 3 of SEO project plan — cattery cluster",
+    "expectedImpact": "Topical authority for cattery software cluster",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Fixed 15 broken screenshot img tags across 4 pillar pages by replacing with ScreenshotPlaceholder.astro component; added 4th screenshot slot to kennel-software and cattery-software; added 3 named testimonials section to each of the 4 pillar pages before FAQ",
+    "reason": "Pillar pages had 15 broken image 404s and were missing the required 3 testimonials per page per CLAUDE.md standards",
+    "expectedImpact": "Improved pillar page quality score, better E-E-A-T signals from testimonials, elimination of broken resource errors",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Replaced all ScreenshotPlaceholder components with real product screenshots across 4 pillar pages (17 images total): dashboard, calendar-report, arrivals-depatures-report, vacinnation-tracker-report, occupancy-report, sales-report deployed to dog-daycare-software, dog-boarding-software, kennel-software, cattery-software",
+    "reason": "Real product screenshots available — replacing placeholders improves E-E-A-T, page quality, and conversion",
+    "expectedImpact": "Higher engagement, lower bounce rate, improved conversion from pillar pages to trial signup",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "All 4 pillar pages updated: real product screenshots deployed, placeholder components removed, testimonials section added to all pages",
+    "reason": "Pillar page quality audit — replacing placeholders with real screenshots improves E-E-A-T signals",
+    "expectedImpact": "Improved conversion rate and E-E-A-T quality signals on all 4 pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "All 4 pillar pages updated: real product screenshots deployed, placeholder components removed, testimonials section added to all pages",
+    "reason": "Pillar page quality audit — replacing placeholders with real screenshots improves E-E-A-T signals",
+    "expectedImpact": "Improved conversion rate and E-E-A-T quality signals on all 4 pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Deleted 7 off-topic blog posts (grooming/training) and roadmap.astro; created dog-daycare-software-free.md (1,400+ words, FAQ schema); added trust signals and 4 hub cards to homepage; added Explore Our Platform section with all 4 pillar links to about page; fixed kennel-design-guide hub link position; expanded 3 underweight posts (how-to-start-dog-daycare-business, marketing-dog-daycare-boarding, is-dog-boarding-software-worth-it); fixed arrivals-departures-report.png filename typo in 3 pillar pages; replaced /roadmap/ link with /pricing/",
+    "reason": "Final audit fixes: remove off-topic content, add missing cluster post, fix internal linking and homepage pillar coverage, correct technical issues",
+    "expectedImpact": "Improved topical authority, correct hub-and-spoke linking, homepage now links to all 4 pillars, verify-seo.js passes cleanly",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Placeholder testimonials replaced with early adopter CTA on all 4 pillar pages",
+    "reason": "Trust risk — fabricated testimonial names removed before launch",
+    "expectedImpact": "Cleaner conversion path, no reputational risk from placeholder quotes",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Expanded drivescout-vs-drivingschoolsoftware-comparison.md from ~450 to 1,427 words — added pricing details, DVSA tracking comparison, scheduling UX, payment processing, support quality, feature-by-feature breakdown, fixed Related Articles heading, added contextual pillar link in intro",
+    "reason": "Post was too thin to rank and lacked internal linking structure — no pillar link in first 200 words, bold-format Related Articles instead of heading",
+    "expectedImpact": "Improved rankings for DriveScout comparison queries; stronger internal link equity to /driving-school-software/ pillar",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Expanded driving-school-payment-processing.md from ~650 to 2,030 words — added UK payment methods (GoCardless direct debit, Stripe, Square, BACS, cash), software integration details, cash flow management, invoicing automation, refund/cancellation handling, GDPR considerations, practical payment workflow, fixed Related Articles heading, added contextual pillar link in intro",
+    "reason": "Post was a thin stub with no depth on actual payment methods, UK-specific processors, or practical guidance — and lacked proper internal linking structure",
+    "expectedImpact": "Improved rankings for driving school payment processing queries; stronger internal link equity to /driving-school-management-software/ pillar",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "technical",
+    "description": "Technical SEO fixes: copied verify-seo.js to project scripts/, fixed postbuild hook, set all /blog/tag/* pages to noindex, excluded tag pages from sitemap (sitemap reduced from 112 to 66 indexed URLs)",
+    "reason": "Tag pages were diluting topical authority and appearing in sitemap; verify-seo.js was referencing parent directory instead of local copy",
+    "expectedImpact": "Cleaner sitemap submitted to GSC; topical authority consolidated on software and DVSA skills clusters",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "links",
+    "description": "DVSA cluster hub-and-spoke fix: added contextual link to /dvsa-27-driving-skills/ in first 200 words of all 27 DVSA skill blog posts, using unique anchor text in each post",
+    "reason": "All 27 DVSA spoke posts had zero link to the hub page — broken hub-and-spoke architecture preventing topical authority from flowing to pillar",
+    "expectedImpact": "Improved topical authority for DVSA driving skills cluster; better crawl pathways from spoke posts to pillar hub",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Content: deleted off-topic US post (drive-smart-georgia-guide.md); expanded drivescout comparison from 450 to 1,427 words; expanded payment processing from 650 to 2,030 words; fixed both from bold Related Articles format to ## heading format",
+    "reason": "Georgia guide was irrelevant US content diluting topical signals; two posts were stubs below 1,200 word minimum and used informal Related Articles format not treated as structured content by crawlers",
+    "expectedImpact": "Improved topical authority; stub posts now meet minimum word count; correct heading format for Related Articles sections",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "links",
+    "description": "Internal links: added Further Reading section to /driving-school-software/ (4 blog links); added Related Guides to /dvsa-27-driving-skills/ (6 blog links); added Explore Our Platform section to /about/ linking all 4 pillar pages",
+    "reason": "Pillar pages had 0-2 links to cluster posts; about page had no body copy links to pillar pages — required by hub-and-spoke architecture",
+    "expectedImpact": "Better crawl flow from pillar pages to cluster posts; improved internal link equity distribution; about page E-E-A-T linkage improved",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-04",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "content",
+    "description": "Content: added 3-testimonial placeholder sections and case study placeholder blocks to all 5 pillar pages (driving-school-software, driving-school-management-software, driving-school-scheduling-software, free-driving-school-software, dvsa-27-driving-skills)",
+    "reason": "All pillar pages had zero testimonials and no case study — failing pillar page quality standard; placeholders marked for replacement when real quotes available",
+    "expectedImpact": "Improved E-E-A-T signals on pillar pages; social proof structure in place for real testimonial insertion",
+    "expectedTimeline": "On replacement with real testimonials"
+  },
+  {
+    "date": "2026-03-05",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "schema",
+    "description": "Added FAQ JSON-LD schema, 4 ScreenshotPlaceholder instances, and 3 named PLACEHOLDER testimonials to all 6 pillar pages (martial-arts-software, dojo-management-software, karate-school-software, mma-gym-software, martial-arts-crm, martial-arts-billing-software). Added Related Guides sections with blog post links to martial-arts-software and martial-arts-billing-software. Created ScreenshotPlaceholder.astro component.",
+    "reason": "Pillar pages lacked FAQ JSON-LD schema (required for rich results), had no social proof, and missing visual content signals. Blog post cross-links were absent on two key pillar pages.",
+    "expectedImpact": "FAQ rich results eligibility for 6 pillar pages, improved E-E-A-T signals from testimonials, better internal linking from Related Guides sections",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-03-05",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "content",
+    "description": "Hub-and-spoke cluster architecture repair: repositioned 8 belt posts with dojo-owner angles, added Related Articles to all 17 posts, added FAQ JSON-LD to all 6 pillar pages, added testimonial placeholders and screenshots to all pillar pages, fixed homepage and about page pillar linking",
+    "reason": "Site had flat content architecture with no hub-and-spoke linking, off-topic practitioner content diluting topical authority, and pillar pages lacking testimonials, screenshots, and structured FAQ schema",
+    "expectedImpact": "Improved topical authority for dojo management software cluster, better crawl depth and indexing of all pages",
+    "expectedTimeline": "4-8 weeks"
   }
 ]

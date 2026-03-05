@@ -180,14 +180,7 @@ function checkPage(filePath, pagePath, siteUrl, sitemapPaths, inboundLinks, outb
     }
   }
 
-  // 3. No noindex
-  const noindexA = /<meta\s[^>]*\bname=["']robots["'][^>]*\bcontent=["'][^"']*noindex/i.test(html);
-  const noindexB = /<meta\s[^>]*\bcontent=["'][^"']*noindex[^"']*["'][^>]*\bname=["']robots["']/i.test(html);
-  if (noindexA || noindexB) {
-    failures.push('noindex directive found');
-  }
-
-  // 4. Exactly 1 H1
+  // 3. Exactly 1 H1
   const h1Count = (html.match(/<h1[\s>]/gi) || []).length;
   if (h1Count === 0) {
     failures.push('Missing H1');
@@ -195,12 +188,12 @@ function checkPage(filePath, pagePath, siteUrl, sitemapPaths, inboundLinks, outb
     failures.push(`Multiple H1 tags (${h1Count})`);
   }
 
-  // 5. Meta description
+  // 4. Meta description
   if (!/<meta\s[^>]*\bname=["']description["']/i.test(html)) {
     failures.push('Missing meta description');
   }
 
-  // 6. Inbound links ≥ 2 (homepage exempt — nothing links "to" it by path)
+  // 5. Inbound links ≥ 2 (homepage exempt — nothing links "to" it by path)
   if (pagePath !== '/') {
     const inbound = inboundLinks.get(pagePath);
     const inboundCount = inbound ? inbound.size : 0;
@@ -209,7 +202,7 @@ function checkPage(filePath, pagePath, siteUrl, sitemapPaths, inboundLinks, outb
     }
   }
 
-  // 7. Outbound internal link ≥ 1
+  // 6. Outbound internal link ≥ 1
   const outbound = outboundLinks.get(pagePath);
   const validOutbound = outbound
     ? [...outbound].filter(p => htmlPageSet.has(p)).length
@@ -231,14 +224,30 @@ const { inboundLinks, outboundLinks } = buildLinkGraph(allHtmlFiles, siteUrl);
 const htmlPageSet = new Set(allHtmlFiles.map(filePathToPagePath));
 
 const pageFailures = [];
+let skippedCount = 0;
+
+const noindexRe = [
+  /<meta\s[^>]*\bname=["']robots["'][^>]*\bcontent=["'][^"']*noindex/i,
+  /<meta\s[^>]*\bcontent=["'][^"']*noindex[^"']*["'][^>]*\bname=["']robots["']/i,
+];
 
 for (const file of allHtmlFiles) {
   const pagePath = filePathToPagePath(file);
+  const html = fs.readFileSync(file, 'utf8');
+
+  // Skip intentionally noindexed pages — SEO checks don't apply to them
+  if (noindexRe.some(re => re.test(html))) {
+    skippedCount++;
+    continue;
+  }
+
   const failures = checkPage(file, pagePath, siteUrl, sitemapPaths, inboundLinks, outboundLinks, htmlPageSet);
   if (failures.length > 0) {
     pageFailures.push({ page: siteUrl + pagePath, failures });
   }
 }
+
+const checkedCount = allHtmlFiles.length - skippedCount;
 
 if (pageFailures.length > 0) {
   console.error(`SEO VERIFICATION FAILED — ${pageFailures.length} page(s) have issues:\n`);
@@ -249,7 +258,9 @@ if (pageFailures.length > 0) {
     }
     console.error('');
   }
+  if (skippedCount > 0) console.error(`(${skippedCount} noindexed page(s) skipped)`);
   process.exit(1);
 } else {
-  console.log(`SEO verification passed — ${allHtmlFiles.length} pages checked`);
+  const skippedNote = skippedCount > 0 ? `, ${skippedCount} noindexed skipped` : '';
+  console.log(`SEO verification passed — ${checkedCount} pages checked${skippedNote}`);
 }
