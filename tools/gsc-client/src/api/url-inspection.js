@@ -20,14 +20,42 @@ export async function inspectUrls(auth, siteUrl, urls) {
         requestBody: { inspectionUrl: url, siteUrl }
       });
 
-      const idx = res.data.inspectionResult?.indexStatusResult || {};
+      const idx    = res.data.inspectionResult?.indexStatusResult || {};
+      const rich   = res.data.inspectionResult?.richResultsResult || {};
+      const mobile = res.data.inspectionResult?.mobileUsabilityResult || {};
+
       results.push({
         url,
+
+        // Index / coverage status (existing)
         coverageState: idx.coverageState || 'Unknown',
-        verdict: idx.verdict || 'NEUTRAL',
+        verdict:       idx.verdict       || 'NEUTRAL',
         lastCrawlTime: idx.lastCrawlTime || null,
         pageFetchState: idx.pageFetchState || 'Unknown',
-        robotsTxtState: idx.robotsTxtState || 'Unknown'
+        robotsTxtState: idx.robotsTxtState || 'Unknown',
+
+        // Rich results / structured data errors
+        // richResultsItems: [{ type, issues: [{ name, message, severity }] }]
+        richResultsVerdict: rich.verdict || null,
+        richResultsItems: (rich.detectedItems || []).map(item => ({
+          type: item.richResultType,
+          issues: (item.items || []).flatMap(i =>
+            (i.issues || []).map(issue => ({
+              name:     i.name,
+              message:  issue.issueMessage,
+              severity: issue.severity   // 'ERROR' | 'WARNING'
+            }))
+          )
+        })),
+
+        // Mobile usability issues
+        // mobileIssues: [{ type, message, severity }]
+        mobileVerdict: mobile.verdict || null,
+        mobileIssues: (mobile.issues || []).map(issue => ({
+          type:     issue.issueType,
+          message:  issue.message,
+          severity: issue.severity   // 'ERROR' | 'WARNING'
+        }))
       });
     } catch (err) {
       results.push({

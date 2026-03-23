@@ -1,5 +1,6 @@
 {
   "serviceAccountPath": "../../petcare-481007-9f7c4f20cf39.json",
+  "slackWebhookUrl": "https://hooks.slack.com/services/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",
   "domains": [
     {
       "name": "mydojo.software",
@@ -14,10 +15,17 @@
       "enabled": true
     },
     {
+      "name": "driveschoolpro.com",
+      "gscProperty": "https://driveschoolpro.com/",
+      "ga4PropertyId": "517695357",
+      "enabled": true
+    },
+    {
       "name": "mydriveschool.software",
       "gscProperty": "https://mydriveschool.software/",
       "ga4PropertyId": "517695357",
-      "enabled": true
+      "enabled": true,
+      "note": "Legacy domain — monitoring 301 redirect traffic only"
     },
     {
       "name": "mytattoo.software",

@@ -23,6 +23,7 @@ import { inspectUrls } from './api/url-inspection.js';
 import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
 import GA4Client from './analytics/ga4-client.js';
 import CombinedReportGenerator from './reports/combined-report.js';
+import { sendFullSlackReport } from './slack.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,6 +37,7 @@ function parseArgs() {
     withAnalytics: false,
     withCoverage: false,
     submitSitemaps: false,
+    slack: false,
     logChange: null,
     logSites: null,
     logCategory: null,
@@ -55,6 +57,8 @@ function parseArgs() {
       options.withCoverage = true;
     } else if (arg === '--submit-sitemaps') {
       options.submitSitemaps = true;
+    } else if (arg === '--slack') {
+      options.slack = true;
     } else if (arg.startsWith('--log-change=')) {
       options.logChange = arg.split('=').slice(1).join('=');
     } else if (arg.startsWith('--sites=')) {
@@ -86,6 +90,7 @@ function showHelp() {
   console.log('  --with-analytics              Include GA4 engagement metrics');
   console.log('  --with-coverage               Include sitemaps health + URL inspection (slower, ~30s extra)');
   console.log('  --submit-sitemaps             Resubmit sitemap-index.xml to GSC for all (or --domain) sites');
+  console.log('  --slack                       Send summary report to Slack (requires slackWebhookUrl in config.json)');
   console.log('  --log-change=<description>    Log an SEO change to the changelog');
   console.log('  --sites=<domain,domain,...>   Sites affected (default: all)');
   console.log('  --category=<type>             Change category: content|technical|meta|links|schema|analytics|conversion|performance');
@@ -486,8 +491,43 @@ function calculateTrend(history, metricName) {
 /**
  * Generate recommendations based on data + audit gaps
  */
-function generateRecommendations(domainData, contentGaps, history) {
+function generateRecommendations(domainData, contentGaps, history, urlInspectionResults = null) {
   const recommendations = [];
+
+  // Structured data errors (CRITICAL — blocks rich results in search)
+  if (urlInspectionResults) {
+    const gscErrors = extractGscErrors(urlInspectionResults);
+    const richErrors   = gscErrors.filter(e => e.category === 'Rich Result' && e.severity === 'ERROR');
+    const mobileErrors = gscErrors.filter(e => e.category === 'Mobile' && e.severity === 'ERROR');
+
+    if (richErrors.length > 0) {
+      const byPage = {};
+      for (const e of richErrors) {
+        if (!byPage[e.path]) byPage[e.path] = [];
+        byPage[e.path].push(`${e.type}: ${e.message}`);
+      }
+      for (const [path, msgs] of Object.entries(byPage)) {
+        recommendations.push({
+          priority: 'CRITICAL',
+          category: 'Structured Data',
+          issue: `Rich result error(s) on ${path} — rich snippets blocked`,
+          action: msgs.join(' · '),
+          impact: 'Rich results (FAQ stars, review stars, etc.) will not show in search until fixed'
+        });
+      }
+    }
+
+    if (mobileErrors.length > 0) {
+      const pages = [...new Set(mobileErrors.map(e => e.path))];
+      recommendations.push({
+        priority: 'HIGH',
+        category: 'Mobile Usability',
+        issue: `${mobileErrors.length} mobile usability error(s) on ${pages.length} page(s)`,
+        action: mobileErrors.slice(0, 3).map(e => `${e.path}: ${e.message}`).join(' · '),
+        impact: 'Mobile usability errors suppress rankings on mobile searches (majority of traffic)'
+      });
+    }
+  }
 
   // Baseline metrics for comparison (from MEMORY.md - Feb 9, 2026)
   const baselines = {
@@ -661,6 +701,65 @@ function printIndexCoverage(urlResults) {
 }
 
 /**
+ * Flatten url inspection results into a simple errors array for reporting/Slack.
+ * Returns [{ path, category, type, message, severity }]
+ */
+function extractGscErrors(urlResults) {
+  if (!urlResults) return [];
+  const errors = [];
+  for (const result of urlResults) {
+    const path = result.url.replace(/^https?:\/\/[^/]+/, '') || '/';
+    for (const item of (result.richResultsItems || [])) {
+      for (const issue of item.issues) {
+        errors.push({ path, category: 'Rich Result', type: item.type, message: issue.message, severity: issue.severity });
+      }
+    }
+    for (const issue of (result.mobileIssues || [])) {
+      errors.push({ path, category: 'Mobile', type: issue.type, message: issue.message, severity: issue.severity });
+    }
+  }
+  return errors;
+}
+
+/**
+ * Print GSC rich results and mobile usability errors
+ */
+function printGscErrors(urlResults) {
+  if (!urlResults || urlResults.length === 0) return;
+
+  const errors = extractGscErrors(urlResults);
+  const richErrors   = errors.filter(e => e.category === 'Rich Result');
+  const mobileErrors = errors.filter(e => e.category === 'Mobile');
+
+  console.log(chalk.bold('\n🧩 GSC ENHANCEMENTS\n'));
+
+  if (richErrors.length === 0) {
+    console.log(chalk.green('  ✅ Rich Results:      no errors on inspected pages'));
+  } else {
+    const errCount  = richErrors.filter(e => e.severity === 'ERROR').length;
+    const warnCount = richErrors.filter(e => e.severity === 'WARNING').length;
+    console.log(chalk.red(`  🔴 Rich Results:      ${errCount} error(s)  ${warnCount > 0 ? chalk.yellow(warnCount + ' warning(s)') : ''}`));
+    for (const e of richErrors) {
+      const icon = e.severity === 'ERROR' ? chalk.red('   ERROR  ') : chalk.yellow('   WARN   ');
+      console.log(`${icon} ${e.path}`);
+      console.log(chalk.gray(`            ${e.type}${e.name ? ' · ' + e.name : ''}: ${e.message}`));
+    }
+  }
+
+  if (mobileErrors.length === 0) {
+    console.log(chalk.green('  ✅ Mobile Usability:  no errors on inspected pages'));
+  } else {
+    const errCount  = mobileErrors.filter(e => e.severity === 'ERROR').length;
+    const warnCount = mobileErrors.filter(e => e.severity === 'WARNING').length;
+    console.log(chalk.red(`  🔴 Mobile Usability:  ${errCount} error(s)  ${warnCount > 0 ? chalk.yellow(warnCount + ' warning(s)') : ''}`));
+    for (const e of mobileErrors) {
+      const icon = e.severity === 'ERROR' ? chalk.red('   ERROR  ') : chalk.yellow('   WARN   ');
+      console.log(`${icon} ${e.path}: ${e.message}`);
+    }
+  }
+}
+
+/**
  * Print query position movers vs previous run
  */
 function printQueryMovers(currentQueries, history) {
@@ -777,6 +876,7 @@ function printDomainReport(domainData, contentGaps, history, ga4Data = null, cha
   // Index Coverage (--with-coverage only)
   if (urlInspectionResults !== null) {
     printIndexCoverage(urlInspectionResults);
+    printGscErrors(urlInspectionResults);
   }
 
   // Query Movers (always, when previous run has topQueries)
@@ -824,7 +924,7 @@ function printDomainReport(domainData, contentGaps, history, ga4Data = null, cha
   printRecentChanges(domainData.domain, changelog);
 
   // Recommendations
-  const recommendations = generateRecommendations(domainData, contentGaps, history);
+  const recommendations = generateRecommendations(domainData, contentGaps, history, urlInspectionResults);
   if (recommendations.length > 0) {
     console.log(chalk.bold('\n🎯 TOP RECOMMENDATIONS\n'));
     recommendations.slice(0, 5).forEach((rec, i) => {
@@ -912,6 +1012,9 @@ async function main() {
       console.error(chalk.red(`❌ No enabled domains found`));
       process.exit(1);
     }
+
+    // Collect per-domain summaries for Slack (populated during loop)
+    const slackSummaries = [];
 
     // Process each domain
     for (const domainConfig of domains) {
@@ -1002,6 +1105,54 @@ async function main() {
 
       // Print enhanced report
       printDomainReport(domainData, contentGaps, history, ga4Data, changelog, sitemapResults, urlInspectionResults);
+
+      // Collect for Slack summary
+      if (options.slack) {
+        // GA4 health score (if available)
+        let ga4HealthScore = null;
+        if (ga4Data) {
+          try {
+            const combinedReport = new CombinedReportGenerator(
+              { topQueries, topPages, summary: aggregateMetrics },
+              ga4Data
+            );
+            ga4HealthScore = combinedReport.calculateSEOHealthScore();
+          } catch { /* skip */ }
+        }
+
+        // Published page count
+        const publishedCount = (() => {
+          try {
+            const pagesDir = resolve(__dirname, '../../../', domainConfig.name, 'src/pages');
+            const blogDir  = resolve(__dirname, '../../../', domainConfig.name, 'src/content/blog');
+            let count = 0;
+            if (existsSync(pagesDir)) {
+              for (const f of readdirSync(pagesDir)) {
+                if (f.endsWith('.astro') && !f.startsWith('[') && !f.startsWith('_') && f !== '404.astro') count++;
+              }
+            }
+            if (existsSync(blogDir)) {
+              for (const f of readdirSync(blogDir)) {
+                if (f.endsWith('.md') || f.endsWith('.mdx')) count++;
+              }
+            }
+            return count;
+          } catch { return 0; }
+        })();
+
+        slackSummaries.push({
+          domain: domainConfig.name,
+          metrics: aggregateMetrics,
+          topQueries,
+          topPages,
+          history: loadHistoricalMetrics(domainConfig.name),
+          publishedCount,
+          ga4HealthScore,
+          recommendations: generateRecommendations(domainData, contentGaps, history, urlInspectionResults),
+          recentChanges: getRecentChanges(domainConfig.name, changelog, 30),
+          urlErrors: extractGscErrors(urlInspectionResults)
+        });
+      }
     }
 
     // Footer
@@ -1012,12 +1163,31 @@ async function main() {
       console.log(chalk.yellow('💡 Tip: Add --with-analytics to include GA4 engagement metrics'));
     }
     if (!options.withCoverage) {
-      console.log(chalk.yellow('💡 Tip: Add --with-coverage to check sitemaps health + URL indexing status'));
+      console.log(chalk.yellow('💡 Tip: Add --with-coverage to check sitemaps + indexing + rich result errors + mobile usability'));
     }
     if (!options.submitSitemaps) {
-      console.log(chalk.yellow('💡 Tip: Add --submit-sitemaps to resubmit sitemaps to Google Search Console\n'));
+      console.log(chalk.yellow('💡 Tip: Add --submit-sitemaps to resubmit sitemaps to Google Search Console'));
+    }
+    if (!options.slack) {
+      console.log(chalk.yellow('💡 Tip: Add --slack to send a summary to Slack\n'));
     } else {
       console.log();
+    }
+
+    // Send Slack notification
+    if (options.slack) {
+      const webhookUrl = config.slackWebhookUrl;
+      if (!webhookUrl) {
+        console.log(chalk.yellow('⚠️  --slack flag set but slackWebhookUrl is missing from config.json. Skipping.'));
+      } else {
+        try {
+          console.log(chalk.blue('📨 Sending Slack report (performance + structural health)...'));
+          await sendFullSlackReport(webhookUrl, slackSummaries, { start: startDate, end: endDate });
+          console.log(chalk.green('✓ Slack report sent (2 messages)\n'));
+        } catch (err) {
+          console.log(chalk.yellow(`⚠️  Slack send failed: ${err.message}`));
+        }
+      }
     }
 
   } catch (error) {

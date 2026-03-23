@@ -736,5 +736,137 @@
     "reason": "Site had flat content architecture with no hub-and-spoke linking, off-topic practitioner content diluting topical authority, and pillar pages lacking testimonials, screenshots, and structured FAQ schema",
     "expectedImpact": "Improved topical authority for dojo management software cluster, better crawl depth and indexing of all pages",
     "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-09",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "meta",
+    "description": "Added MyDriveSchool brand name to homepage title; updated pricing page H1 from 'Simple, Transparent Pricing' to 'Driving School Software Pricing'",
+    "reason": "Homepage title had no brand name — 'mydriveschool' query at pos 13.2 with no brand signal. Pricing H1 had no keyword match for 'driving school software pricing' at pos 17.8",
+    "expectedImpact": "Brand query moves from pos 13 to top 5; pricing page from pos 17 toward top 10",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-03-13",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Deleted 3 off-topic/thin posts: pet-business-ideas.md (grooming references), starting-dog-sitting-business.md (wrong audience, zero hub links), dog-health-safety-protocols.md (492w stub)",
+    "reason": "Off-topic and thin content dilutes topical authority across all clusters per CLAUDE.md rules",
+    "expectedImpact": "Improved topical cluster authority for software keywords",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-03-13",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Expanded dog-calming-techniques.md from 723w to 1081w: added Software Tracking and Building a Calming Protocol sections; fixed hub link to /dog-daycare-software/; replaced italic footer with ## Related Articles",
+    "reason": "Post was below 800w minimum and missing hub link and Related Articles heading — all structural requirements per CLAUDE.md",
+    "expectedImpact": "Impressions and rankings for dog calming / daycare queries",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-13",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Expanded reduce-no-shows-pet-business.md from 742w to 1159w: added How Software Makes This Manageable and FAQ sections; added hub link to /dog-daycare-software/; added ## Related Articles",
+    "reason": "Post was below 800w minimum and missing hub link and Related Articles",
+    "expectedImpact": "Rankings for no-show / cancellation policy queries",
+    "expectedTimeline": "3-6 weeks"
+  },
+  {
+    "date": "2026-03-13",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "links",
+    "description": "Fixed 5 general posts (customer-loyalty, emergency-preparedness, financial-management, partnering-vets-trainers, pet-care-technology-trends, international-dog-day-marketing): added hub links in first 200 words, replaced italic footers with ## Related Articles, removed spammy off-cluster injected links",
+    "reason": "Missing hub links in first 200 words breaks bidirectional cluster authority; informal footers not treated as structured navigation by crawlers",
+    "expectedImpact": "Hub-and-spoke cluster authority; improved crawl signals across all 4 clusters",
+    "expectedTimeline": "3-5 weeks"
+  },
+  {
+    "date": "2026-03-17",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Redeployed petcare.software to remove 3 stale deleted pages from live server (dog-health-safety-protocols, pet-business-ideas, starting-dog-sitting-business)",
+    "reason": "March 13 content deletions were in local repo but live server still serving 53 URLs vs 50 in local build",
+    "expectedImpact": "Cleaner crawl budget, no wasted crawl on deleted content",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-03-17",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "schema",
+    "description": "Redeployed mydriveschool.software to fix invalid FAQPage JSON-LD schema on /driving-school-software/ — live site had raw HTML anchor tags inside JSON string breaking Google's schema parser",
+    "reason": "GSC rich results test reported Parsing error: Missing comma or closing brace on /driving-school-software/ pillar page",
+    "expectedImpact": "FAQPage rich results now eligible on highest-value pillar page; resolves GSC structured data error",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-03-17",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "meta",
+    "description": "Pricing page optimisation to push 'driving school software pricing' from pos 7 toward top 5: (1) keyword-rich anchor text on pillar page and homepage CTAs, (2) FAQPage JSON-LD schema added to pricing FAQ section, (3) new cost breakdown section with pricing table targeting 'how much does driving school software cost'",
+    "reason": "'driving school software pricing' moved from pos 13 to pos 7 after March 9 title change. Anchor text was generic 'View Pricing', pricing page had no FAQ schema, no cost context section",
+    "expectedImpact": "Position 7 → top 5 for 'driving school software pricing'; FAQ rich results eligibility on pricing page; additional impressions for 'how much does driving school software cost' variants",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-19",
+    "sites": [
+      "mydriveschool.software"
+    ],
+    "category": "technical",
+    "description": "Domain migration: mydriveschool.software → driveschoolpro.com. Updated astro.config.mjs site URL and GitHub Actions deploy target. 301 redirects active on server.",
+    "reason": "Rebranding to driveschoolpro.com — better domain for the product",
+    "expectedImpact": "301 redirects preserve link equity; new domain to gain indexing",
+    "expectedTimeline": "4-8 weeks for full ranking transfer"
+  },
+  {
+    "date": "2026-03-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Added driveschoolpro.com to GSC config. Kept mydriveschool.software as legacy entry for redirect monitoring. Updated seo-check command with domain→folder mapping and migration notes.",
+    "reason": "Domain migration from mydriveschool.software to driveschoolpro.com",
+    "expectedImpact": "GSC and GA4 data now tracked under new domain",
+    "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-03-23",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Rewrite privacy policy with UK GDPR 11-section structure; update cookie consent banner (dsp-cookie-consent key, Necessary Only button, coral border, British English)",
+    "reason": "UK GDPR/PECR legal requirement before onboarding real users",
+    "expectedImpact": "Legal compliance; no direct ranking impact",
+    "expectedTimeline": "immediate"
+  },
+  {
+    "date": "2026-03-23",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Add GDPR compliance to app: cookie consent banner, privacy links in sidebar and portal nav, account deletion request/cancel server actions and UI, Prisma schema migration for org/user deletion fields",
+    "reason": "UK GDPR/PECR compliance before onboarding real users — app-side infrastructure",
+    "expectedImpact": "Legal compliance; no direct ranking impact",
+    "expectedTimeline": "immediate"
   }
 ]

@@ -9,13 +9,14 @@ Run enhanced SEO performance reports integrating GSC + GA4 + Content Gaps + Hist
 ## Usage
 
 The user can run this command with optional arguments:
-- `/seo-check` - Enhanced report for all 4 domains with GA4 + trends (last 28 days)
+- `/seo-check` - Full report: GA4 + trends + sitemaps + rich result errors + mobile usability (last 28 days)
 - `/seo-check --domain=petcare.software` - Check single domain with full analysis
 - `/seo-check --days=7` - Weekly report (last 7 days)
 - `/seo-check --days=90` - Quarterly report (last 90 days)
 - `/seo-check --excel` - Generate Excel report instead of enhanced report
 - `/seo-check --structural` - Run structural health audit only (no GSC data needed)
 - `/seo-check --domain=petcare.software --full` - Performance + full structural audit combined
+- `/seo-check --with-coverage` - Adds sitemap health + URL indexing + **rich result errors** + **mobile usability issues**
 
 ## Your Task
 
@@ -26,16 +27,24 @@ Parse the user's arguments and execute the appropriate GSC client command, then 
 ### Step 1: Determine Command Type
 
 **DEFAULT (Recommended):** Use the enhanced report with GA4 + historical tracking + content gaps
-- Command: `cd /Users/john/Projects/Front-end-sites/tools/gsc-client && node src/enhanced-report.js --with-analytics [args]`
+- Command: `cd /Users/john/Projects-code/Front-end-sites/tools/gsc-client && node src/enhanced-report.js --with-analytics --with-coverage --slack [args]`
 - This integrates:
   - Google Search Console data
   - Google Analytics 4 engagement metrics
   - SEO_AUDIT_REPORT.md content gap analysis
   - Historical metrics tracking and trends
   - Smart recommendations based on progress
+  - Slack notification (performance report + structural health audit sent automatically)
+
+**Add `--with-coverage` to also check** (same API call, ~30s extra):
+  - Sitemap submission health
+  - URL indexing / coverage state
+  - **Rich result / structured data errors** (FAQPage, Article, Breadcrumb, etc.)
+  - **Mobile usability issues** (viewport, tap targets, font size, etc.)
+  - These surface as CRITICAL/HIGH recommendations and appear in Slack
 
 **If user specifies `--excel`:** Generate Excel-only report
-- Command: `cd /Users/john/Projects/Front-end-sites/tools/gsc-client && npm run report [args]`
+- Command: `cd /Users/john/Projects-code/Front-end-sites/tools/gsc-client && npm run report [args]`
 
 ---
 
@@ -91,11 +100,12 @@ For each cluster, check that every spoke post has a hub link in the first 200 wo
 ```bash
 cd /Users/john/Projects-code/Front-end-sites/[domain]
 
-# For each hub URL (e.g. /kennel-software), find posts that should link to it
-# and check whether the link appears early enough
+# Skip YAML frontmatter (between --- delimiters), then check first 1500 bytes of body
 for file in src/content/blog/*.md; do
-  # Get first 200 words and check for hub link
-  head -c 1500 "$file" | grep -l "/kennel-software\|/dog-daycare-software\|/dog-boarding-software\|/cattery-software" 2>/dev/null
+  body=$(awk '/^---/{if(++c==2)p=1;next}p' "$file" | head -c 1500)
+  if ! echo "$body" | grep -qE "/kennel-software|/dog-daycare-software|/dog-boarding-software|/cattery-software"; then
+    echo "MISSING HUB LINK: $(basename $file)"
+  fi
 done
 ```
 
@@ -292,12 +302,34 @@ These are the failure patterns most likely to explain flat metrics:
 
 ---
 
+## Domain → Folder Mapping
+
+| Domain | Local folder |
+|--------|-------------|
+| mydojo.software | mydojo.software/ |
+| petcare.software | petcare.software/ |
+| driveschoolpro.com | mydriveschool.software/ |
+| mytattoo.software | mytattoo.software/ |
+| mydriveschool.software | mydriveschool.software/ (legacy — redirect monitoring only) |
+
+When running structural checks for `driveschoolpro.com`, use the `mydriveschool.software/` folder.
+
+---
+
 ## Baseline Metrics (Feb 9, 2026)
 
 - mydojo.software: 1 click, 2,079 impressions (0.05% CTR), position 66.1
 - petcare.software: 0 clicks, 137 impressions (0.00% CTR), position 85.6 ← rebuilt March 2026
 - mydriveschool.software: 10 clicks, 3,068 impressions (0.33% CTR), position 51.2 (best performer)
 - mytattoo.software: 1 click, 884 impressions (0.11% CTR), position 75.4
+
+**Domain migration (March 20, 2026):** mydriveschool.software → driveschoolpro.com
+- 301 redirects active on server (all paths preserved)
+- Full rebrand deployed: all content, meta, schema updated to DriveSchoolPro / driveschoolpro.com
+- GSC property added: https://driveschoolpro.com/ (URL prefix, verified March 20 2026)
+- Sitemap submitted: https://driveschoolpro.com/sitemap-index.xml
+- mydriveschool.software kept in GSC to monitor redirect traffic during ranking transfer
+- Ranking transfer expected over 4–12 weeks
 
 petcare.software structural rebuild completed March 4, 2026:
 - 53 pages live (4 pillar + 31 cluster posts + supporting pages)
