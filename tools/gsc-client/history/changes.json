@@ -1070,5 +1070,27 @@
     "reason": "E-E-A-T signal — founder's background with 1,000+ customers builds authority; targets informational queries from ADIs researching the product",
     "expectedImpact": "Improved E-E-A-T signals; new entry point for brand-aware searches; internal links boost scheduling/management/DVSA pages",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-11",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Added inbound link to /blog/what-i-learned-building-pet-care-software/ from about page (RevelationPets section) to satisfy ≥2 inbound links SEO requirement",
+    "reason": "New founder blog post had only 1 inbound internal link; verify-seo.js blocked build until fixed",
+    "expectedImpact": "Post now eligible for indexing; internal link from about page adds topical authority signal",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-11",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Submitted 19 URLs to Google Indexing API (urlNotifications:publish) and resubmitted sitemap: 3 blog posts, /get-started/, /tools/cost-calculator/ + 10 city pages, /, /pricing/, /driving-school-software/, /blog/what-i-learned-building-pet-care-software/",
+    "reason": "Accelerate indexing of newly published and updated pages — natural crawling takes 2-6 weeks; Indexing API typically indexes within hours",
+    "expectedImpact": "19 URLs indexed within 1-3 days instead of weeks",
+    "expectedTimeline": "1-3 days"
   }
 ]
