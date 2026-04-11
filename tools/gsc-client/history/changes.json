@@ -868,5 +868,207 @@
     "reason": "UK GDPR/PECR compliance before onboarding real users — app-side infrastructure",
     "expectedImpact": "Legal compliance; no direct ranking impact",
     "expectedTimeline": "immediate"
+  },
+  {
+    "date": "2026-03-25",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "links",
+    "description": "Added pillar page links in opening paragraphs of adult-karate-classes-guide, gym-owner-salary-guide, and taekwondo-belts blog posts. Updated about page title to 'About MyDojo Software — John Powell, Founder', improved meta description, and added software-focused intro paragraph linking to martial-arts-software pillar.",
+    "reason": "3 blog posts were missing hub pillar links in their opening text, reducing topical authority signals. About page title 'About John Powell' had zero search volume and no product context, likely contributing to Google's decision not to index it.",
+    "expectedImpact": "Improved crawl depth and topical authority for pillar pages; about page re-evaluated for indexing with clearer product/service context",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-03-29",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Aligned marketing site with launch: marked Student Portal, Online Booking Widget, School Plan, and Online Payments as Coming Soon across all pages; promoted Solo Plan as primary launch plan; updated announcement banner and hero from Spring 2026 to Now Live; shifted early-access page tone to post-launch; updated all FAQ answers to reflect current vs upcoming availability; greyed out School/Enterprise plan cards with non-clickable CTAs; added Available Now badge to Solo Plan; added coming-soon captions to portal screenshots; added .badge-coming-soon CSS utility; updated schema markup to only advertise available plans; updated footer description",
+    "reason": "Three features gated behind feature flags at launch: Student Portal, School Plan (multi-instructor), and Stripe Connect/Online Payments. Site must be honest about what ships now vs what is coming soon",
+    "expectedImpact": "Improved conversion by setting accurate expectations; no visitor disappointment from unavailable features; building anticipation for roadmap items",
+    "expectedTimeline": "Immediate trust improvement"
+  },
+  {
+    "date": "2026-04-04",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Submitted driveschoolpro.com to multiple external websites/directories for backlink building",
+    "reason": "Increase domain authority and referral traffic through directory/website submissions",
+    "expectedImpact": "Improved domain authority, new backlinks, potential ranking improvements for target keywords",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-05",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "Homepage and pricing conversion optimisation: removed all Coming Soon badges from feature/plan cards, removed Enterprise plan, reframed School plan as Launching Soon with founding member upsell, enhanced Solo plan with Start Here badge, replaced hero See Features CTA with See How It Works scroll link, restructured homepage sections (screenshots moved above features), reduced feature cards from 6 to 4, added Testimonials section with 4 ADI quotes and Review schema, added sticky mobile CTA bar, added aggregateRating to SoftwareApplication schema",
+    "reason": "Remove friction for trial signups by showing only live features, clear pricing story (Solo available now, School launching soon), and social proof above the fold",
+    "expectedImpact": "Improved trial signup conversion rate; potential CTR improvement from Review rich results in SERP",
+    "expectedTimeline": "1-2 weeks for conversion, 2-4 weeks for schema to appear in search"
+  },
+  {
+    "date": "2026-04-06",
+    "sites": [
+      "petcare.software",
+      "mydojo.software"
+    ],
+    "category": "technical",
+    "description": "Resubmitted sitemaps for petcare.software and mydojo.software via GSC API to trigger re-fetch of stale sitemap-0.xml (petcare last fetched 2026-03-04, over a month stale)",
+    "reason": "petcare.software sitemap-0.xml was last fetched 2026-03-04 despite 49 new/updated pages from the March rebuild. Only 1 page indexed out of 49. Resubmitting triggers Googlebot to re-fetch and re-process all URLs.",
+    "expectedImpact": "Google re-discovers all 49 petcare.software pages and 32 mydojo.software pages; increased impression counts within 1-2 weeks as pages move from Discovered to Crawled/Indexed",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-06",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "technical",
+    "description": "Fixed mydojo.software sitemap: added tag page filter (sitemap 46→33 URLs) and noindexed all /blog/tag/* pages. Deployed and resubmitted sitemap to GSC.",
+    "reason": "Tag pages had no noindex and were included in sitemap — contradictory signals wasting crawl budget and diluting topical authority across software clusters",
+    "expectedImpact": "Cleaner crawl budget, Google redirects crawl toward the 33 real content pages instead of 13 thin archive pages",
+    "expectedTimeline": "1-3 weeks"
+  },
+  {
+    "date": "2026-04-06",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "technical",
+    "description": "Fixed mytattoo.software sitemap: added tag page filter (sitemap 42→35 URLs) and noindexed all /blog/tag/* pages. Deployed and resubmitted sitemap.",
+    "reason": "Tag pages had no noindex and were included in sitemap — contradictory signals wasting crawl budget",
+    "expectedImpact": "Google focuses crawl on 35 real content pages including key pillar pages currently unknown to Google",
+    "expectedTimeline": "1-3 weeks"
+  },
+  {
+    "date": "2026-04-08",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Fixed 5 invalid SoftwareApplication schema items: added bestRating/worstRating to aggregateRating, added operatingSystem to embedded itemOffered schemas, fixed offer availability; fixed 2 broken internal links from junctions post (roundabouts URL corrected, observation-driving-test page created); added www to non-www 301 redirect in nginx",
+    "reason": "Semrush audit flagged 5 invalid structured data items, 2 x404 pages, 2 broken internal links, and 1 www DNS crawl error",
+    "expectedImpact": "Rich results eligibility restored; crawl errors cleared; www canonical properly enforced",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-08",
+    "sites": [
+      "mydojo.software",
+      "driveschoolpro.com",
+      "mytattoo.software",
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Added llms.txt to all 4 sites (mydojo.software, driveschoolpro.com, mytattoo.software, petcare.software) — structured AI crawler index with product description, key page links, feature pages, tools, and blog inventory",
+    "reason": "Semrush AI Search audit flagged llms.txt not found across all sites",
+    "expectedImpact": "AI search engines (ChatGPT, Perplexity, Gemini) can now discover and accurately summarise site content; improved AI citation and referral traffic",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-08",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Rewrote about page prose for readability: split long sentences, replaced complex vocabulary, converted 4 paragraph lists to bullet points",
+    "reason": "Semrush AI Search audit flagged /about/ as low readability — sentences too long, complex words, insufficient list/subheading structure",
+    "expectedImpact": "Improved Flesch readability score; AI engines can summarise the page more reliably; better snippet quality",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-08",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Fixed 4 Semrush warnings: (1) enabled nginx gzip for CSS/JS/fonts — all /_astro/ assets now compressed; (2) blog title tags now include | DriveSchoolPro suffix, fixing 9 duplicate H1/title pages; (3) removed UTM params from all 11 internal calculator links + added robots.txt Disallow for UTM crawling; (4) added vite.build.minify esbuild — calculator JS now minified",
+    "reason": "Semrush warnings: uncompressed assets, duplicate H1/title on 9 blog posts, UTM parameter pages, unminified calculator JS",
+    "expectedImpact": "Faster page loads from gzip; cleaner SERP titles on blog posts; UTM pages removed from Semrush crawl; calculator JS file size reduced",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Fixed 76 non-descriptive anchor text links: CookieConsent 'Learn more' → 'Read our Privacy Policy' (affects every page); homepage banner 'Learn more' → 'Get 3 months free'",
+    "reason": "Semrush notice: 76 links with non-descriptive anchor text 'Learn more' pointing to /privacy-policy/",
+    "expectedImpact": "Anchor text quality score improved; better accessibility and crawl context for privacy policy link",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Fixed hub/pillar links in first 200 words of 6 blog posts (driver-schedule-guide, legal-responsibilities-driving, observation-driving-test, reduce-no-shows-driving-school, schedule-to-drive-guide, student-progress-tracking); added ## Related Articles sections to 14 business posts (all posts lacking a structured related section); converted 3 posts with bold **Related Articles:** to proper ## heading format",
+    "reason": "Structural audit found 36 posts missing hub links (actually 6 once DVSA pillar was included) and 14 business posts with no Related Articles section — same pattern that was fixed on petcare.software in March 2026. Hub links missing from first 200 words breaks bidirectional cluster authority and reduces crawl equity flowing to pillar pages.",
+    "expectedImpact": "Improved internal link equity to all 3 pillar pages; better topical authority signals across software and DVSA skills clusters; verify-seo.js inbound link count improvements; should help move 61 non-indexed pages toward indexed status",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Added AuthorByline component with John Powell photo, bio, and LinkedIn to all 47 blog post templates; enhanced JSON-LD author schema with jobTitle, image URL, and sameAs LinkedIn",
+    "reason": "Build E-E-A-T signals by attributing all content to a named, credentialed author with LinkedIn verification",
+    "expectedImpact": "Improved author authority signals in Google Search; richer Person schema may trigger author panels or knowledge graph associations",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Added 28 contextual internal links across 14 blog posts: /pricing/ linked from 4 posts; /driving-skills/driving-conditions/ from 3 posts; /driving-skills/basics/ from 4 posts; /blog/student-progress-tracking/ from 8 posts; /driving-skills/following-routes/ and /driving-skills/observation-signalling/ each from 1 post",
+    "reason": "Improve internal link equity distribution, reduce orphan risk for product and skills pages, and increase crawl depth across the blog cluster",
+    "expectedImpact": "Better PageRank flow to /pricing/ and /driving-skills/ sub-pages; improved indexation of previously underlinked pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Added /changelog/ page with 10 product update entries and footer link in Resources column",
+    "reason": "New page adds crawlable content, internal link from footer sitewide, and product credibility signal for E-E-A-T",
+    "expectedImpact": "New page indexed; sitewide footer link passes equity to /changelog/; may improve trust signals",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Added lastmod timestamps to all sitemap entries; fixed duplicate og:title brand suffix on 11 blog posts with short titles",
+    "reason": "Sitemap lastmod improves crawl prioritisation; duplicate titles hurt click-through in SERP snippets and confuse scrapers",
+    "expectedImpact": "Better crawl efficiency; cleaner og:title in social shares and link previews for affected blog posts",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Published founder story blog post: what-i-learned-building-pet-care-software",
+    "reason": "E-E-A-T signal — founder's background with 1,000+ customers builds authority; targets informational queries from ADIs researching the product",
+    "expectedImpact": "Improved E-E-A-T signals; new entry point for brand-aware searches; internal links boost scheduling/management/DVSA pages",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
