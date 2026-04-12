@@ -1092,5 +1092,18 @@
     "reason": "Accelerate indexing of newly published and updated pages — natural crawling takes 2-6 weeks; Indexing API typically indexes within hours",
     "expectedImpact": "19 URLs indexed within 1-3 days instead of weeks",
     "expectedTimeline": "1-3 days"
+  },
+  {
+    "date": "2026-04-12",
+    "sites": [
+      "mydojo.software",
+      "petcare.software",
+      "mytattoo.software"
+    ],
+    "category": "technical",
+    "description": "Submitted 96 URLs to Google Indexing API across 3 sites: mydojo.software (23 URLs), petcare.software (47 URLs), mytattoo.software (26 URLs). Sitemaps also resubmitted for all 3.",
+    "reason": "Full GSC scan revealed most pages unknown to Google — petcare.software worst at 1/49 indexed, mydojo at 9/32, mytattoo at 8/34. Indexing API used to accelerate discovery.",
+    "expectedImpact": "All submitted pages indexed within 1-3 days; GSC impressions should increase significantly across all 3 sites",
+    "expectedTimeline": "1-3 days"
   }
 ]
