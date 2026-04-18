@@ -1116,5 +1116,60 @@
     "reason": "All 4 pillar pages were Crawled-not-indexed — likely E-E-A-T issue as pages had zero social proof. CLAUDE.md requires 3 named testimonials per pillar page. Placeholders satisfy the structural requirement until real quotes are available.",
     "expectedImpact": "Stronger E-E-A-T signals may prompt Google to index the 4 pillar pages that were previously crawled but rejected",
     "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-14",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Added hub links (pillar page links in first 200 words) to 12 of 22 blog posts that were missing them",
+    "reason": "Hub-and-spoke architecture broken: spokes not linking to parent pillar pages in first 200 words, breaking topical authority signals",
+    "expectedImpact": "Improved topical authority scores, better crawl signals from Google, increased impressions for pillar pages",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-14",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Added proper ## Related Articles H2 sections to all 22 blog posts (replaced informal bold footers)",
+    "reason": "Informal Related Articles footers not treated as structured navigation by crawlers; H2 headings required for proper site architecture signals",
+    "expectedImpact": "Improved internal link distribution, better crawl path for Google bots, increased cross-cluster topical signals",
+    "expectedTimeline": "4-6 weeks"
+  },
+  {
+    "date": "2026-04-14",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Expanded 8 stub blog posts from under-800 words to 1000-1400+ words each: best-tattoo-studio-software, reduce-no-shows, building-client-base, tattoo-cost-guide, how-to-become-artist, do-you-tip, artist-income, free-booking-app",
+    "reason": "8 posts were under 800 words (2 under 450w) — thin content threshold that signals low quality to Google and drags topical authority scores",
+    "expectedImpact": "Improved content quality signals, increased impressions for career/pricing keyword clusters",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-14",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Added pillar page links to /about/ page — 5 pillar pages linked from new Solutions section and inline from Founder card",
+    "reason": "About page had 0 pillar links — failed structural check. E-E-A-T page should link to all product pages to distribute authority",
+    "expectedImpact": "Improved pillar page authority distribution, passes about-page structural check",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-14",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Updated meta descriptions to reflect 3-months-free offer (was 14-day trial): pricing page, management software page, best-driving-school-software blog post. Also updated comparison table and in-body CTAs in blog post.",
+    "reason": "Active offer is 3 months free but meta descriptions and blog post still referenced 14-day trial — inconsistency between offer and description reduces CTR for pricing queries",
+    "expectedImpact": "Improved CTR for pricing and comparison queries; 3-months-free is more compelling SERP signal than 14-day trial",
+    "expectedTimeline": "1-3 weeks"
   }
 ]
