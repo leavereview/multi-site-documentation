@@ -189,10 +189,29 @@ No `h-screen` (fixed-height) usage found — the critical case is `h-screen` / `
 
 ### Resolved
 
-| Fix | Commit | Notes |
-|-----|--------|-------|
-| Mobile menu scroll (1.2.A), aria-expanded (1.2.B), Escape key (1.2.C), body lock (1.2.D), overscroll-contain (1.2.E), burger size (1.3.A) | TBD | Applied to all 4 Navigation.astro files |
-| Skip-to-content link (1.12.A) + theme-color (1.1.A) | TBD | Applied to all 4 BaseLayout.astro files |
-| Cookie consent buttons 44px (1.3.B) | TBD | Applied to mydojo, petcare, mytattoo CookieConsent.astro |
-| .input explicit font-size (1.4.A) | TBD | Applied to all 4 global.css files |
-| mytattoo mobile dropdown (1.2.F) | TBD | Applied to mytattoo Navigation.astro |
+| Fix | Commits | Notes |
+|-----|---------|-------|
+| Mobile menu scroll (1.2.A), aria-expanded (1.2.B), Escape key (1.2.C), body lock (1.2.D), overscroll-contain (1.2.E), burger size (1.3.A) | mydojo 04d3a35 · petcare 2e098a6 · mytattoo b5f5edb · mydriveschool 06c9b98 | All 4 Navigation.astro |
+| Skip-to-content link (1.12.A) + theme-color (1.1.A) | mydojo aa9489d · petcare b26214f · mytattoo e40238b · mydriveschool 502ff46 | All 4 BaseLayout.astro |
+| mytattoo mobile dropdown sub-items (1.2.F) | mytattoo e40238b | mytattoo Navigation.astro |
+| Cookie consent buttons 44px (1.3.B) | mydojo f7ca602 · petcare cef4256 · mytattoo c3b45ad | CookieConsent.astro (mydriveschool already used py-2.5) |
+| .input explicit text-base (1.4.A) | mydojo f7ca602 · petcare cef4256 · mytattoo c3b45ad · mydriveschool 355e7ce | All 4 global.css |
+
+### Build verification
+
+All 4 sites built successfully with zero new warnings after all fixes:
+
+| Site | Pages built | SEO verify |
+|------|------------|------------|
+| mydojo.software | 47 pages | ✅ 33 indexed pages passed |
+| petcare.software | 64 pages | ✅ 50 indexed pages passed |
+| mytattoo.software | 43 pages | ✅ 35 indexed pages passed |
+| mydriveschool.software | 146 pages | ✅ 93 indexed pages passed |
+
+### Code-level viewport verification (320px / 375px / 390px / 768px / 1024px)
+
+- **Mobile menu at 320–390px**: `max-h-[calc(100dvh-4rem)]` limits menu to viewport height minus 64px nav bar; `overflow-y-auto` enables internal scroll. All links reachable. ✅
+- **Burger button**: `min-w-[44px] min-h-[44px]` applies at all mobile breakpoints. ✅
+- **768px (md breakpoint)**: mobile menu hidden via `md:hidden`; desktop nav shows. No regression. ✅
+- **1024px**: Same as 768px. Desktop nav functional. ✅
+- **Horizontal scroll**: No `width: 100vw` or fixed pixel widths found. `container-custom` uses `max-w-7xl` + `px-4`. ✅
