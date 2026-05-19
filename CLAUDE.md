@@ -16,14 +16,20 @@ ssh lightsail   # Ubuntu 24.04, IP: 13.43.71.165
 
 ## Deployment
 
-Auto-deploys via GitHub Actions on push to main. GitHub Secrets required per repo:
-- `SSH_PRIVATE_KEY`, `REMOTE_HOST` (13.43.71.165), `SITE_DOMAIN`
+**Direct rsync to Lightsail — no GitHub Actions, no auto-deploy.**
 
-### Manual deploy
 ```bash
 cd {site-folder} && npm run build
-rsync -avz --delete dist/ ubuntu@13.43.71.165:/var/www/{domain}/
+rsync -avz --delete dist/ lightsail:/var/www/{domain}/
 ```
+
+Site → deploy path mapping:
+- `mydriveschool.software/` → `lightsail:/var/www/driveschoolpro.com/` (domain changed March 2026)
+- `mydojo.software/` → `lightsail:/var/www/mydojo.software/`
+- `mytattoo.software/` → `lightsail:/var/www/mytattoo.software/`
+- `petcare.software/` → `lightsail:/var/www/petcare.software/`
+
+Always use the `lightsail` SSH alias, not the raw IP.
 
 ### Build fix (if build fails)
 ```bash

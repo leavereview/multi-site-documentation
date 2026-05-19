@@ -1171,5 +1171,182 @@
     "reason": "Active offer is 3 months free but meta descriptions and blog post still referenced 14-day trial — inconsistency between offer and description reduces CTR for pricing queries",
     "expectedImpact": "Improved CTR for pricing and comparison queries; 3-months-free is more compelling SERP signal than 14-day trial",
     "expectedTimeline": "1-3 weeks"
+  },
+  {
+    "date": "2026-04-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Homepage AI-first repositioning: new H1 ('The driving school platform that does the thinking for you'), new subheadline, added AI Lesson Briefings section with mock card, promoted DVSA 27 Skills section above screenshots, reordered features to lead with differentiators",
+    "reason": "Reposition from generic scheduling tool to AI-first platform; differentiate from Total Drive; justify premium pricing",
+    "expectedImpact": "Improved conversion on homepage; better narrative alignment with AI/DVSA differentiators; lower bounce rate",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Refreshed /ads/driving-school-software landing page with AI-first positioning: new H1, 6-card feature grid (AI Briefings first), How It Works section, 2 new FAQs (AI explanation and Total Drive comparison). Updated Google Ads CSV and campaign-config.json with AI-first ad copy across all 3 ad groups.",
+    "reason": "Align paid ad funnel with new homepage AI-first narrative. Landing page previously led with scheduling; now leads with AI briefings, DVSA framework, automated reviews. Message mismatch hurt Quality Score and conversion rate.",
+    "expectedImpact": "Quality Score improvement (target 7+), lower CPC, higher conversion rate on ad traffic",
+    "expectedTimeline": "1-2 weeks for Quality Score, 4-6 weeks for conversion rate signal"
+  },
+  {
+    "date": "2026-04-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Site audit fixes: (1) Added AI briefings mention to hero of /driving-school-software, /driving-school-scheduling-software, /pricing, and /about pages. (2) Expanded 3 thin blog posts from under 350 words to 1,000-1,200 words each: student-management-driving-schools, how-to-choose-driving-school-scheduling-software, free-driving-school-software. (3) Added noindex to /changelog. (4) Removed broken # placeholder link from homepage.",
+    "reason": "Full site audit identified AI messaging gaps on key conversion pages and thin content posts that could be quality signals against. Expanding thin posts protects against content quality issues.",
+    "expectedImpact": "Improved message consistency across funnel; thin posts more likely to rank and hold positions",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Created two new pages: /how-progress-works (DVSA framework explainer with AI briefings, 6-level skill scale, test readiness, pupil portal) and /compare/total-drive (honest feature comparison vs Total Drive with ComparisonTable, summary cards, Where Each Wins sections). Wired internal links from homepage, /driving-school-software/, best-driving-school-software.md, and ads landing page.",
+    "reason": "Both pages were flagged in sitelinks and FAQ but didn't exist. /compare/total-drive targets comparison search intent. /how-progress-works supports the homepage DVSA section and explains key differentiators.",
+    "expectedImpact": "Capture comparison search intent; improve Quality Score for ads; fill sitelink destinations",
+    "expectedTimeline": "4-8 weeks to rank"
+  },
+  {
+    "date": "2026-04-25",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Redeployed petcare.software with rsync --delete: removed 3 zombie pages that were still live on server (dog-health-safety-protocols, pet-business-ideas, starting-dog-sitting-business). All 3 now return 404. Live sitemap now correctly shows 50 URLs.",
+    "reason": "3 deleted pages were still being served on live server 6 weeks after local deletion (March 13). These off-topic/thin pages (grooming references, wrong audience) were diluting topical authority across all 4 software clusters.",
+    "expectedImpact": "Improved topical cluster authority; Google re-evaluates site without diluting off-topic content; may help unblock 4 pillar pages that are Crawled-not-indexed",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-25",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Added hub links in first 200 words to 4 driveschoolpro business posts: free-driving-school-software (link to /driving-school-software/), how-to-start-a-driving-school (link to /driving-school-software/), student-management-driving-schools (link to /driving-school-management-software/), how-to-choose-driving-school-scheduling-software (link to /driving-school-scheduling-software/). Also added ## Related Articles section to what-i-learned-building-pet-care-software.md (only post with neither Related Skills nor Related Articles).",
+    "reason": "Structural audit found 4 business posts missing hub pillar links in first 200 words, breaking bidirectional cluster authority. Founder story post had no related section despite having 3 strong pillar links as absolute URLs in body copy.",
+    "expectedImpact": "Improved topical authority signal flow to 3 pillar pages (/driving-school-software/, /driving-school-management-software/, /driving-school-scheduling-software/); better crawl connectivity from these business posts to pillar hubs",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-04-25",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Added hub link in first 200 words to do-you-tip-tattoo-artists.md: inserted contextual sentence linking to /tattoo-studio-software/ in the 'Building Long-Term Relationships' section. Link was previously only in the 'For Studio Owners' section at line 123, past the 200-word threshold.",
+    "reason": "CLAUDE.md requires hub link in first 200 words of every spoke post. The tipping post had pillar links but only past the 200-word mark, breaking bidirectional authority signal to /tattoo-studio-software/.",
+    "expectedImpact": "Improved authority signal from tipping post to /tattoo-studio-software/ pillar; full hub-and-spoke compliance for all mytattoo blog posts",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-04-25",
+    "sites": [
+      "mydojo.software",
+      "mytattoo.software"
+    ],
+    "category": "technical",
+    "description": "Submitted 3 uncrawled pillar pages to Google Indexing API: mydojo.software/dojo-management-software/ (URL unknown to Google), mytattoo.software/tattoo-artist-software/ (URL unknown to Google), mytattoo.software/tattoo-booking-app/ (URL unknown to Google). Sitemaps also resubmitted for both sites.",
+    "reason": "GSC coverage check showed 3 key pillar pages had never been crawled despite sitemap submission. Indexing API accelerates first crawl from weeks to hours.",
+    "expectedImpact": "All 3 pages crawled within 24-48 hours; should move from URL unknown to Discovered/Indexed within 1-2 weeks",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-04-29",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Deleted off-topic blog post what-i-learned-building-pet-care-software.md; removed its inbound link from about.astro RevelationPets section",
+    "reason": "Post about pet care software is off-topic on a driving school software site — dilutes topical authority across all software clusters and sends mixed topic signals to Google",
+    "expectedImpact": "Improved topical authority for driving school software cluster; cleaner niche signal to Google",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-05-05",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Fixed 5 invalid SoftwareApplication schema items on driveschoolpro.com: (1) added ratingCount:4 to aggregateRating on homepage (had reviewCount but not ratingCount which Google requires); (2) replaced incomplete nested itemOffered.SoftwareApplication objects with @id references to canonical schema on homepage offerSchema, pricing offerSchemas, and pricing freeTrialSchema; (3) added url and offer name to calculator SoftwareApplication",
+    "reason": "SEMrush flagged 5 invalid SoftwareApp structured data blocks on homepage (x2), pricing (x2), and calculator (x1). Nested SoftwareApplication objects in itemOffered lacked required offers/aggregateRating; aggregateRating missing ratingCount.",
+    "expectedImpact": "Rich results eligibility restored; SoftwareApp rich snippets may appear in SERP for driveschoolpro.com pages",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-05-05",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Redeployed petcare.software with rsync --delete (3rd attempt): confirmed zombie pages dog-health-safety-protocols, pet-business-ideas, starting-dog-sitting-business now return 404. Live sitemap now 50 URLs. Also resubmitted sitemap-index.xml to GSC to trigger fresh crawl of sitemap-0.xml (previously stale since March 4 despite index being fetched April 12).",
+    "reason": "Previous 2 rsync --delete deploys failed to remove zombie pages. Sitemap-0.xml stale at March 4 — Google crawling old version of site. Resubmitting triggers fresh sitemap-0.xml fetch.",
+    "expectedImpact": "Cleaner crawl budget; Google re-discovers current 50-page site; may help 4 pillar pages move from Crawled-not-indexed to indexed",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-05-05",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "technical",
+    "description": "Resubmitted 3 mytattoo.software pillar pages to Google Indexing API (2nd attempt): /tattoo-artist-software/, /tattoo-booking-app/, /pricing/. Also resubmitted sitemap.",
+    "reason": "First Indexing API submission on April 25 did not result in indexing — pages still unknown to Google as of May 5. Second submission to re-trigger crawl.",
+    "expectedImpact": "Pillar pages crawled within 24-48 hours; should move from URL unknown to Discovered/Indexed",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-05-18",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Added ## Related Articles sections to 29 DVSA skill blog posts on driveschoolpro.com. Each post now links to /dvsa-27-driving-skills/ hub plus 2-3 sibling posts in the same DVSA category (Manoeuvres, Junctions & Roundabouts, Observation & Planning, etc.)",
+    "reason": "/seo-check 2026-05-17 flagged 29/48 blog posts missing the ## Related Articles H2 — structural rule failure. Same failure pattern that kept petcare.software flat for months. Hub-and-spoke now bidirectional across the learner-skill cluster.",
+    "expectedImpact": "Improved internal link distribution and cluster authority signals to the DVSA hub; could accelerate the ranking transfer from mydriveschool.software → driveschoolpro.com which is currently 4-12 weeks in",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-05-18",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "meta",
+    "description": "Rewrote 22 meta descriptions on mytattoo.software using [Benefit] + [Data] + [CTA] formula. Updated 6 pillar/product pages (tattoo-artist-software, tattoo-booking-app, tattoo-scheduling-software, tattoo-studio-software, tattoo-studio-calculator, pricing) and 16 weaker blog descriptions. All under 170 chars with defensible data anchors (£29-£99/mo pricing, 40-70% no-show reduction, 10-25% tipping ranges, etc.)",
+    "reason": "/seo-check 2026-05-17 identified mytattoo as the highest-leverage CTR opportunity in the portfolio — 1,701 impressions/month at position 42 but only 0.06% CTR. Pages already ranking but snippets too generic to earn clicks. Could capture ~33 additional clicks/month at 2% CTR from existing impressions.",
+    "expectedImpact": "CTR lift from 0.06% toward 1-2% target across the 18 GSC-visible pages; absolute click count from 1 → 15-30/month",
+    "expectedTimeline": "2-4 weeks for SERP refresh cycle"
+  },
+  {
+    "date": "2026-05-18",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "meta",
+    "description": "Rewrote 15 meta descriptions on mydojo.software using [Benefit] + [Data] + [CTA] formula. Updated 6 pillar/product pages (bjj-gym-software, dojo-management-software, karate-school-software, martial-arts-crm, mma-gym-software, pricing) and 9 weaker blog descriptions. Includes retiring a narrative 'Picture this:' meta on martial-arts-belt-order-complete-guide.md and adding 2026 date specificity.",
+    "reason": "/seo-check 2026-05-17 showed 2,566 impressions/month at 0% CTR with avg position 61.5 — page-6 ranking issue is the primary problem, but stronger snippets will help as the 23 not-yet-indexed pages come online. Keeping the already-strong descriptions (best-martial-arts-software, gym-owner-salary-guide etc.) untouched.",
+    "expectedImpact": "Improved CTR as discovery improves; better SERP snippets for queries already in striking distance (positions 4-20)",
+    "expectedTimeline": "4-8 weeks (gated on indexing progress)"
+  },
+  {
+    "date": "2026-05-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Resolved keyword cannibalisation on driveschoolpro.com: 301-redirected /blog/reduce-no-shows-driving-school/ to /blog/reduce-driving-lesson-no-shows/, and /blog/free-driving-school-software/ to /free-driving-school-software/. Updated 12 internal linkers to point at the keepers. Submitted all 4 URLs to Indexing API.",
+    "reason": "Two URL pairs were splitting equity on no-show intent and free-software intent. Neither candidate was visible in the top 10 of their target SERP. Consolidating to the stronger URL in each pair (newer native-voice no-shows post; top-level free-software pillar page) should let one URL accumulate the combined equity.",
+    "expectedImpact": "Ranking lift for 'reduce driving lesson no-shows' and 'free driving school software' SERPs; reduced duplicate-intent dilution; cleaner internal-link graph.",
+    "expectedTimeline": "4-8 weeks"
   }
 ]
