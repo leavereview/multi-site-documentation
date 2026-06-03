@@ -18,12 +18,25 @@ ssh lightsail   # Ubuntu 24.04, IP: 13.43.71.165
 
 **Direct rsync to Lightsail — no GitHub Actions, no auto-deploy.**
 
+Use the guarded deploy script. It rebuilds from clean, shows a `--delete` dry-run, deploys,
+then **fails unless the live sitemap matches the fresh build** — this prevents the recurring
+bug where a stale `dist/` gets rsynced and deleted pages reappear live:
+
 ```bash
-cd {site-folder} && npm run build
-rsync -avz --delete dist/ lightsail:/var/www/{domain}/
+./deploy.sh {site-folder}          # e.g. ./deploy.sh petcare.software
+./deploy.sh {site-folder} --yes    # skip the dry-run confirmation prompt
 ```
 
-Site → deploy path mapping:
+Manual fallback (only if `deploy.sh` is unavailable — **always rebuild first; never rsync a stale `dist/`**):
+
+```bash
+cd {site-folder} && rm -rf dist .astro && npm run build   # postbuild runs verify-seo.js
+rsync -avz --delete dist/ lightsail:/var/www/{domain}/
+# then verify the live sitemap count matches local (must be equal):
+curl -s https://{domain}/sitemap-0.xml | grep -o "<loc>" | wc -l
+```
+
+Site → deploy path mapping (baked into the script):
 - `mydriveschool.software/` → `lightsail:/var/www/driveschoolpro.com/` (domain changed March 2026)
 - `mydojo.software/` → `lightsail:/var/www/mydojo.software/`
 - `mytattoo.software/` → `lightsail:/var/www/mytattoo.software/`

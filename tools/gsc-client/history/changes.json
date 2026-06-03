@@ -1348,5 +1348,71 @@
     "reason": "Two URL pairs were splitting equity on no-show intent and free-software intent. Neither candidate was visible in the top 10 of their target SERP. Consolidating to the stronger URL in each pair (newer native-voice no-shows post; top-level free-software pillar page) should let one URL accumulate the combined equity.",
     "expectedImpact": "Ranking lift for 'reduce driving lesson no-shows' and 'free driving school software' SERPs; reduced duplicate-intent dilution; cleaner internal-link graph.",
     "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-05-23",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Redeployed petcare.software with rsync --delete (4th attempt). 3 zombie pages (dog-health-safety-protocols, pet-business-ideas, starting-dog-sitting-business) reappeared on live server between May 5 and May 21 — diagnosed via /seo-check sitemap diff (live 53 URLs vs local 50). Confirmed all 3 now return HTTP 404 post-deploy; live sitemap-0.xml back to 50 URLs and matches local build exactly. Sitemap resubmitted to GSC.",
+    "reason": "Off-topic zombie pages reappeared a 4th time despite 3 prior --delete deploys. Likely cause: previous deploy ran from stale dist or without --delete. These 3 pages dilute topical authority across all 4 software clusters and were a known regression. Recurring issue — if this happens again the deploy workflow itself needs investigation (e.g. verify dist is freshly built immediately before each rsync).",
+    "expectedImpact": "Cleaner crawl budget; Google re-evaluates site without off-topic dilution; may help unblock the 48 Crawled-not-indexed pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-05-23",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Retired 2 orphan pillar pages on petcare.software: /pet-grooming-software/ and /pet-sitting-software/. Deleted both .astro files, removed from Navigation.astro dropdown, updated 3 anchor refs in pet-business-calculator.astro, swapped FAQ links in dog-daycare-software.astro and dog-boarding-software.astro to point to canonical pillars, and removed inline references from 6 blog posts (dog-boarding-business-plan, dog-daycare-software-complete-guide, dog-daycare-franchise-guide, cattery-software-complete-guide, grow-dog-kennel-business, dog-boarding-software-complete-guide) plus internalLinks.ts util. Added nginx 301 redirects: /pet-grooming-software/ -> /dog-daycare-software/, /pet-sitting-software/ -> /dog-boarding-software/ (both with and without trailing slash). Build now produces 48 pages (down from 50). All 4 redirect variants confirmed returning 301 to correct target. Live sitemap matches local build exactly. Sitemap resubmitted to GSC.",
+    "reason": "Both pages were orphan pillars outside the documented 4-cluster architecture (daycare/boarding/kennel/cattery) defined in CLAUDE.md. They had pillar-grade structure (442/507 lines, ~2,400 and ~2,900 words) but were half the depth of canonical pillars (~5,800 words) with zero spokes, zero GSC impressions in the last 28 days, and sat in the top nav fragmenting the topical signal across 6 product pages when the architecture defines 4. Retiring them with 301s to the closest thematic cluster (grooming→daycare for drop-off care; sitting→boarding for away-from-home care) preserves any accumulated link equity while consolidating crawl budget on the 4 real pillars.",
+    "expectedImpact": "Tighter topical authority signal across the 4 canonical clusters; freed crawl budget; reduced internal-link dilution from 6 product nodes to 4. May help unblock the 48 Crawled-not-indexed pages.",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-05-23",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "CTR-focused meta title/description rewrites on 7 driveschoolpro.com page-1 rankers",
+    "reason": "GSC audit showed multiple pages at position 5-15 with near-zero CTR — titles too long (84 chars truncating), informational framing on commercial pages (free-software 'Guide'), and weak hooks. Sharpened titles, fixed truncation, removed product pivot from learner-content descriptions.",
+    "expectedImpact": "CTR uplift on pages /free-driving-school-software/ (about to inherit 612 imp from redirected blog), /dvsa-27-driving-skills/ (pos 9.7, 231 imp), /blog/reduce-driving-lesson-no-shows/ (pos 5.8), and 4 other DVSA-skill blog posts. Expect 1-3% CTR baseline lift on pages ranking pos <15.",
+    "expectedTimeline": "2-4 weeks (Google re-crawl and snippet refresh)"
+  },
+  {
+    "date": "2026-06-03",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Repriced Solo plan £29→£16/month across driveschoolpro.com (merged to main, pending rsync deploy): pricing page card/table (£0.58→£0.32/student)/prose + meta title & description; SoftwareApplication schema price 29→16 on homepage/get-started/ads (homepage priceValidUntil 2026→2027); 7 landing-page FAQ answers & meta descriptions; 5 blog posts (incl. derived £348/yr→£192/yr). Also corrected best-driving-school-software comparison: removed phantom Team £49/School £99 tiers → real Solo £16 live / School £79 up-to-5 coming-soon / Enterprise custom, recomputed ROI table, fixed false 'SMS included'/'1.75% Stripe fees' to live 'coming soon' status; aligned remaining stale 14-day trial copy to 3-months-free offer.",
+    "reason": "Solo £29 sat above the main UK competitor's £24/mo top tier with a thinner feature set; £16 removes price as a launch objection. Also eliminated sitewide £29-vs-£16 inconsistency (displayed price vs schema/FAQ) and factual inaccuracies (phantom tiers, SMS/Stripe shown as live, 14-day trial) that hurt trust and conversion.",
+    "expectedImpact": "Higher CTR/conversion on pricing & comparison queries; consistent price across visible copy, meta, and SoftwareApplication schema; accurate feature/tier claims",
+    "expectedTimeline": "2-4 weeks after deploy"
+  },
+  {
+    "date": "2026-06-03",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Redeployed petcare.software from a clean atomic build (rm -rf dist && npm run build && rsync --delete). Removed 5 zombie pages that had reappeared live serving HTTP 200/301: blog/dog-health-safety-protocols, blog/pet-business-ideas, blog/starting-dog-sitting-business (off-topic posts deleted in March), plus retired pillars pet-grooming-software & pet-sitting-software (now correctly 301 via nginx, static files removed). Live sitemap corrected 53->48 URLs, now matches local build exactly. Root cause identified: prior deploys rsynced a STALE dist/ built before the deletions (zombie file mtimes matched the deploy timestamp, proving the deployed dist still contained them) — not an auto-deploy/cron (none exist) or wrong nginx root (confirmed /var/www/petcare.software). 5th recurrence of this zombie pattern.",
+    "reason": "Off-topic zombie pages reappeared a 5th time, diluting topical authority across all 4 clusters and a likely cause of petcare being stuck at 1/47 pages indexed (2%) with all 4 pillars Crawled-not-indexed. Diagnosed via /seo-check live-vs-local sitemap diff (live 53 vs local 48).",
+    "expectedImpact": "Cleaner crawl budget; Google re-evaluates site without off-topic dilution; may help unblock the Crawled-not-indexed pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-03",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Redeployed driveschoolpro.com from a clean atomic build. (1) Removed zombie blog/what-i-learned-building-pet-care-software (off-topic pet-care post deleted from source 2026-04-29 but still live serving HTTP 200 with today's deploy mtime — same stale-dist root cause as petcare). Now 404; live sitemap corrected 94->93. (2) Shipped the previously-pending Solo £29->£16/month repricing across the whole site — verified live: pricing page shows £16 (0 remaining £29), homepage SoftwareApplication schema price now 16.",
+    "reason": "Deleted off-topic post lingered live 5+ weeks via stale-dist deploys, diluting the driving-school topical signal; and the £16 price cut (logged 2026-06-03 as pending) needed to actually reach production to take effect.",
+    "expectedImpact": "Cleaner niche signal for driving-school cluster; consistent £16 price across visible copy, meta, and schema; higher CTR/conversion on pricing & comparison queries",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
