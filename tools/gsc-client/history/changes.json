@@ -1414,5 +1414,27 @@
     "reason": "Deleted off-topic post lingered live 5+ weeks via stale-dist deploys, diluting the driving-school topical signal; and the £16 price cut (logged 2026-06-03 as pending) needed to actually reach production to take effect.",
     "expectedImpact": "Cleaner niche signal for driving-school cluster; consistent £16 price across visible copy, meta, and schema; higher CTR/conversion on pricing & comparison queries",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-03",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "On-page title/H1 rewrites on 2 driveschoolpro.com money pages. Scheduling page: title 'Scheduling Software Guide (2026)' -> 'Driving School Scheduling & Booking Software | DriveSchoolPro' (was brand-less, keyword-less, and framed a commercial page as informational); H1 'Driving School Scheduling Software' -> '...Scheduling & Booking Software' to capture the untapped booking-software/app/system query cluster landing there. Management page: title shortened from 88 chars (was truncating in SERP, burying brand) to 'Driving School Student Management Software | DriveSchoolPro' (58 chars).",
+    "reason": "Audit (2026-06-03) found the scheduling page title was the single biggest on-page miss and the management title was truncating. Both target real commercial clusters the pages already get impressions for.",
+    "expectedImpact": "Higher CTR/relevance on driving-school scheduling & booking and student-management queries; brand now visible in SERP",
+    "expectedTimeline": "2-4 weeks (re-crawl + snippet refresh)"
+  },
+  {
+    "date": "2026-06-03",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Schema + factual-accuracy cleanup on driveschoolpro.com. (1) Removed a DUPLICATE SoftwareApplication entity: the Testimonials.astro component was injecting its own SoftwareApplication+AggregateRating+Review on all 5 pages it appears on (homepage had 2 SoftwareApplication entities). (2) Removed the self-serving 5.0/5-from-4-reviews AggregateRating sitewide (homepage #software entity + get-started + ads page-level schema) — a Google rich-result policy risk; gated until real third-party reviews exist. Homepage now 1 SoftwareApplication, 0 AggregateRating; sitewide 0 self-serving ratings. (3) Fixed stale facts: llms.txt advertised the OLD £29 price and a defunct 14-day trial to AI assistants -> now £16 + 3 months free; scheduling page 'SMS is essential' and ads 'SMS included as backup' implied a coming-soon feature was live -> reframed to live channels (email included, WhatsApp on Solo, SMS coming soon).",
+    "reason": "Audit found duplicate/conflicting SoftwareApplication entities and a thin self-serving AggregateRating (policy/manual-action risk), plus stale price/feature claims that conflicted with the live site and confused AI assistants.",
+    "expectedImpact": "Clean single product entity for Google; removes rich-result policy risk; consistent £16 pricing + accurate feature status across copy, schema, and llms.txt",
+    "expectedTimeline": "1-2 weeks"
   }
 ]
