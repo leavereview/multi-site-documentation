@@ -1436,5 +1436,38 @@
     "reason": "Audit found duplicate/conflicting SoftwareApplication entities and a thin self-serving AggregateRating (policy/manual-action risk), plus stale price/feature claims that conflicted with the live site and confused AI assistants.",
     "expectedImpact": "Clean single product entity for Google; removes rich-result policy risk; consistent £16 pricing + accurate feature status across copy, schema, and llms.txt",
     "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-06-03",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "Repriced School plan to per-instructor (£16 first instructor + £12 each additional, up to 10 instructors; 11+ Enterprise) on /pricing/ and aligned every School-Plan reference site-wide — 4 landing pages (driving-school-software, -management-software, -scheduling-software, free-driving-school-software) and the best-driving-school-software blog (comparison table, pricing breakdown, ROI calculator). Solo stays £16/mo; trial is 3 months free.",
+    "reason": "The old flat £79/month School price was inconsistent with the new per-instructor model and appeared unevenly across pages; unified the messaging and corrected the figures/maths.",
+    "expectedImpact": "Higher pricing-page-to-signup conversion and clearer multi-instructor value; fewer pricing objections from schools.",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-10",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Redeployed petcare.software via guarded deploy.sh after /seo-check found the 5 zombie pages live AGAIN (6th recurrence): 3 off-topic blog posts serving 200 + 2 retired pillars in sitemap; live sitemap 53 vs local 48. Server mtimes show a Jun 8 13:10 deploy put a stale dist back (driveschoolpro deployed fresh at 13:01 same day, so the Jun 8 petcare deploy bypassed deploy.sh). Post-fix: zombies 404, live==local 48 URLs verified by deploy.sh, sitemap resubmitted to GSC.",
+    "reason": "Zombie off-topic pages dilute topical authority across all 4 clusters and are the prime suspect for petcare stuck at 1/47 indexed (2%). Recurrence cause: a Jun 8 deploy that did not use deploy.sh — any future petcare deploy MUST go through ./deploy.sh",
+    "expectedImpact": "Cleaner crawl signal; unblock Crawled-not-indexed pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New pricing live: Solo £22/mo, School £22 first instructor + £12 each additional (up to 5); trial messaging unified to 14-day free trial (was 3 months free) incl. titles/meta/JSON-LD; added removable SUMMER26 summer-sale banner (on-page only)",
+    "reason": "Pricing/offer update from owner; old 3-months-free and £16 pricing inconsistent with new commercial model",
+    "expectedImpact": "Pricing-page CTR and signup conversions; consistent trial messaging in SERP snippets",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
