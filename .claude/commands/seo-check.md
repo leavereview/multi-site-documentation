@@ -16,7 +16,9 @@ The user can run this command with optional arguments:
 - `/seo-check --excel` - Generate Excel report instead of enhanced report
 - `/seo-check --structural` - Run structural health audit only (no GSC data needed)
 - `/seo-check --domain=petcare.software --full` - Performance + full structural audit combined
-- `/seo-check --with-coverage` - Adds sitemap health + URL indexing + **rich result errors** + **mobile usability issues**
+
+Note: sitemap health + URL indexing + **rich result errors** + **mobile usability** (`--with-coverage`)
+are included in the default command. Only omit `--with-coverage` if the user asks for a fast run.
 
 ## Your Task
 
@@ -36,7 +38,7 @@ Parse the user's arguments and execute the appropriate GSC client command, then 
   - Smart recommendations based on progress
   - Slack notification (performance report + structural health audit sent automatically)
 
-**Add `--with-coverage` to also check** (same API call, ~30s extra):
+**`--with-coverage` (included in the default command above, ~30s extra) checks:**
   - Sitemap submission health
   - URL indexing / coverage state
   - **Rich result / structured data errors** (FAQPage, Article, Breadcrumb, etc.)
@@ -60,12 +62,10 @@ Run the appropriate command using the Bash tool and display the output.
 
 This catches the class of issues that keep metrics flat even when content is good. Learned from petcare.software full audit (March 2026).
 
-For each domain being checked, cd into the site folder and run:
-
-#### 3A — Build health
+#### 3A — Build health (per domain, bash)
 
 ```bash
-cd /Users/john/Projects-code/Front-end-sites/[domain]
+cd /Users/john/Projects-code/Front-end-sites/[folder]   # see Domain → Folder Mapping below
 npm run build 2>&1 | tail -20
 ```
 
@@ -75,123 +75,48 @@ Report:
 - Noindexed pages skipped (expected: tag pages only)
 - Any new errors vs last check
 
-#### 3B — Sitemap health
+#### 3B — Local vs live sitemap count (per domain, bash)
+
+Run **after** the fresh build from 3A (never against a stale `dist/` — that's the
+zombie-deploy bug `deploy.sh` exists to prevent):
 
 ```bash
-# Local sitemap URL count
-cat dist/sitemap-index.xml
-# Count URLs in child sitemap
-cat dist/sitemap-0.xml | grep -c "<loc>"
-
-# Live sitemap check
-curl -s https://[domain]/sitemap-index.xml | grep -c "<loc>"
-curl -o /dev/null -s -w "%{http_code}" https://[domain]/sitemap-0.xml
+echo "local: $(grep -c '<loc>' dist/sitemap-0.xml)"
+echo "live:  $(curl -s https://[domain]/sitemap-0.xml | grep -c '<loc>')"
 ```
 
-Flag as CRITICAL if:
-- Live sitemap returns 404 or empty
-- URL count in live sitemap does not match local build
-- Child sitemap returns non-200
+Flag as CRITICAL if the counts differ or the live sitemap is 404/empty.
+If they differ, the fix is `./deploy.sh [folder]` from the repo root (atomic rebuild + verify).
 
-#### 3C — Hub-and-spoke link integrity
+#### 3C — Scripted structural checks (all remaining checks)
 
-For each cluster, check that every spoke post has a hub link in the first 200 words:
+The 3C–3J checks (hub links in first 200 words, Related Articles sections, short posts,
+broken images, prohibited pages, homepage pillar links, About E-E-A-T) are implemented
+in `tools/gsc-client/src/structural-health.js` with per-site pillar/hub configuration
+for all four sites. Run it instead of ad-hoc bash:
 
 ```bash
-cd /Users/john/Projects-code/Front-end-sites/[domain]
-
-# Skip YAML frontmatter (between --- delimiters), then check first 1500 bytes of body
-for file in src/content/blog/*.md; do
-  body=$(awk '/^---/{if(++c==2)p=1;next}p' "$file" | head -c 1500)
-  if ! echo "$body" | grep -qE "/kennel-software|/dog-daycare-software|/dog-boarding-software|/cattery-software"; then
-    echo "MISSING HUB LINK: $(basename $file)"
-  fi
-done
+cd /Users/john/Projects-code/Front-end-sites/tools/gsc-client
+node src/structural-health.js                          # all domains
+node src/structural-health.js --domain=[domain]        # single domain
 ```
 
-Simpler check — report any blog post with zero internal links:
+It prints a scorecard per domain (X/8 checks passing) with severities and the failing
+files listed, and exits non-zero if any check fails. This is the same module the Slack
+report uses, so results stay consistent.
 
-```bash
-grep -rL "](/\|href=\"/" src/content/blog/*.md | head -20
-```
+To add or change a site's pillar pages, E-E-A-T signals, or prohibited patterns, edit
+`SITE_CONFIG` at the top of `structural-health.js`.
 
-Flag as HIGH if any post has zero internal links to any page on the site.
-
-#### 3D — Related Articles section check
-
-```bash
-grep -rL "## Related Articles" src/content/blog/*.md
-```
-
-Report any file missing `## Related Articles`. Flag as HIGH if count > 0.
-
-#### 3E — Word count spot check
-
-```bash
-# Check for posts suspiciously short (under ~800 words is a warning sign)
-for file in src/content/blog/*.md; do
-  words=$(wc -w < "$file")
-  if [ "$words" -lt 800 ]; then
-    echo "$words $file"
-  fi
-done | sort -n
-```
-
-Flag as MEDIUM any post under 800 words. Flag as HIGH if a post that was previously above minimum has dropped (indicates accidental truncation on deployment).
-
-#### 3F — Off-topic content check
-
-```bash
-ls src/content/blog/*.md | xargs -I{} basename {}
-```
-
-Visually scan the list for any filenames that are clearly off-topic for the site's subject matter (e.g. grooming posts on a software site). Flag as CRITICAL if any exist — off-topic content dilutes topical authority across all clusters.
-
-#### 3G — Broken image references
-
-```bash
-# Find all image src references in pillar pages
-grep -h 'src="/images/' src/pages/*.astro | grep -oP '(?<=src=")[^"]+' | sort -u | while read img; do
-  if [ ! -f "public$img" ]; then
-    echo "MISSING: $img"
-  fi
-done
-```
-
-Flag as HIGH if any image files referenced in pillar pages do not exist in `/public/`.
-
-#### 3H — Prohibited pages check
-
-```bash
-# Check if any previously-deleted content has reappeared (e.g. from git merge)
-ls src/content/blog/ | grep -iE "grooming|pup-cup|roadmap|training-tools" 2>/dev/null
-ls src/pages/ | grep -iE "roadmap" 2>/dev/null
-```
-
-Flag as CRITICAL if any prohibited off-topic pages exist.
-
-#### 3I — Homepage pillar link check
-
-```bash
-grep -o 'href="[^"]*software[^"]*"' src/pages/index.astro
-```
-
-Report which pillar pages are linked from the homepage. Flag as HIGH if any defined pillar page is missing.
-
-#### 3J — About page E-E-A-T check
-
-```bash
-grep -c "05408918\|RevelationPets\|Winchester\|founded" src/pages/about.astro 2>/dev/null || echo "0 matches"
-grep -c "href=\"/dog-\|href=\"/kennel\|href=\"/cattery" src/pages/about.astro 2>/dev/null || echo "0 pillar links"
-```
-
-Flag as MEDIUM if E-E-A-T signals are absent. Flag as HIGH if about page has zero links to pillar pages.
+> Fallback only (if the script is broken): the checks can be done with bash loops over
+> `src/content/blog/*.md` and `src/pages/*.astro`. Note macOS grep is BSD grep — it has
+> no `-P` flag; use `grep -oE` / `awk` instead of PCRE lookbehinds.
 
 ---
 
 ### Step 4: Structural Health Score
 
-After running all checks, produce a structural health summary:
+The script in 3C prints the scorecard. Combine it with 3A/3B into the summary:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -199,15 +124,8 @@ After running all checks, produce a structural health summary:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Build health:           ✅/❌  (0 errors / X errors)
-  Sitemap live:           ✅/❌  (X URLs / 0 URLs)
-  Hub links <200w:        ✅/⚠️   (X posts pass / Y missing)
-  Related Articles:       ✅/⚠️   (X posts pass / Y missing)
-  Short posts (<800w):    ✅/⚠️   (0 / X posts flagged)
-  Off-topic content:      ✅/❌  (0 / X files found)
-  Broken image refs:      ✅/❌  (0 / X missing)
-  Prohibited pages:       ✅/❌  (0 / X found)
-  Homepage pillar links:  ✅/⚠️   (X/4 pillars linked)
-  About E-E-A-T:          ✅/⚠️   (signals present/absent)
+  Sitemap local==live:    ✅/❌  (X URLs / Y URLs)
+  + the 8 scripted checks from structural-health.js
 
   Structural Score: XX/10 checks passing
 
@@ -247,6 +165,24 @@ Summarize across both reports:
 
 ---
 
+### Step 7: After Deploying Fixes — Indexing (REQUIRED)
+
+If any structural or content fixes were deployed during this session, submitting them
+to Google is **not optional**:
+
+```bash
+# 1. Deploy with the guarded script (atomic rebuild + live==local verify)
+cd /Users/john/Projects-code/Front-end-sites && ./deploy.sh [folder]
+
+# 2. Resubmit sitemap(s) to GSC
+cd tools/gsc-client && node src/enhanced-report.js --submit-sitemaps --domain=[domain]
+
+# 3. Request indexing for new/changed URLs via the Indexing API
+node src/request-indexing.js --site=[domain] --urls=url1,url2,...
+```
+
+---
+
 ## Logging SEO Changes
 
 After making any SEO changes (content, meta, technical, links), log them:
@@ -273,6 +209,9 @@ Claude should automatically log changes after completing any SEO work in a sessi
 - Historical data: `/Users/john/Projects-code/Front-end-sites/tools/gsc-client/history/<domain>.json`
 - Changelog: `/Users/john/Projects-code/Front-end-sites/tools/gsc-client/history/changes.json`
 - Content gap analysis reads from: `/Users/john/Projects-code/Front-end-sites/SEO_AUDIT_REPORT.md`
+  — **this file currently does not exist**, so gap analysis is silently disabled and the
+  per-site gap counts in `enhanced-report.js` are hardcoded fallbacks from Feb 2026.
+  Recreate the report (or remove the feature) before trusting gap numbers.
 - verify-seo.js lives in each site's `scripts/` folder — NOT the root repo level
 - Structural checks run against the local build, not the live site (except sitemap curl checks)
 - Trends show week-over-week: 📈 (up), 📉 (down), ➡️ (flat)
@@ -284,7 +223,7 @@ Claude should automatically log changes after completing any SEO work in a sessi
 
 These are the failure patterns most likely to explain flat metrics:
 
-1. **Sitemap showing 0 discovered pages in GSC** — child sitemaps not accessible on live server. Diagnose with `curl https://[domain]/sitemap-0.xml`.
+1. **Sitemap showing 0 discovered pages in GSC** — child sitemaps not accessible on live server, or a stale `dist/` was rsynced (zombie-deploy bug). Diagnose with `curl https://[domain]/sitemap-0.xml`; prevent with `./deploy.sh [folder]`, which rebuilds from clean and fails unless live sitemap == fresh build.
 
 2. **No page live with fewer than 2 inbound internal links** — enforced by verify-seo.js. Single most important structural rule.
 
@@ -316,7 +255,10 @@ When running structural checks for `driveschoolpro.com`, use the `mydriveschool.
 
 ---
 
-## Baseline Metrics (Feb 9, 2026)
+## Baseline Metrics (Feb 9, 2026 — historical reference only)
+
+These are the pre-rebuild baselines; compare current numbers against
+`history/<domain>.json` for real trends, not against this list.
 
 - mydojo.software: 1 click, 2,079 impressions (0.05% CTR), position 66.1
 - petcare.software: 0 clicks, 137 impressions (0.00% CTR), position 85.6 ← rebuilt March 2026
@@ -324,16 +266,12 @@ When running structural checks for `driveschoolpro.com`, use the `mydriveschool.
 - mytattoo.software: 1 click, 884 impressions (0.11% CTR), position 75.4
 
 **Domain migration (March 20, 2026):** mydriveschool.software → driveschoolpro.com
-- 301 redirects active on server (all paths preserved)
-- Full rebrand deployed: all content, meta, schema updated to DriveSchoolPro / driveschoolpro.com
-- GSC property added: https://driveschoolpro.com/ (URL prefix, verified March 20 2026)
-- Sitemap submitted: https://driveschoolpro.com/sitemap-index.xml
-- mydriveschool.software kept in GSC to monitor redirect traffic during ranking transfer
-- Ranking transfer expected over 4–12 weeks
+- 301 redirects active on server (all paths preserved); GSC property + sitemap submitted March 20, 2026
+- mydriveschool.software kept in GSC only to monitor redirect traffic during ranking transfer
+- Ranking transfer window was 4–12 weeks → **ends ~mid-June 2026**. When running this command,
+  compare driveschoolpro.com vs the legacy property: once legacy impressions have flatlined near
+  zero, recommend disabling `mydriveschool.software` in `tools/gsc-client/config.json` and
+  dropping it from default reports.
 
-petcare.software structural rebuild completed March 4, 2026:
-- 53 pages live (4 pillar + 31 cluster posts + supporting pages)
-- Hub-and-spoke architecture across 4 clusters
-- All verify-seo.js checks passing
-- Sitemap submitted to GSC
-- First impressions for target keywords expected within 3–4 weeks
+petcare.software structural rebuild completed March 4, 2026: 53 pages live,
+hub-and-spoke across 4 clusters, all verify-seo.js checks passing, sitemap submitted.
