@@ -29,14 +29,14 @@ esac
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT/$SITE"
 
-echo "════════ 1/4  Clean atomic build: $SITE → lightsail:$DEST ════════"
+echo "════════ 1/5  Clean atomic build: $SITE → lightsail:$DEST ════════"
 rm -rf dist .astro
 npm run build              # postbuild runs verify-seo.js; a non-zero exit aborts the deploy here
 
 LOCAL=$(grep -o "<loc>" dist/sitemap-0.xml | wc -l | tr -d ' ')
 echo "  Fresh build: $LOCAL sitemap URLs"
 
-echo "════════ 2/4  Dry-run (what --delete will remove) ════════"
+echo "════════ 2/5  Dry-run (what --delete will remove) ════════"
 rsync -avz --delete --dry-run dist/ "lightsail:$DEST" | grep '^deleting' || echo "  (nothing to delete)"
 
 if [ "$AUTO" != "--yes" ]; then
@@ -44,10 +44,10 @@ if [ "$AUTO" != "--yes" ]; then
   [ "$ans" = "y" ] || [ "$ans" = "Y" ] || { echo "Aborted."; exit 1; }
 fi
 
-echo "════════ 3/4  Deploy ════════"
+echo "════════ 3/5  Deploy ════════"
 rsync -avz --delete dist/ "lightsail:$DEST"
 
-echo "════════ 4/4  Verify live == local ════════"
+echo "════════ 4/5  Verify live == local ════════"
 sleep 2
 LIVE=$(curl -s --max-time 20 "https://$DOMAIN/sitemap-0.xml" | grep -o "<loc>" | wc -l | tr -d ' ')
 echo "  local=$LOCAL  live=$LIVE"
@@ -58,3 +58,9 @@ else
   echo "   (CDN cache? wrong nginx root? check: ssh lightsail 'grep -o \"<loc>\" $DEST/sitemap-0.xml | wc -l')"
   exit 1
 fi
+
+echo "════════ 5/5  TLS certificate health ════════"
+# Advisory only — a near-expiry cert must not fail a content deploy, but we surface
+# it on every deploy so a failing auto-renewal can't stay invisible for months
+# (which is exactly how driveschoolpro.com's cert lapsed in June 2026).
+"$ROOT/tools/check-certs.sh" || echo "  ⚠️  cert check flagged an issue (above) — does not block this deploy, but investigate soon."
