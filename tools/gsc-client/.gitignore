@@ -2,3 +2,7 @@ node_modules/
 output/
 *.log
 .DS_Store
+
+# Local config — holds the live Slack webhook + service-account key path.
+# Copy config.example.json -> config.json and fill in your own values.
+config.json

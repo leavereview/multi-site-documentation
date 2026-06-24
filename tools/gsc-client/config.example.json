@@ -1,36 +1,36 @@
 {
-  "serviceAccountPath": "../../petcare-481007-9f7c4f20cf39.json",
-  "slackWebhookUrl": "https://hooks.slack.com/services/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",
+  "serviceAccountPath": "../../your-service-account-key.json",
+  "slackWebhookUrl": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
   "domains": [
     {
       "name": "mydojo.software",
       "gscProperty": "https://mydojo.software/",
-      "ga4PropertyId": "518326472",
+      "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
       "enabled": true
     },
     {
       "name": "petcare.software",
       "gscProperty": "https://petcare.software/",
-      "ga4PropertyId": "506153996",
+      "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
       "enabled": true
     },
     {
       "name": "driveschoolpro.com",
       "gscProperty": "https://driveschoolpro.com/",
-      "ga4PropertyId": "517695357",
+      "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
       "enabled": true
     },
     {
       "name": "mydriveschool.software",
       "gscProperty": "https://mydriveschool.software/",
-      "ga4PropertyId": "517695357",
-      "enabled": true,
-      "note": "Legacy domain — monitoring 301 redirect traffic only"
+      "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
+      "enabled": false,
+      "note": "Legacy domain — retired from default reports 2026-06-17 (migration transfer complete). Re-enable only to spot-check 301 redirect traffic."
     },
     {
       "name": "mytattoo.software",
       "gscProperty": "https://mytattoo.software/",
-      "ga4PropertyId": "521481169",
+      "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
       "enabled": true
     }
   ],
