@@ -80,9 +80,13 @@ Report:
 Run **after** the fresh build from 3A (never against a stale `dist/` — that's the
 zombie-deploy bug `deploy.sh` exists to prevent):
 
+Sitemaps are emitted as single-line XML, so `grep -c` counts *lines* and always returns 1 —
+which reads as a passing `1 == 1` even when the counts genuinely differ, hiding the exact bug
+this check exists to catch. Count occurrences with `grep -o | wc -l`:
+
 ```bash
-echo "local: $(grep -c '<loc>' dist/sitemap-0.xml)"
-echo "live:  $(curl -s https://[domain]/sitemap-0.xml | grep -c '<loc>')"
+echo "local: $(grep -o '<loc>' dist/sitemap-0.xml | wc -l)"
+echo "live:  $(curl -s https://[domain]/sitemap-0.xml | grep -o '<loc>' | wc -l)"
 ```
 
 Flag as CRITICAL if the counts differ or the live sitemap is 404/empty.

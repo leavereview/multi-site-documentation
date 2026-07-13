@@ -1469,5 +1469,225 @@
     "reason": "Pricing/offer update from owner; old 3-months-free and £16 pricing inconsistent with new commercial model",
     "expectedImpact": "Pricing-page CTR and signup conversions; consistent trial messaging in SERP snippets",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-17",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Moved the /tattoo-studio-software/ hub link into the first paragraph of blog/do-you-tip-tattoo-artists.md (previously first appeared ~250 words in, past the 200-word threshold). Deployed via deploy.sh (live==local 35 URLs verified), resubmitted sitemap, submitted the URL to the Indexing API.",
+    "reason": "/seo-check structural audit flagged this as the ONLY hub-link-not-in-first-200-words failure in the portfolio. Bidirectional hub-and-spoke requires each spoke to link its pillar within the first 200 words; the 2026-04-25 fix had placed the link too deep in the post.",
+    "expectedImpact": "Restored authority signal from the tipping post to the /tattoo-studio-software/ pillar; mytattoo.software now 8/8 structural checks.",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-17",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Resubmitted petcare sitemap-index.xml to GSC and submitted 3 never-crawled pages (/about, /cattery-software, /contact — all 'URL unknown to Google') to the Indexing API (3 submitted, 0 failed). All 3 return HTTP 200 live. Service account confirmed to have Indexing-API access on petcare.",
+    "reason": "/seo-check coverage showed only 1 of ~48 pages indexed (2%); these 3 pages had never been crawled and GSC last fetched the child sitemap-0.xml on 2026-03-04 (stale). Structure is 8/8 and sitemap clean (no zombies this run), so indexing/authority is the blocker now, not structure.",
+    "expectedImpact": "3 never-crawled pages crawled within 24-48h; nudge GSC to re-fetch the sitemap and re-evaluate the 3 Crawled-not-indexed pillars.",
+    "expectedTimeline": "1-2 weeks crawl, 2-4 weeks indexing"
+  },
+  {
+    "date": "2026-06-17",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Tooling fix (audit accuracy, not a site change): added the DVSA learner-cluster hub /dvsa-27-driving-skills to driveschoolpro.com pillarHubs in structural-health.js. The 29 DVSA skill posts correctly link this hub in their first paragraph, but the audit config omitted it, producing 29 false 'no hub link' failures every run.",
+    "reason": "/seo-check reported driveschoolpro at 7/8 with 29 'missing hub link' posts; verifying anticipation-driving.md showed the DVSA hub link present in para 1 — the SITE_CONFIG simply didn't recognise /dvsa-27-driving-skills as a hub. driveschoolpro is genuinely 8/8.",
+    "expectedImpact": "Accurate structural scoring going forward; removes 29 recurring false positives from every /seo-check run.",
+    "expectedTimeline": "immediate"
+  },
+  {
+    "date": "2026-06-17",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Disabled legacy mydriveschool.software in gsc-client config.json (enabled:false) — dropped from default /seo-check reports. Migration to driveschoolpro.com effectively complete: legacy down to 8 impressions (-50% WoW); driveschoolpro at 25 clicks / 4,975 impressions / pos 33.5.",
+    "reason": "The 4-12 week ranking-transfer window from the 2026-03-20 migration has closed (~mid-June 2026) and legacy impressions have flatlined near zero, so per the migration protocol the legacy property is retired from monitoring. Re-enable only to spot-check 301 redirect traffic.",
+    "expectedImpact": "Cleaner default reports focused on the 4 active properties; no metric impact.",
+    "expectedTimeline": "n/a"
+  },
+  {
+    "date": "2026-06-17",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Created /tattoo-software-comparison page: multi-product roundup (MyTattoo vs Booksy vs Mindbody vs Square Appointments) with 14-row feature comparison table, per-product 'best for' breakdowns, 8-question FAQ + FAQPage schema, Article + Breadcrumb schema. Added inbound links from Navigation + Footer (sitewide).",
+    "reason": "Replicate the format of driveschoolpro.com/compare/total-drive, one of the highest-ranking GSC pages on the driveschool site, to capture 'tattoo software comparison' / 'best tattoo software' search intent.",
+    "expectedImpact": "New impressions/clicks for comparison and 'best tattoo software' queries; improved internal linking to pillar pages",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-06-18",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Fact-checked and corrected competitor claims on /tattoo-software-comparison: fixed Booksy price (£25→£40/mo solo, no free tier), corrected Mindbody (has Instagram booking + 20% marketplace commission), removed misleading 'Square not UK-focused' and indefensible 'multi-hour only MyTattoo' rows. Verified against current vendor/Capterra pricing pages June 2026.",
+    "reason": "Accuracy: original competitor comparison was written from general knowledge; several pricing/feature claims were wrong and could undermine credibility or invite complaints.",
+    "expectedImpact": "Maintains trust/accuracy of ranking comparison page; no traffic change expected",
+    "expectedTimeline": "n/a"
+  },
+  {
+    "date": "2026-06-18",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Restored expired TLS certificate on driveschoolpro.com (re-issued apex-only via certbot + reloaded nginx); removed orphaned mydojo.software cert lineage; added cert-expiry monitoring (check-certs.sh wired into deploy.sh + daily systemd timer on server)",
+    "reason": "HTTPS cert expired 2026-06-18; certbot auto-renewal had been silently failing for ~3 months because the cert's www.driveschoolpro.com SAN has no DNS record, and the server has no mail/account email to surface the failure. Site served TLS errors to every visitor and to Googlebot.",
+    "expectedImpact": "Restored site availability and HTTPS crawlability; recovery of crawl/indexing lost during the outage",
+    "expectedTimeline": "Immediate availability; 1-3 weeks for crawl/index recovery"
+  },
+  {
+    "date": "2026-06-24",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "Re-submitted the 3 still-unknown-to-Google petcare pages (/about/, /cattery-software/, /contact/) to the Indexing API (3 submitted, 0 failed) and resubmitted sitemap-index.xml. Pre-verified each is technically clean: HTTP 200 on trailing slash, clean 301 from non-slash, self-canonical, no noindex/robots block, all 3 present in the live sitemap (48 URLs, local==live). No technical blocker found.",
+    "reason": "/seo-check 2026-06-24 coverage showed these 3 pages STILL 'URL unknown to Google — Crawl: never' a full week after the identical 2026-06-17 Indexing API submission. With structure 8/8, sitemap clean (no zombies), and the URLs technically flawless, the blocker is crawl budget/authority on a 2%-indexed domain, not structure or a page defect — resubmitting to nudge another crawl attempt.",
+    "expectedImpact": "3 pages crawled within 24-48h; move from 'URL unknown to Google' to at least Discovered/Crawled in GSC coverage",
+    "expectedTimeline": "1-2 weeks crawl, 2-4 weeks indexing"
+  },
+  {
+    "date": "2026-06-24",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "On-page SEO pass on 4 pages (post-TLS-recovery). (1) /driving-school-management-software: rewrote meta to front-load 'driving test student management software' (was ~205 chars missing those terms; now 152) and added an intent-fusing H2 'Track Every Student's Driving Test Journey' uniting student-management + driving-test content + an FAQ 'How do I track a student's driving test readiness?'; kept title='Driving School Student Management Software' to match H1 (2140->2465 words). (2) /dvsa-27-driving-skills: REMOVED live [PLACEHOLDER] testimonials + [PLACEHOLDER School Name] case study (CLAUDE.md violation), retitled to 'DVSA's 27 Driving Skills Explained (2026): Are You Test-Ready?' + learner-checklist meta, rebalanced learner-first (software CTA demoted), added a real Pre-Test Readiness Checklist. (3) /driving-school-scheduling-software: made exact phrase 'Driving School Scheduling Software' contiguous in title+H1 (was split by '& Booking'). (4) /driving-school-software: trimmed title 81->68 chars (head term first), added 4 head-term H2s (What Is/Types Of/How Much Does It Cost/How To Choose), removed 5 empty screenshot TODO slots (1628->2442 words). Deployed via deploy.sh (live==local 94 URLs); 4 URLs resubmitted to Indexing API.",
+    "reason": "/seo-check 2026-06-24 found demand but poor rank/CTR: management pos 10.7 for 'driving test student management software' (136 impr, 0 clicks) with a meta missing the query terms; dvsa-27 pos 5.1 / 169 impr / 0 clicks (CTR+intent mismatch) plus live placeholder content; scheduling 745 impr (most on site) at pos 52 with the exact phrase split; driving-school-software pos 70 on the head term with the thinnest H2 structure of the product pages. Cert was dead ~3 months until 2026-06-18 so rankings are mid-recovery — these on-page fixes compound the recovery crawl.",
+    "expectedImpact": "dvsa page earns its first clicks (pos 5, was 0); management page into top-5 + wins the snippet on the test query; scheduling + software climb as the recovery crawl re-rates the clearer/deeper content",
+    "expectedTimeline": "2-4 weeks (re-crawl + snippet refresh); software/scheduling partly gated on TLS recovery"
+  },
+  {
+    "date": "2026-06-24",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "On-page SEO pass on 3 pillars + blog linking. (1) /tattoo-booking-app (flagship): added 3 visible H2s — 'Benefits of a Tattoo Booking App', 'Mobile App vs Mobile Booking Website', 'Tattoo Booking App Pricing & Affordable Options' — surfacing copy previously trapped in hidden FAQ accordions; grew visible body 844->1863 words (over the 1,800 pillar min); retitled 'Tattoo Booking App Guide (2026)'->'Tattoo Booking App: Mobile Booking, Benefits & Pricing (2026)'. (2) /tattoo-artist-software: deepened the existing Client Management H2 +~430 words (client profiles & tattoo history, GDPR/data export surfaced from a hidden FAQ, repeat-client retention) using the exact phrase 'client management for tattoo artists' (977->1433 words). (3) /tattoo-studio-software: added 'Is There Free Tattoo Studio Software?' H2 covering freemium limits + the 14-day trial (805->1176 words). (4) Added booking-app to the blog sidebar 'Our Software' card. Deployed via deploy.sh (live==local 36 URLs); 3 URLs resubmitted to Indexing API.",
+    "reason": "/seo-check 2026-06-24: whole site at 8 clicks, money pages page 2-3 at 0 clicks. /tattoo-booking-app 921 impr at pos 27 but already page-2 for a 0-click cluster ('benefits of tattoo booking apps' pos 12.7/100 impr, 'mobile app for tattoo bookings' pos 15/90 impr, 'affordable tattoo booking apps' pos 18.8) while only ~970 visible words with the matching copy hidden in FAQ accordions; artist-software pos 16.2 for 'client management for tattoo artists'; studio-software pos 19.6 for 'tattoo studio software free' with no free-intent section. Bottleneck is ranking/thin-visible-content, not snippets.",
+    "expectedImpact": "booking-app cluster (benefits/mobile/affordable/pricing, 250+ impr) climbs page 2->page 1; artist + studio pages gain page-1 visibility on their exact-match queries; deeper visible content lifts topical relevance",
+    "expectedTimeline": "2-4 weeks (re-crawl); booking-app the highest-leverage"
+  },
+  {
+    "date": "2026-06-27",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Accuracy/consistency/conversion audit deployed: truthful stats (removed unsourced %), illustrative testimonials, removed VAT-inclusive claim (not VAT-registered), calendar=day/week/month, reminders=email live + WhatsApp coming soon (SMS dropped), homepage pricing teaser + FAQ schema + trust bar + switching block, pricing Enterprise path, UK spellings, per-page OG images, nav keyboard a11y, /sms→/whatsapp policy, Anthropic added to privacy sub-processors",
+    "reason": "Make every marketing claim strictly truthful to the product and lift trial conversion",
+    "expectedImpact": "Higher trial signups; cleaner E-E-A-T/accuracy signals; fewer misleading claims",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-27",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "meta",
+    "description": "Deployed pending updates: meta-description rewrites (6 pillars + 9 blogs), mobile-nav a11y (scroll, aria-expanded, Escape, scroll-lock), skip-to-content link, theme-color, iOS input-zoom fix, 44px cookie buttons",
+    "reason": "Clear pending SEO/a11y improvements that were unshipped",
+    "expectedImpact": "Better CTR + mobile UX/a11y",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-27",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Deployed pending updates: new tattoo-software-comparison page, nav/footer updates, meta rewrites (6 pillars + 16 blogs), mobile-nav a11y + iOS input-zoom + 44px cookie buttons",
+    "reason": "Ship pending content + SEO/a11y work",
+    "expectedImpact": "New comparison page ranks; better CTR + mobile UX",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-06-27",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "content",
+    "description": "Deployed restructure: removed grooming + pet-sitting software pages and 3 off-strategy blog posts, updated 4 pillar pages + internal links, plus mobile-nav a11y + iOS input-zoom fixes",
+    "reason": "Remove off-strategy/grooming content per site SEO architecture; tighten internal links",
+    "expectedImpact": "Cleaner topical focus + crawl budget",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-07-02",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Created /tattoo-bookings-from-instagram/ Instagram-intent page (~1,500 words, FAQPage schema, founding-cohort waitlist form with UTM attribution); added 4 contextual inbound links (tattoo-booking-app pillar, free-tattoo-booking-app-guide, reduce-no-shows, deposit-guide); added scripts/submit-indexing.js batch Indexing API script",
+    "reason": "Query 'apps for booking tattoo appointments on instagram' ranks pos 6.7 with no dedicated page; ~13 recent posts unindexed",
+    "expectedImpact": "Ranking for Instagram booking queries; waitlist signups; faster indexing of recent posts",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-07-06",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Published two PPC/SEO landing pages: /driving-instructor-software (solo ADI) and /driving-school-software-uk (multi-instructor). Minimal LandingLayout, indexable, in sitemap, self-canonical, FAQPage schema. Also added cookie-consent + load-analytics-on-consent to LandingLayout so paid conversions fire for cold PPC visitors.",
+    "reason": "Google Ads landing pages for 'driving instructor software' and 'driving school software', focused on the free-trial conversion; indexable so they double as SEO pages. School lander at -uk slug to preserve the existing /driving-school-software pillar.",
+    "expectedImpact": "Higher Ads Quality Score + trial signups from paid; incremental organic impressions for the two head terms",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-07-06",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "conversion",
+    "description": "Launch flip for MyTattoo: wired all marketing CTAs to the live app (app.mytattoo.software/signin), retired the early-access/waitlist framing sitewide (pages + 6 pillar pages + 16 blog posts), and rewrote pricing/FAQ copy to the current no-fee reality — no platform fee, no commission, no subscription; artists connect their own Stripe and the client's deposit goes straight to them. Repurposed /contact to a plain contact page and removed the waitlist form/component.",
+    "reason": "app.mytattoo.software went live and open (self-serve signup), so the marketing site needed to route to the product instead of a waitlist and drop pre-launch positioning.",
+    "expectedImpact": "Trial/account signups from marketing traffic that previously dead-ended at a waitlist; clearer launched messaging",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-07-12",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "content",
+    "description": "Removed all paid pricing: killed the $49/$79/$119 subscription tiers and the free trial sitewide. /pricing rewritten around 'MyDojo is free while in early access' (single Offer schema at price 0, replacing 3 tier Offers + a free-trial Offer; 6 new FAQs with FAQPage schema generated from the rendered array). terms.astro sections 4-5 rewritten (were legally false: 'requires a paid subscription', 'trial auto-converts to paid'). Pillar FAQ price claims (£79/£99 flat-rate) replaced in both the JSON-LD and rendered copies; 4 comparison-table Monthly Price rows now 'Free'; 6 meta descriptions rewritten; 10 blog CTAs repointed. All sign-up CTAs now go to app.mydojo.software/signup instead of the contact form. Fixed: $-vs-GBP currency mismatch, 4 dead #trial anchors, 30-vs-14-day trial contradiction, and a stale llms.txt still advertising Starter/Growth/Professional plans to AI crawlers.",
+    "reason": "The $49-$119 tiers and 30-day trial advertised a paid product the app cannot deliver — the dojo app has no billing code at all (prisma/schema.prisma: 'Billing is OUT of MVP scope — no Stripe models here at all'). Moving to free-while-in-early-access, monetised later by monthly subscriptions. A 2% Stripe Connect commission was considered and rejected: on dojo it would mean ~£200/mo from a school billing £10k, far more than the tiers it replaces.",
+    "expectedImpact": "New ranking surface for 'free martial arts software' / 'free dojo software' queries; higher CTR on pricing and pillar pages now that the meta descriptions lead with free; conversion lift from self-serve signup replacing the contact-form gate.",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-07-12",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Kept the £0 platform fee and 'keep every deposit' promise intact; added explicit notice that paid plans are coming with at least 30 days' notice, aligning /pricing with what terms.astro section 7 already promised. Added the competitor cost contrast the £0 fee is worth (3-5% per booking; Booksy up to 30% of new-client bookings). Fixed tattoo-software-comparison.astro, which scored MyTattoo FALSE for 'Free entry tier' while the same page called itself free two sections down. Standardised 'free while we're getting started' to 'free while we're in early access' sitewide. Updated llms.txt pricing line for AI crawlers.",
+    "reason": "Original brief was to add a 2% commission on Stripe Connect deposits. Rejected: 2% of a ~£50 deposit is ~£20/artist/month — too small to be revenue — while it would spend the one categorical claim no competitor can match ('we take £0 of your deposit') against Booksy's 30%. Six MyTattoo pages already argue, correctly, that percentage fees punish success. deposit.ts is unchanged (no application_fee_amount). Early-access framing added so the eventual subscription launch is not a walk-back.",
+    "expectedImpact": "Stronger differentiation on fee-related queries where £0 platform fee is the wedge; the corrected 'Free entry tier' row removes a self-contradiction on the main comparison page.",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-07-13",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Added the missing /tattoo-studio-software/ pillar link to the mytattoo.software homepage body. The 'Explore' card grid covered 4 of the 5 pillars (booking-software, scheduling-software, booking-app, artist-software) but omitted studio-software — the flagship pillar and the nav parent — so it had ZERO homepage body links while the narrower /tattoo-booking-software/ had four. Added a 5th 'Tattoo Studio Software' card (grid lg:grid-cols-4 -> lg:grid-cols-5) and extended the section intro to cover the studio variant. Deployed via deploy.sh (live==local 37 URLs); sitemap resubmitted; / and /tattoo-studio-software/ submitted to the Indexing API. Also fixed a tooling bug in .claude/commands/seo-check.md step 3B: it used 'grep -c' on single-line XML sitemaps, which counts LINES and always returns 1 — so the live-vs-local check reported a passing '1 == 1' for every site and could never have caught a real mismatch (the zombie-deploy bug it exists to detect). Now uses 'grep -o | wc -l'.",
+    "reason": "/seo-check 2026-07-13 structural audit: mytattoo was the only site below 8/8 (7/8, HIGH — homepage pillar links 4/5). CLAUDE.md structural rule 7: homepage must link all pillar pages; missing homepage links = reduced crawl priority. Studio-software reached the homepage only via the sitewide nav dropdown (boilerplate), not the body. Separately, the seo-check grep -c bug meant the sitemap zombie check has been silently vacuous.",
+    "expectedImpact": "Crawl priority + internal link equity to /tattoo-studio-software/, which sits at pos 19.6 for 'tattoo studio software free'; restores mytattoo to 8/8 structural. The seo-check fix restores a real zombie-deploy tripwire across all 4 sites.",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
