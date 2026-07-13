@@ -15,7 +15,7 @@ import { dirname, resolve } from 'path';
 import { format, subDays } from 'date-fns';
 import { loadConfig } from './utils/config.js';
 import { authenticate } from './auth.js';
-import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
+import { getTopQueries, getTopPages, getSiteTotals } from './api/search-analytics.js';
 import GA4Client from './analytics/ga4-client.js';
 import CombinedReportGenerator from './reports/combined-report.js';
 
@@ -101,7 +101,8 @@ async function main() {
 
     const topQueries = await getTopQueries(gscClient, domainConfig.gscProperty, startDateStr, endDateStr);
     const topPages = await getTopPages(gscClient, domainConfig.gscProperty, startDateStr, endDateStr);
-    const summary = calculateAggregateMetrics(topQueries);
+    // Query rows carry only ~5-11% of impressions (GSC anonymizes the long tail).
+    const summary = await getSiteTotals(gscClient, domainConfig.gscProperty, startDateStr, endDateStr);
 
     const gscData = { topQueries, topPages, summary };
     console.log(chalk.green(`✓ Retrieved ${topQueries.length} queries, ${topPages.length} pages\n`));

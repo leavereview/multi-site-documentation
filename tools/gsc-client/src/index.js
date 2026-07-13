@@ -6,7 +6,7 @@ import { writeFile, mkdir } from 'fs/promises';
 import { resolve } from 'path';
 import { authenticate, validateCredentials } from './auth.js';
 import { loadConfig, expandPath, getDomainConfig } from './utils/config.js';
-import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
+import { getTopQueries, getTopPages, getSiteTotals } from './api/search-analytics.js';
 import { generateManifest, saveManifest } from './storage/manifest.js';
 
 // Parse command line arguments
@@ -130,8 +130,9 @@ async function main() {
     const topPages = await getTopPages(client, domainConfig.gscProperty, startDate, endDate, 100);
     console.log(chalk.green(`✓ Retrieved ${topPages.length} pages`));
 
-    // Calculate aggregate metrics
-    const aggregateMetrics = calculateAggregateMetrics([...topQueries, ...topPages]);
+    // Headline metrics from GSC's dimensionless totals — summing query + page rows
+    // double-counts every click (see getSiteTotals).
+    const aggregateMetrics = await getSiteTotals(client, domainConfig.gscProperty, startDate, endDate);
 
     // Display summary
     console.log(chalk.bold.cyan('\n\n📊 SUMMARY'));

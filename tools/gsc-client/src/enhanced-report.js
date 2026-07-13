@@ -18,9 +18,10 @@ import { fileURLToPath } from 'url';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
 import { authenticate, getJwtAuth } from './auth.js';
 import { loadConfig, expandPath } from './utils/config.js';
+import { ctrPerformance, underperformingRows } from './utils/ctr-curve.js';
 import { getSitemapStatus, submitSitemap } from './api/sitemaps.js';
 import { inspectUrls } from './api/url-inspection.js';
-import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
+import { getTopQueries, getTopPages, getSiteTotals } from './api/search-analytics.js';
 import GA4Client from './analytics/ga4-client.js';
 import CombinedReportGenerator from './reports/combined-report.js';
 import { sendFullSlackReport } from './slack.js';
@@ -446,13 +447,16 @@ function saveHistoricalMetrics(domain, metrics) {
     }
 
     const historyFile = resolve(historyDir, `${domain}.json`);
-    const history = loadHistoricalMetrics(domain);
+    const today = format(new Date(), 'yyyy-MM-dd');
 
-    // Add current metrics with timestamp
-    history.push({
-      date: format(new Date(), 'yyyy-MM-dd'),
-      ...metrics
-    });
+    // One data point per day: a same-day re-run must OVERWRITE, not append.
+    //
+    // This used to push unconditionally. Trends are computed from the last two entries, so a
+    // second /seo-check on the same day compared today against today and reported a flat 0%
+    // change — silently destroying the week-over-week signal the report leads with. The
+    // history files had accumulated same-day duplicates going back to May as a result.
+    const history = loadHistoricalMetrics(domain).filter(h => h.date !== today);
+    history.push({ date: today, ...metrics });
 
     // Keep last 90 days only
     const cutoffDate = subDays(new Date(), 90);
@@ -558,15 +562,57 @@ function generateRecommendations(domainData, contentGaps, history, urlInspection
     }
   }
 
-  // Recommendation 2: CTR Optimization
-  if (current.avgCtr < 1.0) {
-    const impressionWaste = Math.round(current.totalImpressions * (0.02 - current.avgCtr / 100));
+  // Recommendation 2: CTR vs what the held positions actually pay.
+  //
+  // This used to flag `avgCtr < 1.0` as HIGH "CTR should be 2-3%". avgCtr is a FRACTION
+  // (0.0019 = 0.19%), so that condition was true for every site on every run, and the
+  // "impact" figure reduced to a flat 2% of impressions. It sent us to rewrite meta
+  // descriptions three separate times on sites averaging position 30-40, where no snippet
+  // can earn a click. Judge CTR against the curve instead: only a genuine shortfall against
+  // the positions actually held is a snippet problem.
+  // Measured over PAGE rows, not query rows: GSC anonymizes the long tail, so query rows carry
+  // only ~5-11% of impressions here while page rows carry ~90%.
+  //
+  // ctrPerformance only counts pages inside the top 20 — the one band where the curve can price
+  // a click honestly. So this fires ONLY when pages that genuinely rank are genuinely not being
+  // clicked, which is the only case a snippet rewrite can fix.
+  const perf = ctrPerformance(domainData.topPages);
+  const weak = underperformingRows(domainData.topPages, { minImpressions: 100, maxRatio: 0.4 });
+
+  if (weak.length > 0) {
+    // Name the pages. Do NOT sum an upside — see underperformingRows() for why that number lies.
+    const named = weak.slice(0, 3).map(p => {
+      const path = p.page ? p.page.replace(/^https?:\/\/[^/]+/, '') : '(unknown)';
+      return `${path} (pos ${p.position.toFixed(1)}, ${p.impressions.toLocaleString()} impr, ${p.clicks} clicks)`;
+    });
     recommendations.push({
       priority: 'HIGH',
-      category: 'CTR Optimization',
-      issue: `CTR is ${(current.avgCtr * 100).toFixed(2)}% (should be 2-3%)`,
-      action: 'Rewrite meta descriptions using [Benefit] + [Data] + [CTA] formula',
-      impact: `Could gain ${impressionWaste} additional clicks/month from existing impressions`
+      category: 'Ranking But Not Clicked',
+      issue: `${weak.length} page(s) rank in the top 20 yet earn almost no clicks: ${named.join('; ')}` +
+             (weak.length > 3 ? ` +${weak.length - 3} more` : ''),
+      action: 'Check INTENT first: are these ranking for searchers your product actually serves? ' +
+              'If the audience is wrong, no meta rewrite will help — retarget or deprioritise the page. ' +
+              'Only if intent matches is this a title/meta problem',
+      impact: 'These pages already have the impressions — they are the cheapest clicks available, if the intent is right'
+    });
+  } else if (perf.ratio === null) {
+    // Nothing ranking in the top 20 at all. There is no snippet verdict to give.
+    recommendations.push({
+      priority: 'INFO',
+      category: 'Nothing In Clickable Range',
+      issue: `No page ranks in the top 20 (site average is position ${current.avgPosition.toFixed(1)})`,
+      action: 'Do NOT rewrite meta descriptions — nothing is ranking where a snippet could earn a click',
+      impact: 'The constraint is ranking/indexing. Spend the effort on authority and coverage instead'
+    });
+  } else if (current.avgPosition > 20) {
+    // Pages in the band are clicking as expected; the rest of the site is just too deep.
+    recommendations.push({
+      priority: 'INFO',
+      category: 'CTR In Line With Position',
+      issue: `Top-20 pages earn ${(perf.ratio * 100).toFixed(0)}% of expected clicks (healthy); ` +
+             `site average position is ${current.avgPosition.toFixed(1)}`,
+      action: 'Do NOT rewrite meta descriptions sitewide — the constraint is ranking/indexing, not snippets',
+      impact: 'Clicks follow position here; spend the effort on rankings and coverage instead'
     });
   }
 
@@ -1023,7 +1069,9 @@ async function main() {
       // Fetch GSC data
       const topQueries = await getTopQueries(client, domainConfig.gscProperty, startDate, endDate, 100);
       const topPages = await getTopPages(client, domainConfig.gscProperty, startDate, endDate, 100);
-      const aggregateMetrics = calculateAggregateMetrics([...topQueries, ...topPages]);
+      // Headline metrics come from GSC's own dimensionless totals. Summing the query and page
+      // rows (the old behaviour) double-counted every click — see getSiteTotals().
+      const aggregateMetrics = await getSiteTotals(client, domainConfig.gscProperty, startDate, endDate);
 
       const domainData = {
         domain: domainConfig.name,

@@ -6,6 +6,7 @@
  */
 
 import chalk from 'chalk';
+import { ctrPerformance } from '../utils/ctr-curve.js';
 
 export class CombinedReportGenerator {
   constructor(gscData, ga4Data) {
@@ -186,14 +187,27 @@ export class CombinedReportGenerator {
     let score = 0;
     let factors = 0;
 
-    // Factor 1: Average CTR (target: 3%)
-    const avgCTR = merged.reduce((sum, p) => sum + p.ctr, 0) / merged.length;
-    score += Math.min((avgCTR / 3) * 25, 25);
-    factors++;
+    // Factor 1: CTR against what the held positions should pay (target: meets the curve).
+    //
+    // Was `Math.min((avgCTR / 3) * 25, 25)` — but p.ctr is a raw GSC FRACTION (0.0019), not a
+    // percentage, so dividing by 3 yielded ~0.016 of the available 25 points for every site on
+    // every run. Combined with the position factor below, that made this an SEO score which
+    // contained no SEO signal at all.
+    const perf = ctrPerformance(merged);
+    if (perf.ratio !== null) {
+      // Meeting the curve scores 20/25; beating it by 25%+ earns the full 25.
+      score += 25 * Math.min(perf.ratio / 1.25, 1);
+      factors++;
+    }
 
-    // Factor 2: Average position (target: < 20)
+    // Factor 2: Average position.
+    //
+    // Was `Math.max(25 - (avgPosition / 20) * 25, 0)`, which floors at zero for ANY average
+    // position >= 20 — true of every site here, so it scored a flat 0 and could not tell
+    // driveschoolpro (pos 25) apart from petcare (pos 86). Decay smoothly instead so the
+    // score still moves as positions improve deep in the tail.
     const avgPosition = merged.reduce((sum, p) => sum + p.position, 0) / merged.length;
-    score += Math.max(25 - (avgPosition / 20) * 25, 0);
+    score += Math.max(0, Math.min(25, 25 * Math.exp(-(avgPosition - 1) / 25)));
     factors++;
 
     // Factor 3: Engagement rate (target: 50%)

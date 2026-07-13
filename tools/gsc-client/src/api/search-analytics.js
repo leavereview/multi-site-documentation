@@ -110,7 +110,50 @@ export async function getTopPages(client, siteUrl, startDate, endDate, limit = 1
 }
 
 /**
- * Calculate aggregate metrics from search analytics data
+ * True site totals for a date range, straight from GSC with NO dimensions.
+ *
+ * Use this for headline metrics. Do NOT derive them by summing dimension rows:
+ *
+ *  - `calculateAggregateMetrics([...topQueries, ...topPages])` sums two different VIEWS of the
+ *    same traffic, so every click is counted twice — once under its query, once under its page.
+ *    That inflated mydojo to 42 clicks / 21,768 impressions when the truth was 27 / 17,492.
+ *  - Summing a single dimension is also wrong, just less so: GSC anonymizes long-tail queries,
+ *    so the query rows carry only ~5-11% of impressions here (pages carry ~90%).
+ *
+ * The inflation factor varies per site AND per week (it depends on how much GSC anonymized),
+ * so it does not even cancel out of a week-over-week trend.
+ *
+ * @param {Object} client - Authenticated webmasters client
+ * @param {string} siteUrl - GSC property
+ * @param {string} startDate - YYYY-MM-DD
+ * @param {string} endDate - YYYY-MM-DD
+ * @returns {Promise<{totalClicks:number, totalImpressions:number, avgCtr:number, avgPosition:number}>}
+ */
+export async function getSiteTotals(client, siteUrl, startDate, endDate) {
+  const response = await client.searchanalytics.query({
+    siteUrl,
+    requestBody: { startDate, endDate, dimensions: [], rowLimit: 1 }
+  });
+
+  const row = response.data.rows?.[0];
+  if (!row) {
+    return { totalClicks: 0, totalImpressions: 0, avgCtr: 0, avgPosition: 0 };
+  }
+
+  return {
+    totalClicks: row.clicks || 0,
+    totalImpressions: row.impressions || 0,
+    avgCtr: row.ctr || 0,
+    avgPosition: row.position || 0
+  };
+}
+
+/**
+ * Calculate aggregate metrics from search analytics data.
+ *
+ * ⚠️  Only valid over rows from a SINGLE dimension, and even then it under-counts because GSC
+ * drops anonymized rows. For site headline metrics use getSiteTotals() instead.
+ *
  * @param {Array} rows - Raw search analytics rows
  * @returns {Object} Aggregated metrics
  */

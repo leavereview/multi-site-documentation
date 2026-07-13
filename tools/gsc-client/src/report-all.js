@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { resolve } from 'path';
 import { authenticate } from './auth.js';
 import { loadConfig, expandPath } from './utils/config.js';
-import { getTopQueries, getTopPages, calculateAggregateMetrics } from './api/search-analytics.js';
+import { getTopQueries, getTopPages, getSiteTotals } from './api/search-analytics.js';
 import { generateExcelReport } from './reporting/excel.js';
 
 // Parse command line arguments
@@ -54,7 +54,8 @@ async function fetchDomainData(client, domainConfig, startDate, endDate) {
     const topPages = await getTopPages(client, domainConfig.gscProperty, startDate, endDate, 100);
     console.log(chalk.green(`  ✓ Retrieved ${topPages.length} pages`));
 
-    const aggregateMetrics = calculateAggregateMetrics([...topQueries, ...topPages]);
+    // Summing query + page rows double-counts every click (see getSiteTotals).
+    const aggregateMetrics = await getSiteTotals(client, domainConfig.gscProperty, startDate, endDate);
 
     return {
       domain: domainConfig.name,
