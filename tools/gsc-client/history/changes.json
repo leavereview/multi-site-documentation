@@ -1689,5 +1689,19 @@
     "reason": "/seo-check 2026-07-13 structural audit: mytattoo was the only site below 8/8 (7/8, HIGH — homepage pillar links 4/5). CLAUDE.md structural rule 7: homepage must link all pillar pages; missing homepage links = reduced crawl priority. Studio-software reached the homepage only via the sitewide nav dropdown (boilerplate), not the body. Separately, the seo-check grep -c bug meant the sitemap zombie check has been silently vacuous.",
     "expectedImpact": "Crawl priority + internal link equity to /tattoo-studio-software/, which sits at pos 19.6 for 'tattoo studio software free'; restores mytattoo to 8/8 structural. The seo-check fix restores a real zombie-deploy tripwire across all 4 sites.",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-07-13",
+    "sites": [
+      "mydojo.software",
+      "petcare.software",
+      "mytattoo.software",
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Fixed 3 bugs in the GSC reporting tool that each made it assert something false. (1) DOUBLE-COUNTED METRICS: site totals were calculateAggregateMetrics([...topQueries, ...topPages]) — the sum of two dimension views of the SAME traffic, counting every click twice. mydojo reported 42 clicks/21,768 impr; truth is 27/17,492. petcare impressions ~2x inflated (1,403 vs 708). Added getSiteTotals() (dimensionless GSC query), used in all 4 callers. Also rebuilt all ~90 historical snapshots from GSC and de-duplicated same-day entries (history had appended, not overwritten, so re-running /seo-check the same day compared today vs today and reported a flat 0%). (2) POSITION-BLIND CTR ADVICE: 'avgCtr < 1.0' compared a FRACTION (0.0019) to a percentage threshold, so '[HIGH] CTR should be 2-3%' fired unconditionally on every site every run. CTR is now judged against expected-CTR-for-position (new src/utils/ctr-curve.js), restricted to the top 20 where the curve is measurable. (3) HEALTH SCORE had no SEO signal in it: same fraction/percentage bug on the CTR factor (~0.016 of 25 points, always) and the position factor floored at 0 for any avg position >=20 (all 4 sites) — the score was GA4 engagement wearing an SEO label. Added src/striking-distance.js (queries + pages where clicks are actually available, split into snippet fixes vs ranking pushes).",
+    "reason": "The changelog shows meta descriptions were rewritten 3 separate times (2026-05-18 mydojo x15, 2026-05-18 mytattoo x22, 2026-06-27 both) chasing a '[HIGH] CTR Optimization' recommendation that was firing unconditionally because of a units bug — on sites averaging position 30-40, where no snippet can earn a click. The tool was generating the work. Meanwhile every headline number and every historical trend it reported was inflated by a varying factor.",
+    "expectedImpact": "Reports now state true click/impression counts and only flag CTR where a snippet could actually earn a click. Surfaced the real finding the old aggregates hid: the highest-impression page on each site ranks for CONSUMER intent while the products serve business owners (mydojo /blog/adult-karate-classes-guide 4,770 impr 0 clicks; mytattoo /blog/how-much-do-tattoo-artists-make 967 impr 0 clicks; driveschoolpro /dvsa-27-driving-skills 815 impr 7 clicks).",
+    "expectedTimeline": "immediate (tooling accuracy; no ranking impact)"
   }
 ]

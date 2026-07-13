@@ -218,7 +218,9 @@ Claude should automatically log changes after completing any SEO work in a sessi
   Recreate the report (or remove the feature) before trusting gap numbers.
 - verify-seo.js lives in each site's `scripts/` folder — NOT the root repo level
 - Structural checks run against the local build, not the live site (except sitemap curl checks)
-- Trends show week-over-week: 📈 (up), 📉 (down), ➡️ (flat)
+- Trends compare against the **previous run**, not a fixed week: 📈 (up), 📉 (down), ➡️ (flat).
+  Runs are irregular, so the interval varies — read the dates in `history/<domain>.json` before
+  drawing a conclusion from a % change. Same-day re-runs overwrite rather than append.
 - Recommendations priority: CRITICAL > HIGH > MEDIUM > LOW > INFO
 
 ---
