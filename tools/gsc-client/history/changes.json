@@ -1703,5 +1703,16 @@
     "reason": "The changelog shows meta descriptions were rewritten 3 separate times (2026-05-18 mydojo x15, 2026-05-18 mytattoo x22, 2026-06-27 both) chasing a '[HIGH] CTR Optimization' recommendation that was firing unconditionally because of a units bug — on sites averaging position 30-40, where no snippet can earn a click. The tool was generating the work. Meanwhile every headline number and every historical trend it reported was inflated by a varying factor.",
     "expectedImpact": "Reports now state true click/impression counts and only flag CTR where a snippet could actually earn a click. Surfaced the real finding the old aggregates hid: the highest-impression page on each site ranks for CONSUMER intent while the products serve business owners (mydojo /blog/adult-karate-classes-guide 4,770 impr 0 clicks; mytattoo /blog/how-much-do-tattoo-artists-make 967 impr 0 clicks; driveschoolpro /dvsa-27-driving-skills 815 impr 7 clicks).",
     "expectedTimeline": "immediate (tooling accuracy; no ranking impact)"
+  },
+  {
+    "date": "2026-07-17",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "conversion",
+    "description": "Fixed broken app CTA links site-wide: all 48 Get Started links pointed to app.mydojo.software/signup (404); now point to app.mydojo.software/signin (200)",
+    "reason": "app.mydojo.software/signup returns 404, so every signup CTA on the marketing site was a dead end",
+    "expectedImpact": "App sign-in/sign-up conversions from the marketing site recover from zero",
+    "expectedTimeline": "Immediate"
   }
 ]
