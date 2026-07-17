@@ -55,10 +55,11 @@ All sites: **Astro 5.x**, **Tailwind CSS**, **TypeScript**. Static output to `di
 
 ## Design System
 
-Colors (all sites):
-- Primary Navy: `#1A1A2E` · Accent Red: `#E94560` · Light Red: `#FFE7EC`
+Colors:
+- **mydojo / mydriveschool / petcare** (shared template): Primary Navy `#1A1A2E` · Accent Red `#E94560` · Light Red `#FFE7EC` · font Inter.
+- **mytattoo** — ⚠️ **DIVERGED ON PURPOSE. Do NOT "fix" it back to the navy/red template.** mytattoo.software matches the MyTattoo booking app's "Flash-Sheet" brand: `ink #17120E` / `ink-soft #241B14` · `bone #E7DECC` / `bone-hi #F3ECDD` · `blood #A62B22` / `blood-deep #7C1E17` · `sepia #B4A184` / `sepia-deep #8C795D` · `paper-line #D3C7AE`. Fonts: **Alfa Slab One** (display) · **Archivo** (body) · **Space Mono** (mono). Tokens live in mytattoo's `tailwind.config.mjs` (`brand.*` remapped for back-compat + named Flash-Sheet colours). App repo: `leavereview/mytattoo`.
 
-CSS classes: `.btn-primary` · `.btn-secondary` · `.card` · `.container-custom` · `.section`
+CSS classes (all sites): `.btn-primary` · `.btn-secondary` · `.card` · `.container-custom` · `.section`
 
 ## Reference Site
 
