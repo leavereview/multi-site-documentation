@@ -1714,5 +1714,74 @@
     "reason": "app.mydojo.software/signup returns 404, so every signup CTA on the marketing site was a dead end",
     "expectedImpact": "App sign-in/sign-up conversions from the marketing site recover from zero",
     "expectedTimeline": "Immediate"
+  },
+  {
+    "date": "2026-07-28",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "technical",
+    "description": "Restored 9 tracked-but-deleted image files in mydojo.software/public/images/ (404-martial, blog-belt-ceremony, blog-dojo-interior, blog-instructor, blog-kids-class, blog-mma-training, hero-blog, hero-contact, hero-pricing). They were deleted from the working tree without being committed, so the build stopped emitting them while src/ still referenced them in 40 places across the built output (blog-instructor x11, blog-dojo-interior x10, blog-belt-ceremony x6, blog-mma-training x5, blog-kids-class x4, plus the pricing/contact/blog hero images and the 404 page). The live site still served all 9 because old server copies survived, so nothing was visibly broken — but deploy.sh rsyncs with --delete, so the very next mydojo deploy would have removed all 9 and broken every reference at once. Fixed with 'git restore public/images/' (no deploy needed; live and local now agree). Verified: 20/20 images in dist, rsync --delete dry-run 0 orphans, structural health back to 8/8.",
+    "reason": "/seo-check 2026-07-28: structural audit flagged one broken image ref (404.astro -> /images/404-martial.jpg). The file returned HTTP 200 live but was absent from the local build — the inverse of the usual zombie-page bug (stale file on server, not stale page). An rsync --delete dry-run revealed 8 more orphans in the same state, and all 9 turned out to be actively referenced by the current source. The structural check only caught the one in a .astro page; the other 8 are referenced from blog markdown, which its broken-image scan does not cover.",
+    "expectedImpact": "Prevents ~40 broken images across mydojo blog/pricing/contact/404 on the next deploy; no ranking change expected since nothing is currently broken live",
+    "expectedTimeline": "immediate (latent-breakage prevention)"
+  },
+  {
+    "date": "2026-07-29",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "content",
+    "description": "Comparison-intent content build on mydojo. (1) REWROTE /blog/best-martial-arts-software/ — 6,262 impressions at position 67.3 with 0 clicks, the 2nd-largest impression pool in the portfolio, because the page answered 'best martial arts software' with abstract CATEGORIES ('Best Overall: Purpose-Built Martial Arts Platforms') rather than named products. Now a real roundup of 6 named platforms (Kicksite, Martialytics, Gymdesk, Zen Planner, Clubworx, Spark) with pricing bands verified against vendor pricing pages July 2026, a cost-at-your-school-size table, and FAQ schema. Removed the fabricated '12,000+ dojos' claim from the meta description and the unverified GBP prices (competitors publish USD; Clubworx publishes AUD). (2) NEW /free-martial-arts-software/ targeting ~690 impressions of unserved demand ('free martial arts software' 354 impr pos 50.1, 'free martial arts club management software' 148 pos 60.6, 'free dojo management software' 122 pos 23.4) — the one keyword where MyDojo's product truth (free during early access) matches the query exactly. (3) RETARGETED /blog/gym-management-software-comparison/ (361 impr pos 60.6) from generic gym software to the dojo-specific category decision (martial-arts-first vs general gym software), keeping the 'gym management software' phrase dojo owners actually search while removing the off-cluster framing.",
+    "reason": "/seo-check 2026-07-28 found mydojo carrying 2,238 comparison-intent impressions across 90 days at ZERO clicks, with no page naming a single competitor. The existing best-martial-arts-software post ranked 67th because it never answered the question the query asks. Competitor pricing was researched from vendor pricing pages rather than aggregators, per the accuracy standard chosen for this build.",
+    "expectedImpact": "best-martial-arts-software moves off page 7 toward page 1-2 on its 1,050+ impressions of exact-match demand; free-martial-arts-software opens a new ranking surface on ~690 impressions currently served by nothing",
+    "expectedTimeline": "4-8 weeks (position movement first; clicks lag)"
+  },
+  {
+    "date": "2026-07-29",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Comparison-intent content build on mytattoo. (1) NEW /booksy-alternative/ — head-to-head built on the site's strongest wedge: Booksy's Boost takes 30% of a new marketplace client's FIRST booking (min £5), which is ~£120 on a £400 tattoo session because that commission model was designed for £25 haircuts. Includes worked maths (4 new clients/mo at £350 = ~£420/mo commission vs a ~£40 subscription), an honest 'where Booksy genuinely wins' section (marketplace discovery, multi-artist maturity), and the counterpoint that commission is a defensible cost of sale IF the marketplace really sourced the client. (2) NEW /best-tattoo-studio-software/ roundup targeting ~335 impressions ('best tattoo studio software' 151 impr pos 44.4, 'best tattoo booking software' 67, 'best tattoo booking app' 44). (3) UPGRADED /tattoo-software-comparison/ (327 impr, pos 39.3): added Vagaro and Fresha as 5th/6th columns, added a subscription-vs-commission pricing table, and retitled for the reviews/comparison variants it was missing entirely ('tattoo booking app reviews' 153 impr pos 19.3, 'tattoo scheduling app comparison' 115, 'tattoo scheduling software comparison' 108, 'tattoo scheduling software reviews' 95). All competitor pricing verified against vendor pricing pages July 2026: Booksy ~£40/mo solo UK + 30% Boost; Fresha .95/mo Independent + 20% marketplace (min ), having ended its free model in 2025; Vagaro from ~£20/mo per calendar; Square Appointments free single-user tier.",
+    "reason": "/seo-check 2026-07-28: mytattoo carries 1,291 comparison-intent impressions at zero clicks, and the one comparison page sat at position 39.3 while its target queries rank 19-28 — it was missing the 'reviews' and 'scheduling comparison' phrasings altogether. The £0-platform-fee vs Booksy-30% contrast was already argued across six pages but had no dedicated head-to-head to rank for 'booksy alternative' intent.",
+    "expectedImpact": "comparison page climbs from pos 39 toward the pos 19-28 band its queries already sit in; booksy-alternative captures switching intent at the highest conversion point on the site",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-07-29",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "driveschoolpro: expanded the top page and CORRECTED false competitor claims on the compare page. (1) /blog/best-driving-school-software/ (2,692 impr, 16 clicks, pos 20.7 — the site's best page) gained two sections aimed at the variants it did not address: 'Cheapest Driving School Booking Software, Ranked by Price' (serves 'cheapest booking software for driving schools', 201 impr at pos 67.2) and 'Best Booking Software for Solo Driving Instructors' (serves 'best booking software for driving instructors', 125 impr pos 56.6, and 'best driving instructor software', 71 impr). Title/meta widened to cover instructor + booking-software phrasing. 3,885 -> 4,513 words. (2) FACTUAL CORRECTION on /compare/total-drive/ (pos 7.8): the page's two headline differentiators were both FALSE. It claimed Total Drive has no transparent public pricing and no free trial without a demo. Total Drive's own homepage states 'From only £18 per month' and '30 Day Free Trial — No payment details needed'. So the competitor is £4/month CHEAPER than DriveSchoolPro's £22 with a trial twice as long, while our page told readers they could not find its price. Corrected the comparison matrix (both rows now true for both products), the FeaturedAnswer, 3 FAQ answers, the pricing card ('Contact for pricing' -> 'From £18/month'), and replaced the two now-invalid advantage blocks with claims that are actually true (Stripe Connect + parent portal; per-instructor £12 scaling). The roundup's comparison table carried the same 'Contact for pricing'/'Demo' error and was corrected too, and the cheapest-ranked table now places Total Drive ABOVE DriveSchoolPro with an explicit 'we are not the cheapest, and we would rather say so' note.",
+    "reason": "/seo-check 2026-07-28: the roundup is the site's top page but ranks 20.7 and misses the cheapest/instructor query variants entirely. Separately, verifying Total Drive's pricing for this build (per the named-and-verified standard chosen for the work) found the compare page asserting two things the competitor's own homepage contradicts. Beyond being wrong, unverifiable comparative claims about a named competitor are a CAP Code risk and undermine the page's credibility with exactly the buyers it ranks for.",
+    "expectedImpact": "roundup picks up the ~400 impressions of cheapest/instructor demand it currently misses and pushes toward page 1; compare page becomes defensible and stops losing trust with readers who check Total Drive's site",
+    "expectedTimeline": "2-4 weeks (re-crawl); correction effective immediately"
+  },
+  {
+    "date": "2026-07-29",
+    "sites": [
+      "petcare.software"
+    ],
+    "category": "technical",
+    "description": "petcare authority/crawl work (no new content — the site already has 47 pages and all 5 CLAUDE.md quick-wins; crawl demand is the constraint, not content volume). (1) 301'd 16 legacy WordPress URLs from the pre-March-2026 site to their closest current equivalents, via /etc/nginx/snippets/petcare-legacy-redirects.conf (source of truth tracked in repo at petcare.software/nginx-legacy-redirects.conf). These were 404ing, and the ONE genuine Googlebot request to petcare across 14 days of logs was to one of them (/best-dog-daycare-software-in-2025-save-time-boost-revenue/feed/). Deliberately NOT redirected: grooming and other off-strategy content removed in March/June — those still 404, since redirecting off-topic URLs onto software pages is a relevance mismatch. (2) DELETED the 13 tag pages (src/pages/blog/tag/) entirely per CLAUDE.md, and repointed the blog index 'Browse by Topic' section from 13 noindexed dead-ends to the 4 pillar hubs — turning crawl waste into pillar link equity. (3) FIXED 12 broken /early-access/ CTAs across all 4 pillar pages: the page was never built and returned 404, so 'Apply for Early Access' — a primary CTA on every money page — was dead sitewide. Now points to /contact/. Same class of bug as the mydojo signup 404 fixed 2026-07-17. (4) Gave 3 posts real contextual inbound links (dog-daycare-software-free, partnering-vets-trainers-pet-care, pet-care-technology-trends). All three had ZERO contextual inbound links and were surviving verify-seo only via the tag pages — deleting the tags exposed them, including dog-daycare-software-free, a KD-17 quick-win target that was effectively orphaned.",
+    "reason": "/seo-check 2026-07-28 confirmed via nginx logs that petcare gets ~0 genuine Googlebot (66.249.x) crawls of content pages in 14 days vs 41-96 for the three sibling sites on the same server, with 1 of 47 pages indexed. Structure is 8/8 and the sitemap is clean, so the blocker is crawl demand/authority. The work therefore targets what is in our control: recover Google's residual memory of the domain (legacy 301s), stop spending a near-zero crawl budget on noindexed tag pages, and fix the dead CTAs those crawls land on.",
+    "expectedImpact": "recovers residual signal from legacy URLs Google still requests; removes 13 wasted URLs from the crawl surface; restores the conversion path on all 4 pillar pages",
+    "expectedTimeline": "4-12 weeks (authority-bound); CTA fix immediate"
+  },
+  {
+    "date": "2026-07-29",
+    "sites": [
+      "mydojo.software",
+      "mytattoo.software",
+      "petcare.software",
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Sitemap <lastmod> across all 4 sites, derived honestly. petcare, mydojo and mytattoo emitted bare <loc> entries with no lastmod at all. driveschoolpro DID emit lastmod — but via serialize(item){item.lastmod = new Date().toISOString()}, which stamps every one of its 96 URLs with the BUILD TIME on every deploy. That asserts all 96 pages changed whenever you fix a typo, and Google's sitemap documentation is explicit that it ignores lastmod once it finds the values unreliable — so the dishonest version buys nothing and can burn the signal. Added scripts/sitemap-lastmod.mjs (shared by all 4 astro.config.mjs) which resolves a real per-page date in priority order: frontmatter updatedDate -> git last-commit date for the source file -> frontmatter date/pubDate -> filesystem mtime (reached only for files git has not seen yet) -> omit rather than invent. Added updatedDate to all 4 content collection schemas. Result: mydojo 34/34, mytattoo 39/39, petcare 48/48, driveschoolpro 96/96 URLs now carry dates that reflect actual edits, spread across real commit history rather than all sharing one timestamp.",
+    "reason": "/seo-check 2026-07-28: 3 of 4 sites gave Google no freshness signal at all, and the 4th gave it a uniformly false one. lastmod is one of the few crawl-scheduling inputs available to a site with no authority — which matters most for petcare, the site getting ~0 crawls. Noting honestly that driveschoolpro (the only site that had any lastmod) also has 2.3x the crawl rate of its siblings: that is correlation, not established causation, and it is not the reason for the change — accuracy is.",
+    "expectedImpact": "gives Googlebot a truthful recrawl signal per page; changed pages become distinguishable from unchanged ones, which the previous build-time approach made impossible",
+    "expectedTimeline": "2-6 weeks"
   }
 ]
