@@ -1783,5 +1783,77 @@
     "reason": "/seo-check 2026-07-28: 3 of 4 sites gave Google no freshness signal at all, and the 4th gave it a uniformly false one. lastmod is one of the few crawl-scheduling inputs available to a site with no authority — which matters most for petcare, the site getting ~0 crawls. Noting honestly that driveschoolpro (the only site that had any lastmod) also has 2.3x the crawl rate of its siblings: that is correlation, not established causation, and it is not the reason for the change — accuracy is.",
     "expectedImpact": "gives Googlebot a truthful recrawl signal per page; changed pages become distinguishable from unchanged ones, which the previous build-time approach made impossible",
     "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-07-29",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Fixed driveschoolpro.com GA4 measurement ID: G-2E741HXVN9 (nonexistent, returns HTTP 404 from googletagmanager) -> G-4HJLDWJ8DR (real stream on property 517695357). Updated BaseLayout.astro + LandingLayout.astro and corrected the false 'data stream created 2026-03-20' comment block in both.",
+    "reason": "GA4 property 517695357 recorded 0 sessions from driveschoolpro.com across a 400-day window while mydojo/mytattoo/petcare all reported normally. GA4 Admin API showed the property has exactly one data stream, G-4HJLDWJ8DR; the hardcoded G-2E741HXVN9 matched no stream anywhere and gtag/js?id=G-2E741HXVN9 returns HTTP 404. Introduced 2026-03-20 by the same-day 'typo fix' in commit f7894ec during the mydriveschool.software -> driveschoolpro.com migration, so all analytics including PPC traffic were silently discarded for ~4 months.",
+    "expectedImpact": "GA4 sessions/users for driveschoolpro.com go from 0 to actual traffic within 24-48h; PPC landing pages become measurable for the first time",
+    "expectedTimeline": "24-48 hours"
+  },
+  {
+    "date": "2026-08-14",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "links",
+    "description": "Added a 'Login' nav link to https://app.mytattoo.software/admin in desktop and mobile navigation",
+    "reason": "Returning studio owners had no signposted route back into the app from the marketing site; only a 'Get started' signup CTA existed",
+    "expectedImpact": "Fewer bounces from returning users; more app logins originating from the marketing site",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-08-19",
+    "sites": [
+      "mydojo.software",
+      "petcare.software"
+    ],
+    "category": "schema",
+    "description": "Removed fabricated review schema and unverifiable statistics from mydojo and petcare. mydojo homepage emitted aggregateRating 4.9/127 ratings plus three invented named Reviews (Sensei Mike Thompson/Thompson Karate Academy, Sarah Chen/Chen's MMA & BJJ, Master Kim/Kim's Taekwondo) with invented metrics; petcare emitted three more (Sarah Mitchell, James Thompson, Emma Wilson). Both aggregateRating blocks and all six Review objects deleted. Visible testimonials kept but relabelled to initials with the driveschoolpro house disclaimer ('Illustrative examples, representative of the feedback we hear from...'). Also removed fabricated stats from 4 mydojo meta descriptions ('recover 40% of failed payments', 'collection rates to 97%', 'Save 15+ hours weekly and improve retention by 22%'), removed a broken SoftwareApplication.screenshot ref (dashboard-screenshot.jpg absent from dist) and unsubstantiated softwareVersion 2.0 from both sites, and replaced unverifiable homepage stat tiles (99.9% uptime guarantee, 15+ hrs saved weekly, 24/7 support) with defensible product facts. Corrected petcare's price claims: schema and 6 files advertised 'From £79/month' while /pricing/ charges £40 Basic / £60 Premium — all own-price claims corrected to £40 (Gingr's £79 in the reviews post left alone), including a derived annual figure (£948 -> £480).",
+    "reason": "Google's structured-data policy prohibits fabricated and self-serving review markup; risk is a manual action that would dwarf any CTR gain. Also a direct CLAUDE.md violation ('do not create placeholder content') — the same class of issue was removed from driveschoolpro's /dvsa-27-driving-skills on 2026-06-24 and the fabricated '12,000+ dojos' claim on 2026-07-29. mytattoo and driveschoolpro had already had accuracy passes; mydojo and petcare never did. The £79-vs-£40 mismatch was additionally emitting a wrong price in Offer schema.",
+    "expectedImpact": "Removes manual-action risk on two properties; every live claim now defensible. May reduce any star rich results that were showing, which is the intended trade.",
+    "expectedTimeline": "Immediate (risk removal); no ranking gain expected"
+  },
+  {
+    "date": "2026-08-19",
+    "sites": [
+      "petcare.software",
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Unblocked petcare's build and cleared broken internal links across the estate. (1) petcare's postbuild verify-seo.js was FAILING, so the site could not be deployed at all: /blog/financial-management-pet-business/ and /blog/international-dog-day-marketing/ had 1 inbound link each (the /blog/ index only) and zero contextual references anywhere in src/. Root cause is structural, not content: src/pages/blog/[slug].astro builds its related-posts widget with .filter(tag).slice(0,3) over getCollection, which returns alphabetical-by-filename order with no shuffle, so alphabetically-early posts absorb nearly every widget link and 'f'/'i' slugs can never place. Deleting the tag pages on 2026-07-29 removed their last artificial inbound link. Added contextual links following the ddb78f6 template (extend an existing sentence, don't bolt on a paragraph): financial-management from dog-boarding-pricing-strategies 'Undercharging', the boarding pillar Further Reading, and pet-boarding-business-plan-guide; international-dog-day from the marketing post's seasonal calendar (which had a July/Aug row but no 26 August entry) and customer-loyalty-pet-business. Also topped up the 3 posts sitting at exactly 2 inbound (free-dog-boarding-software, partnering-vets-trainers-pet-care, pet-care-technology-trends). All 5 now at 3-4. (2) petcare Footer.astro linked /roadmap/ — a sitewide 404 on 49 pages, and a page CLAUDE.md says must NOT exist. verify-seo.js cannot catch this: it only requires >=1 valid outbound link and never checks a page that was never built. Removed. (3) Two /early-access/ links survived the 2026-07-29 sweep (kennel-software, cattery-software FAQ answers) — repointed to /pricing/. (4) driveschoolpro had 6 broken blog links (anticipation-planning-driving x3, use-of-speed, use-of-speed-driving-test, use-of-mirrors-driving, roundabouts-driving-test) — repointed to the real slugs, and corrected one anchor that mislabelled Skill 10 as 'Use of Mirrors (Skill 8)'. All 4 sites now have zero broken internal links.",
+    "reason": "/seo-check 2026-08-19: petcare's build failed, meaning deploy.sh would refuse and no petcare change could ship. The scripted structural audit passes 8/8 on all four sites but does not detect links to pages that were never built, so a sitewide 404 in the footer went unnoticed.",
+    "expectedImpact": "petcare deployable again; 49 pages stop linking to a 404; crawl budget stops being spent on dead URLs",
+    "expectedTimeline": "Immediate (deployability); 2-4 weeks for crawl effects"
+  },
+  {
+    "date": "2026-08-19",
+    "sites": [
+      "mydojo.software",
+      "mytattoo.software",
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Snippet rewrites on the 7 pages where 90-day GSC data shows clicks are actually available (striking-distance: ~69 clicks/mo recoverable with no ranking work). Discovered a trap first: every BaseLayout's getTitleSuffix appends the brand only when the title is <=50 chars, so 51-char titles silently lose the brand while 32-char titles waste half the SERP on a suffix nobody searches. All rewrites target ~52-58 rendered chars, verified in dist/ rather than at the prop. (1) mydojo /martial-arts-billing-software/ ranks 4.2 for 'automated recurring billing for martial arts dojo' (138 impr, ZERO clicks) with an 81-char title and a 261-char description whose visible portion was entirely fabricated stats — retitled 'Automated Recurring Billing for Martial Arts Schools' (52), 153-char description leading with the real offer. (2) /martial-arts-crm/ rendered at just 32 chars ('Martial Arts CRM (2026) | MyDojo') on 1,548 impr / 2 clicks — now 'CRM for Martial Arts Schools: Leads & Retention' matching the actual queries. (3) mytattoo /tattoo-studio-calculator/ was NOT a generic snippet problem: query-level data shows it ranks for income research ('how much does a tattoo shop owner make' pos 4.7, 'increase tattoo studio revenue' pos 1.0, 'tattoo artist monthly income'), while title and meta spoke accounting-planner language and promised no number. Retitled 'How Much Does a Tattoo Studio Make? Free Calculator', description now leads with a real benchmark (£80-£150/hr) plus the buried differentiators (instant, free, no signup). H1 realigned. (4) /tattoo-booking-app/ carries 721 impressions at ZERO clicks on 'benefits of tattoo booking apps' (pos 9.3) and 'affordable tattoo booking apps' (pos 14.9) while its description mentioned neither benefits nor price — rewritten around both. Also de-duplicated two competing H2s ('Benefits for Tattoo Artists' #benefits vs 'Benefits of a Tattoo Booking App' #benefits-of-app, the latter surfacing as a 0-click jump-link) by repurposing the weaker one as 'Is a Tattoo Booking App Right for You?', and reconciled a third divergent Article headline string. (5) driveschoolpro /blog/best-driving-school-software/ rendered at 90 chars with a 195-char description that cut the offer entirely — both trimmed. (6) /blog/starting-driving-school-guide/ retargeted to the queries it actually ranks for ('driving school business setup' 36 impr pos 10.6, not 'how to start'). Checked the suspected cannibalisation with how-to-start-a-driving-school: that post gets literally zero impressions, so it is not competing — no 301 needed.",
+    "reason": "/seo-check 2026-08-19 striking-distance analysis over 90 days. The enhanced report's own 'Ranking But Not Clicked' list pointed at the wrong pages: its top mydojo target (/blog/adult-karate-classes-guide/, 7,485 impr) is consumer intent that cannot convert, while the genuine page-1 zero-click business page (/martial-arts-billing-software/ at pos 4.2) was not listed at all.",
+    "expectedImpact": "~69 clicks/mo across the portfolio at current rankings; the billing page earning its first clicks at pos 4.2 is the single clearest signal",
+    "expectedTimeline": "2-4 weeks (snippet refresh on re-crawl)"
+  },
+  {
+    "date": "2026-08-19",
+    "sites": [
+      "mytattoo.software",
+      "driveschoolpro.com",
+      "mydojo.software"
+    ],
+    "category": "content",
+    "description": "Six new pages, each targeting demand GSC already measures rather than keyword-tool estimates. mytattoo /tattoo-appointment-software/ — the site targets 'booking' and 'scheduling' but had no page for the 'appointment' variant, which carries ~920 measured impressions at pos 22-58 ('manage tattoo appointments online' 238, 'tattoo appointment software' 212, 'tattoo appointment scheduling app' 172, 'tattoo appointment scheduling software' 152, 'tattoo appointment app' 147). New pillar with FAQPage schema, added to nav, footer and the homepage Explore grid (6/6 pillars now linked, satisfying structural rule 7) and registered in structural-health.js SITE_CONFIG. driveschoolpro /compare/ + /compare/driving-school-office/ — the site had one comparison page and its /compare/ breadcrumb pointed at a non-existent index (a broken link). Driving School Office verified live against drivingschooloffice.co.uk August 2026: 'Engine 3.0', Pay-As-You-Grow pricing (unpublished), 'First Instructor Free', white-labelling and instructor expense tracking, no advertised DVSA-27 tracking. NOTE: two competitors named by AI listicle farms in the SERP — 'DriveRev' and 'Motor School Software' — could not be verified (DriveRev's domain does not resolve; neither appears in the July verified-pricing research), so no pages were built for them. Also aligned the existing roundup, which claimed DSO has DVSA tracking ('Yes') — unverifiable, softened to 'Not stated'. driveschoolpro /driving-instructor-accounting-software/ — 93 impr at pos 50.7 with no page. Written to state plainly that DriveSchoolPro is NOT accounting software (it records lesson income and invoices; it does not do expenses, mileage, bank reconciliation or Self Assessment), because that distinction is what the searcher is actually trying to resolve. mydojo /compare/ + /compare/kicksite/ + /compare/zen-planner/ — mydojo had zero comparison pages while the 'best martial arts software' SERP is owned by competitor-run roundups. Kicksite pricing independently re-verified against kicksite.com/pricing August 2026 ($49 0-25 students / $99 26-50 / $149 51-100 / $199 101+, all features every tier, 30-day trial via demo) and matches the July research exactly. Zen Planner ($99 Studio to $348 Ultimate, no listed trial) carried over from July since its pricing page would not expose tier detail on re-check — not revised on guesswork. Every comparison page includes an explicit 'where the competitor genuinely wins' section. Also corrected a claim I had introduced: the new DSO page listed Stripe Connect payments as live, but the management pillar says card payments are 'coming soon' — changed to the conservative wording.",
+    "reason": "/seo-check 2026-08-19 unserved-demand analysis (queries with >=40 impressions at position >20). Deliberately did NOT build pages for 'cheapest booking software for driving schools' (244 impr) or 'best booking software for driving instructors' (148 impr) — both are already covered by H2s inside the existing roundup, so they are ranking problems, not content gaps.",
+    "expectedImpact": "tattoo-appointment-software opens a ~920-impression surface currently served by nothing; comparison pages capture switching intent, the highest-converting query class, where both sites previously captured none",
+    "expectedTimeline": "4-8 weeks (indexing first, then position; do not judge at 4 weeks)"
   }
 ]
