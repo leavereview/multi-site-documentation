@@ -1855,5 +1855,137 @@
     "reason": "/seo-check 2026-08-19 unserved-demand analysis (queries with >=40 impressions at position >20). Deliberately did NOT build pages for 'cheapest booking software for driving schools' (244 impr) or 'best booking software for driving instructors' (148 impr) — both are already covered by H2s inside the existing roundup, so they are ranking problems, not content gaps.",
     "expectedImpact": "tattoo-appointment-software opens a ~920-impression surface currently served by nothing; comparison pages capture switching intent, the highest-converting query class, where both sites previously captured none",
     "expectedTimeline": "4-8 weeks (indexing first, then position; do not judge at 4 weeks)"
+  },
+  {
+    "date": "2026-09-03",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Content truth pass: aligned site copy with the app's feature-flag state",
+    "reason": "The site advertised 5 flagged-off features (lesson confirm, recurring series, parent invites, document upload/expiry, held-back reports) and labelled 4 shipped ones coming soon, including the GA student portal in 26 places. A build-time claim guard (scripts/verify-claims.js) now enforces each rule against built HTML, citing the app-side flag.",
+    "expectedImpact": "Fewer signup-to-product expectation mismatches; accurate SERP snippets and rich results",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "driveschoolpro.com: collapsed the desktop top nav behind a Shopify-style hamburger — bar now holds logo + Log in + Get started only; all nav links moved into a single server-rendered menu panel (Software / Driving Skills / Company)",
+    "reason": "The nine-item desktop nav wrapped onto two lines and read as cluttered (issue #6 on leavereview/mydriveschool-static); the hamburger keeps every link in the DOM while cleaning up the header",
+    "expectedImpact": "No loss of internal-link equity (links still crawlable); improved header clarity and CTA prominence, so watch CTA click-through and bounce rate",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "Replaced the hand-built AI Briefing card on the homepage with a real app screenshot (Today view: lesson card, Suggested Focus, AI lesson briefing); added a bare variant to MarketingScreenshot",
+    "reason": "The section illustrated its AI claim with mocked-up HTML on a page that promises 'real screenshots, no mockups' — issue #5",
+    "expectedImpact": "Higher engagement and signup CTR on the homepage AI section; stronger credibility signal",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Collapsed the site navigation behind a hamburger menu at all breakpoints (Shopify-style); nine desktop bar items plus two dropdowns moved into a single three-column panel, bar now holds logo, Log in and CTA only",
+    "reason": "The desktop bar was overloaded and wrapped onto two lines at common widths — issue #6. Links stay server-rendered so crawlability is unchanged",
+    "expectedImpact": "Cleaner header, better mobile UX and CTA prominence; internal link graph unchanged (verify-seo passes 96 pages)",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Restructured driveschoolpro.com homepage around the instructor's working week: five benefit sections using pain sentence, outcome headline, product demo and proof line. Added ProductDemo component (silent looping MP4 with poster fallback, lazy-loaded, reduced-motion safe) and verify-demos.js to the postbuild chain. Hero CTA now targets a moving demo instead of a static screenshot. Corrected the setup-time claim from ten minutes to five in eleven places.",
+    "reason": "Homepage sold features by name and illustrated them with static screenshots; the hero's 'see how it works' CTA landed on a still image. Competitor research (Xero, Shopify, Proton VPN, Total Drive, Lesson Diary) shows a consistent pain-to-outcome-to-demo pattern the site was not following. With no social proof available during free early access, product demonstration substitutes for it.",
+    "expectedImpact": "Higher homepage engagement and signup conversion; lower bounce from the hero CTA",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-10",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Shipped the /features hub (6 pages: hub, scheduling, lesson-briefings, progress-tracking, getting-paid, reviews; 1,360-1,470 words each with FAQPage schema) and added a Features nav section. Also corrected four false product claims found by auditing every claim against the app: parent portal access on /how-progress-works/, review requests described as automatic (it is a nudge panel), an instructor calendar/ICS export that does not exist, and a per-pupil AI briefing toggle that does not exist. Added 19 guard rules to verify-claims.js.",
+    "reason": "The site had no /features surface while a direct competitor ranks on exactly that shape. Separately, a full claim audit found four statements the build's claim verifier could not catch because no rule matched their wording — two of them pre-existing, two introduced in the same day's homepage work.",
+    "expectedImpact": "New long-tail feature-intent rankings; removal of inaccurate product claims from live pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-11",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Corrected the platform commission claim across 17 places on 8 pages: the site said 'we take no commission' (three instances inside FAQPage JSON-LD) while connect-fees.ts charges 3% on Stripe Connect payments, founding orgs included. All now state 3% with Stripe's processing fee called out separately. Also reworded review collection from 'automated' to 'prompted' in 11 places across 6 pages, removed an unmeasured 'saves 5-10 minutes per lesson', softened a '10+ hours' claim to match the footnoted figure, and aligned a third setup-time number to five minutes.",
+    "reason": "A claims audit found the live site contradicting the app on pricing. A false commission claim on pages people use to decide whether to buy - including a live Google Ads landing page and three FAQ rich-result candidates - is the most consequential kind of inaccuracy on the site.",
+    "expectedImpact": "Accurate pricing disclosure; removal of misleading claims from purchase-decision and Ads pages",
+    "expectedTimeline": "immediate"
+  },
+  {
+    "date": "2026-09-15",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "technical",
+    "description": "Migrated mydojo.software to beltmanager.com: new nginx vhost + Let's Encrypt cert (apex+www) for beltmanager.com, 301 redirects (apex, www, http) from mydojo.software preserving path, astro.config.mjs site URL + robots.txt + JSON-LD schema (BaseLayout, schema/index.ts, index/about/contact pages) updated to beltmanager.com, deploy.sh + CLAUDE.md deploy path mapping updated. App subdomain (app.mydojo.software) and contact emails intentionally left unchanged pending separate decision.",
+    "reason": "Domain rebrand from mydojo.software to beltmanager.com",
+    "expectedImpact": "Preserve link equity and rankings via 301s during domain migration; avoid indexing/canonical conflicts",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-15",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "content",
+    "description": "Rebranded mydojo.software content from MyDojo to BeltManager: replaced ~400 brand-text references across ~50 files (nav/footer, all pages, JSON-LD names, blog frontmatter+CTAs, package.json, llms.txt), redrew logo.svg wordmark, swapped contact emails to @beltmanager.com, updated app CTA links to app.beltmanager.com. Also fixed pre-existing privacy-policy.astro bugs unrelated to rebrand: broken 'mymydojo.software' typo domain/email and an off-brand FAQ paragraph copy-pasted from the petcare.software project (described dog daycare/grooming instead of martial arts). Also fixed a shared-component bug (StatisticsSection.astro) that leaked the raw internal site key as 'mydojo Research Team' in Dataset JSON-LD citations across all 4 sites.",
+    "reason": "Domain/brand rebrand from mydojo.software to beltmanager.com, follow-up content pass after the infra migration",
+    "expectedImpact": "Consistent brand presentation post-migration; corrected broken/off-brand legal-page content; fixed shared schema bug affecting citation accuracy",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-15",
+    "sites": [
+      "mydojo.software"
+    ],
+    "category": "meta",
+    "description": "Finalized BeltManager logo: replaced the placeholder wordmark with a rank-badge 'BM' hexagon monogram + wordmark lockup (public/logo.svg), and updated favicon.svg to the same monogram (previously an unrelated belt-icon glyph). Explored 4 logo directions on a design canvas with the user before finalizing.",
+    "reason": "Placeholder logo shipped during the mydojo.software->beltmanager.com rebrand needed a real design; user reviewed 4 concepts and picked the rank-badge monogram",
+    "expectedImpact": "Consistent, non-placeholder brand mark across nav/footer/favicon",
+    "expectedTimeline": "immediate"
+  },
+  {
+    "date": "2026-09-21",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Homepage hero rewritten to lead with DVSA readiness vs test backlog; new /compare/my-drive-time/; /compare/total-drive/ rebuilt with no competitor prices and honest-gaps section; Comparisons footer list and homepage switching link; benefit-led homepage and /features hub merged live",
+    "reason": "Message-match the ad strategy; add high-intent competitor comparison pages built to ASA comparative-advertising rules; remove unverifiable competitor price claims",
+    "expectedImpact": "Impressions and clicks on 'total drive alternative' / 'my drive time alternative' queries; homepage CTR",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-09-21",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Accuracy pass: hero wait-time claim corrected to NAO figures (22 weeks Sept 2025; 7-week target Nov 2027) with source link; how-progress-works level names corrected to app's Introduced/Helped/Prompted/Independent/Reflection; examiner-framework overstatements reworded; DVSA section moved before AI on homepage; Total Drive price removed from software roundup",
+    "reason": "Remove claims that misstated their sources or the product; keep comparison content within ASA comparative-advertising rules",
+    "expectedImpact": "Trust and conversion on homepage; no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
   }
 ]

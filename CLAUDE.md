@@ -4,7 +4,7 @@
 
 | Folder | Domain | Deploy Path | Status |
 |--------|--------|-------------|--------|
-| mydojo.software | mydojo.software | /var/www/mydojo.software/ | Active |
+| mydojo.software | beltmanager.com | /var/www/beltmanager.com/ | Active — migrated from mydojo.software (Sept 2026); old domain 301s to new |
 | mydriveschool.software | mydriveschool.software | /var/www/mydriveschool.software/ | Active |
 | mytattoo.software | mytattoo.software | /var/www/mytattoo.software/ | Active |
 | petcare.software | petcare.software | /var/www/petcare.software/ | Active — Astro rebuild |
@@ -38,7 +38,7 @@ curl -s https://{domain}/sitemap-0.xml | grep -o "<loc>" | wc -l
 
 Site → deploy path mapping (baked into the script):
 - `mydriveschool.software/` → `lightsail:/var/www/driveschoolpro.com/` (domain changed March 2026)
-- `mydojo.software/` → `lightsail:/var/www/mydojo.software/`
+- `mydojo.software/` → `lightsail:/var/www/beltmanager.com/` (domain changed September 2026)
 - `mytattoo.software/` → `lightsail:/var/www/mytattoo.software/`
 - `petcare.software/` → `lightsail:/var/www/petcare.software/`
 
