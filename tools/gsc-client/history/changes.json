@@ -1987,5 +1987,82 @@
     "reason": "Remove claims that misstated their sources or the product; keep comparison content within ASA comparative-advertising rules",
     "expectedImpact": "Trust and conversion on homepage; no ranking change expected",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-25",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Replaced hero graphics on / (scheduling + progress sections), /features/scheduling/ and /features/progress-tracking/ with interactive Arcade demos; added phone calendar screenshot + copy section to /features/scheduling/",
+    "reason": "Interactive demos show the product working; more engaging than static screenshots",
+    "expectedImpact": "Engagement/time on page and trial signups from feature pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-25",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Homepage: replaced Arcade embeds with calendar screenshot, DVSA progress MP4 and Today-view AI phone shot; all five feature graphics now click through to their feature pages",
+    "reason": "Give visitors a direct path from each homepage visual to its feature page; adds image-link internal links",
+    "expectedImpact": "Click-through from homepage to feature pages; feature page engagement",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-09-25",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "/features/lesson-briefings/: replaced phone screenshot with AI briefing demo video",
+    "reason": "Show the briefing in use rather than a still",
+    "expectedImpact": "Engagement on lesson-briefings page",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-05",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "/start PPC landers Phase 1 CRO: brand bar, two-column desktop hero, populated screenshots (Core=Today screen, Free=day diary), Free variant reframed to iPhone/Android app (app is live on both stores), FAQ: free-first fee wording + 'what happens when early access ends'. Ads: Free headline + shared description 4 updated (re-import pending); Display R2 final URL -> app /signup",
+    "reason": "Landing pages showed an empty diary, no brand, no answer to post-early-access risk; Free page contradicted 'free download' intent",
+    "expectedImpact": "Higher signup_start rate per click on /start variants; better landing page experience score",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-05",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "/start PPC landers Phases 2-4: looping demo clip, founder card + trust strip, per-variant CTA, reassurance line, accurate How it works, sticky phone CTA; new noindexed /start/tour/ demo-first page for Display R1; Ads sitelinks + callouts CSVs. Homepage: removed illustrative testimonials, fixed 'next billing date' FAQ. /ads lander: removed false 'import pupils' claim (+ verify-claims guard)",
+    "reason": "Squeeze pages had no proof or trust signals; homepage carried non-genuine testimonials and a billing FAQ contradicting the free launch",
+    "expectedImpact": "signup_start rate per /start session up; sitelinks lift CTR; R1 remarketing conversion up",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-05",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "Signup field autofocus on load (desktop only) on homepage hero and all /start landers",
+    "reason": "Remove a click before typing on single-purpose pages; skipped on phones to avoid keyboard covering the offer",
+    "expectedImpact": "Higher signup_start rate on desktop sessions",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-05",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Messaging rewrite: homepage hero -> 'Teach. Everything else runs itself.' (NAO test-wait stat moved to DVSA section), stats bar drops footnoted '10+ hrs saved' for checkable facts, outcome-titled feature cards, new 'On your phone — and theirs' native-app section + app FAQ, schema OS adds iOS/Android. /start landers: founder card + signup-steps replaced by 'Your week with DriveSchoolPro' moments + apps section. Setup time aligned to 'about two minutes' site-wide.",
+    "reason": "Pages sold features, the founder and signup steps instead of how the instructor's week gets easier; native iOS/Android apps were never mentioned",
+    "expectedImpact": "Higher signup_start rate on homepage and /start; better engagement",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
