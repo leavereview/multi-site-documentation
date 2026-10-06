@@ -16,7 +16,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
  * Per-site structural rules.
- *  - folder:        local folder name (differs from domain for driveschoolpro.com)
+ *  - folder:        local folder name (differs from domain for driveschoolpro.com and beltmanager.com)
  *  - pillarHubs:    pillar/hub page paths; every blog post must link to one in the first ~200 words
  *  - homepageHubs:  subset of pillarHubs that MUST be linked from the homepage
  *  - prohibited:    filename patterns that must never exist in the blog folder
@@ -30,7 +30,7 @@ const SITE_CONFIG = {
     prohibited: /grooming|pup-cup|roadmap|training-tools/i,
     eeatPattern: /05408918|RevelationPets|Winchester|founded/g
   },
-  'mydojo.software': {
+  'beltmanager.com': {
     folder: 'mydojo.software',
     pillarHubs: [
       '/martial-arts-software', '/dojo-management-software', '/karate-school-software',

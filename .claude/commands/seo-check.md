@@ -251,13 +251,15 @@ These are the failure patterns most likely to explain flat metrics:
 
 | Domain | Local folder |
 |--------|-------------|
-| mydojo.software | mydojo.software/ |
+| beltmanager.com | mydojo.software/ |
 | petcare.software | petcare.software/ |
 | driveschoolpro.com | mydriveschool.software/ |
 | mytattoo.software | mytattoo.software/ |
-| mydriveschool.software | mydriveschool.software/ (legacy — redirect monitoring only) |
+| mydojo.software | — (legacy — 301s to beltmanager.com; GSC redirect monitoring only) |
+| mydriveschool.software | — (legacy — 301s to driveschoolpro.com; disabled in config) |
 
-When running structural checks for `driveschoolpro.com`, use the `mydriveschool.software/` folder.
+Local folder names were kept after both migrations: structural checks for `beltmanager.com`
+use `mydojo.software/`, and for `driveschoolpro.com` use `mydriveschool.software/`.
 
 ---
 
@@ -266,18 +268,30 @@ When running structural checks for `driveschoolpro.com`, use the `mydriveschool.
 These are the pre-rebuild baselines; compare current numbers against
 `history/<domain>.json` for real trends, not against this list.
 
-- mydojo.software: 1 click, 2,079 impressions (0.05% CTR), position 66.1
+- mydojo.software (now beltmanager.com): 1 click, 2,079 impressions (0.05% CTR), position 66.1
 - petcare.software: 0 clicks, 137 impressions (0.00% CTR), position 85.6 ← rebuilt March 2026
-- mydriveschool.software: 10 clicks, 3,068 impressions (0.33% CTR), position 51.2 (best performer)
+- mydriveschool.software (now driveschoolpro.com): 10 clicks, 3,068 impressions (0.33% CTR), position 51.2 (best performer)
 - mytattoo.software: 1 click, 884 impressions (0.11% CTR), position 75.4
 
-**Domain migration (March 20, 2026):** mydriveschool.software → driveschoolpro.com
-- 301 redirects active on server (all paths preserved); GSC property + sitemap submitted March 20, 2026
-- mydriveschool.software kept in GSC only to monitor redirect traffic during ranking transfer
-- Ranking transfer window was 4–12 weeks → **ends ~mid-June 2026**. When running this command,
-  compare driveschoolpro.com vs the legacy property: once legacy impressions have flatlined near
-  zero, recommend disabling `mydriveschool.software` in `tools/gsc-client/config.json` and
-  dropping it from default reports.
+**Domain migration (March 20, 2026):** mydriveschool.software → driveschoolpro.com — ✅ **complete**
+- 301 redirects active on server (all paths preserved)
+- Ranking transfer finished; the legacy `mydriveschool.software` property was disabled in
+  `tools/gsc-client/config.json` on 2026-06-17 (down to single-digit impressions). Nothing to do
+  here — re-enable it only to spot-check redirect traffic.
+
+**Domain migration (September 15, 2026):** mydojo.software → beltmanager.com — ⏳ **in progress**
+- 301 redirects active on server (apex/www/http, all paths preserved)
+- ⚠️ **No GSC property for beltmanager.com yet.** The report lists it but skips it with a
+  "GSC fetch failed / insufficient permission" warning until the property is added in GSC,
+  verified, and the service account is given Owner access. Then submit the sitemap
+  (`node src/enhanced-report.js --submit-sitemaps --domain=beltmanager.com`). Flag this as
+  CRITICAL in the summary while the warning appears.
+- `mydojo.software` stays enabled to watch the ranking transfer. Window is 4–12 weeks →
+  **ends ~mid-December 2026**. Once beltmanager.com has data, compare the two: when legacy
+  impressions flatline near zero, recommend setting `mydojo.software` to `"enabled": false` in
+  `config.json` (same as was done for mydriveschool.software).
+- History for the old domain stays in `history/mydojo.software.json`; beltmanager.com starts a
+  fresh `history/beltmanager.com.json`, so its first run will show no trends.
 
 petcare.software structural rebuild completed March 4, 2026: 53 pages live,
 hub-and-spoke across 4 clusters, all verify-seo.js checks passing, sitemap submitted.

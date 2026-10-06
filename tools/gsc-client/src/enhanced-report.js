@@ -1066,12 +1066,19 @@ async function main() {
     for (const domainConfig of domains) {
       console.log(chalk.bold(`\n📊 Fetching: ${chalk.cyan(domainConfig.name)}`));
 
-      // Fetch GSC data
-      const topQueries = await getTopQueries(client, domainConfig.gscProperty, startDate, endDate, 100);
-      const topPages = await getTopPages(client, domainConfig.gscProperty, startDate, endDate, 100);
-      // Headline metrics come from GSC's own dimensionless totals. Summing the query and page
-      // rows (the old behaviour) double-counted every click — see getSiteTotals().
-      const aggregateMetrics = await getSiteTotals(client, domainConfig.gscProperty, startDate, endDate);
+      // Fetch GSC data. A property the service account can't read (e.g. a newly migrated
+      // domain not yet verified in GSC) is skipped with a warning rather than aborting the run.
+      let topQueries, topPages, aggregateMetrics;
+      try {
+        topQueries = await getTopQueries(client, domainConfig.gscProperty, startDate, endDate, 100);
+        topPages = await getTopPages(client, domainConfig.gscProperty, startDate, endDate, 100);
+        // Headline metrics come from GSC's own dimensionless totals. Summing the query and page
+        // rows (the old behaviour) double-counted every click — see getSiteTotals().
+        aggregateMetrics = await getSiteTotals(client, domainConfig.gscProperty, startDate, endDate);
+      } catch (err) {
+        console.log(chalk.yellow(`⚠️  Skipping ${domainConfig.name}: GSC fetch failed for ${domainConfig.gscProperty} (${err.message})`));
+        continue;
+      }
 
       const domainData = {
         domain: domainConfig.name,
