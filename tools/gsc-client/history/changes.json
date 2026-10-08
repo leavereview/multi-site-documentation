@@ -2075,5 +2075,16 @@
     "reason": "SERP review 2026-10-08: AI Overview names Passly/Teachworks/Reservio alongside us; our snippet was the generic footer text; compare hub broke the no-competitor-prices rule",
     "expectedImpact": "Impressions/clicks for '[competitor] vs/alternative' and 'best/free driving instructor app' queries; better homepage CTR for 'driving school software'",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-08",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Rewrote /blog/best-driving-school-software/: dropped 'cheapest ranked' table and all competitor prices/ratings, removed fabricated testimonial, unsourced stats and untrue DSP claims; reviews now cover 8 platforms with verified compare pages. DSO compare page competitor 'No' -> 'Not listed'.",
+    "reason": "Post broke ASA comparative-advertising rules used on /compare/ (competitor prices, unsourced ratings, fake quote); risk of competitor complaint",
+    "expectedImpact": "Hold rankings for 'best driving school software'; more clicks through to /compare/ pages",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
