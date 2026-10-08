@@ -1,0 +1,95 @@
+# Nightly live check of the four marketing sites (agentbox roadmap WS5).
+#
+# deploy.sh proves live == fresh build at deploy time. This catches what happens BETWEEN deploys:
+# a sitemap URL that stops answering 200 or loses its self-canonical, a stray noindex, a broken
+# same-site link, or a sitemap that shrank more than 20% overnight (a stale dist/ or bad deploy:
+# the recurring zombie-page bug). tools/site-monitor/check-live.mjs does the work, with no
+# dependencies. Problems open (or comment on) ONE `site-alert` issue; a clean night closes it.
+#
+# GitHub-hosted on purpose: this repo is public, so hosted minutes are free, and it needs no
+# secrets. It only reads public pages.
+name: Site monitor
+
+on:
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+concurrency:
+  group: site-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    name: Check the live sites
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      SITES: beltmanager.com driveschoolpro.com mytattoo.software petcare.software
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: tools/site-monitor
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Unit tests
+        run: node --test tools/site-monitor/check-live.test.mjs
+
+      - name: Fetch last night's sitemap counts
+        run: |
+          id=$(gh api "repos/$REPO/actions/artifacts?name=site-monitor-counts&per_page=1" \
+            --jq '[.artifacts[] | select(.expired == false)][0].id // empty')
+          if [ -n "$id" ]; then
+            gh api "repos/$REPO/actions/artifacts/$id/zip" > prev.zip && unzip -oq prev.zip -d prev
+          fi
+          ls prev 2>/dev/null || echo "no previous counts (first run)"
+
+      - name: Check the sites
+        id: check
+        run: |
+          # shellcheck disable=SC2086
+          node tools/site-monitor/check-live.mjs --out report.md --counts counts.json --prev prev/counts.json $SITES
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep tonight's counts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-monitor-counts
+          path: counts.json
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Open or update the site-alert issue
+        if: failure() && steps.check.outcome == 'failure'
+        run: |
+          set -euo pipefail
+          gh label create site-alert --repo "$REPO" --color B60205 \
+            --description "Nightly site monitor found a problem (site-monitor.yml)" 2>/dev/null || true
+          { echo "Site monitor found problems ($(date -u +'%F %H:%M UTC')):"; echo; cat report.md; echo;
+            echo "Run: ${{ github.server_url }}/$REPO/actions/runs/${{ github.run_id }}"; } > alert.md
+          num=$(gh issue list --repo "$REPO" --label site-alert --state open --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --repo "$REPO" --body-file alert.md
+          else
+            gh issue create --repo "$REPO" --title "Site monitor: live site problems" --label site-alert --body-file alert.md
+          fi
+
+      - name: Close the site-alert issue when clean
+        if: success()
+        run: |
+          set -euo pipefail
+          num=$(gh issue list --repo "$REPO" --label site-alert --state open --json number --jq '.[0].number // empty')
+          if [ -n "$num" ]; then
+            gh issue close "$num" --repo "$REPO" --comment "All four sites clean again ($(date -u +'%F %H:%M UTC'))."
+          fi
