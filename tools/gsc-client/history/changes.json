@@ -2064,5 +2064,16 @@
     "reason": "Pages sold features, the founder and signup steps instead of how the instructor's week gets easier; native iOS/Android apps were never mentioned",
     "expectedImpact": "Higher signup_start rate on homepage and /start; better engagement",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-08",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Added /compare/ pages for Passly, LessonBuddy, Teachworks, Reservio; removed competitor price + parent-access claim from /compare/ hub; rewrote footer blurb (Google was using it as homepage snippet), homepage title/description/hero badge; PAA FAQs + internal links on best-software post and free page",
+    "reason": "SERP review 2026-10-08: AI Overview names Passly/Teachworks/Reservio alongside us; our snippet was the generic footer text; compare hub broke the no-competitor-prices rule",
+    "expectedImpact": "Impressions/clicks for '[competitor] vs/alternative' and 'best/free driving instructor app' queries; better homepage CTR for 'driving school software'",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
