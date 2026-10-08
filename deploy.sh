@@ -19,7 +19,7 @@ AUTO="${2:-}"
 
 # folder -> "server-path|domain"  (domain is what the live sitemap is served under)
 case "$SITE" in
-  mydojo.software)        DEST="/var/www/mydojo.software/";      DOMAIN="mydojo.software" ;;
+  mydojo.software)        DEST="/var/www/beltmanager.com/";      DOMAIN="beltmanager.com" ;;  # folder != domain (migrated from mydojo.software)
   mytattoo.software)      DEST="/var/www/mytattoo.software/";    DOMAIN="mytattoo.software" ;;
   petcare.software)       DEST="/var/www/petcare.software/";     DOMAIN="petcare.software" ;;
   mydriveschool.software) DEST="/var/www/driveschoolpro.com/";   DOMAIN="driveschoolpro.com" ;;  # folder != domain

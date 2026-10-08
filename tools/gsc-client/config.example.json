@@ -3,10 +3,18 @@
   "slackWebhookUrl": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
   "domains": [
     {
+      "name": "beltmanager.com",
+      "gscProperty": "https://beltmanager.com/",
+      "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
+      "enabled": true,
+      "note": "Migrated from mydojo.software 2026-09-15. GSC property must be added + verified (service account as owner) before data appears \u2014 until then the report warns and skips it."
+    },
+    {
       "name": "mydojo.software",
       "gscProperty": "https://mydojo.software/",
       "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
-      "enabled": true
+      "enabled": true,
+      "note": "Legacy domain \u2014 301s to beltmanager.com since 2026-09-15. Kept enabled to watch the ranking transfer (4\u201312 weeks \u2192 ~mid-Dec 2026); disable once impressions flatline near zero."
     },
     {
       "name": "petcare.software",
@@ -25,7 +33,7 @@
       "gscProperty": "https://mydriveschool.software/",
       "ga4PropertyId": "YOUR_GA4_PROPERTY_ID",
       "enabled": false,
-      "note": "Legacy domain — retired from default reports 2026-06-17 (migration transfer complete). Re-enable only to spot-check 301 redirect traffic."
+      "note": "Legacy domain \u2014 retired from default reports 2026-06-17 (migration transfer complete). Re-enable only to spot-check 301 redirect traffic."
     },
     {
       "name": "mytattoo.software",
