@@ -2086,5 +2086,16 @@
     "reason": "Post broke ASA comparative-advertising rules used on /compare/ (competitor prices, unsourced ratings, fake quote); risk of competitor complaint",
     "expectedImpact": "Hold rankings for 'best driving school software'; more clicks through to /compare/ pages",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-08",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Rewrote /blog/drivescout-vs-drivingschoolsoftware-comparison/ from vendor sites (removed invented prices, UK/DVSA claims for US products, false DSP GoCardless claim); corrected 'no native app' copy across all compare pages, best-software post and free page (app live on App Store + Google Play for instructors and pupils)",
+    "reason": "Unverifiable competitor claims and inaccurate DSP product claims (ASA risk, trust)",
+    "expectedImpact": "Accurate comparison content; protects rankings and CTR on comparison queries",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
