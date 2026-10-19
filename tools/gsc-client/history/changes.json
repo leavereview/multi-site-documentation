@@ -2097,5 +2097,126 @@
     "reason": "Unverifiable competitor claims and inaccurate DSP product claims (ASA risk, trust)",
     "expectedImpact": "Accurate comparison content; protects rankings and CTR on comparison queries",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Published prices sitewide: free until 31 Mar 2027, then permanent Free plan (1 instructor, 60 lessons/mo, all features incl AI), Solo £22, School £22+£10/extra instructor, founding £15 locked 24 months, no VAT. Pricing page rewritten with 4 Offer schemas + FAQ from one array; ~25 'pricing announced' lines replaced; PRICING config in offer.ts",
+    "reason": "AI assistants and SERP comparisons need a published price; permanent free plan keeps 'free driving school software' ranking true after March",
+    "expectedImpact": "Pricing page CTR, AI answer mentions with correct price, 'free driving school software' position",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Blog posts now output dateModified (updatedDate frontmatter -> BaseLayout) and show 'Updated <date>' in byline (en-GB); all 46 posts bylined John Powell",
+    "reason": "Google showed 24 Feb 2026 on the rewritten roundup because dateModified was never emitted",
+    "expectedImpact": "Fresher date in SERP for best-driving-school-software; E-E-A-T",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Organization schema: removed dead twitter/facebook sameAs, added Companies House, Capterra, G2, Trustpilot, Product Hunt; legalName JOHN POWELL LTD; logo now icon-512.png. About page listing badges link to our actual listing pages",
+    "reason": "Entity consolidation for Google and AI assistants; old sameAs pointed at non-existent profiles",
+    "expectedImpact": "Knowledge panel/entity signals, AI brand accuracy",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Replaced Astro default favicon with DSP brand mark (svg + 48/180/192/512 png)",
+    "reason": "Google showed the Astro logo next to our results",
+    "expectedImpact": "SERP CTR",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New /about/facts/ company fact sheet (linked from footer + about); llms.txt updated with prices, company and facts page",
+    "reason": "Single authoritative source for AI assistants and directories with outdated details (Capterra 'Revelation Media', '£29')",
+    "expectedImpact": "AI answer accuracy on price/company",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Noindexed + removed from sitemap/listings US drivers-ed posts (driver-ed-cars-guide, drivers-ed-franchise-guide)",
+    "reason": "US topics dilute UK relevance",
+    "expectedImpact": "Topical focus; sitemap 106 URLs",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "IndexNow added to deploy.sh (key file in public/); 106 URLs submitted on deploy 16 Oct",
+    "reason": "Bing/Copilot discovery — site not previously pinged; Bing feeds ChatGPT search",
+    "expectedImpact": "Bing indexation and Bing organic sessions",
+    "expectedTimeline": "1-4 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Legal entity renamed sitewide LEAVE.REVIEW LTD -> JOHN POWELL LTD (same company 05408918); removed SUMMER26 promo copy; dead footer social icons removed",
+    "reason": "Consistent company identity across site and listings",
+    "expectedImpact": "Trust/entity consistency",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "301 /driving-school-software/ -> / (nginx); page deleted; 27 files' internal links repointed (feature links to /features/ and /features/scheduling/); nav Software tab -> management page; management page title/H1 'Driving School Management Software: Pupils, Diary, Payments' (was 'Student Management')",
+    "reason": "8 pages competed for 'driving school software'; homepage ranked 28 vs old pillar 65. Management page gets 1,008 impr/90d for 'management' queries but its title said 'Student Management'",
+    "expectedImpact": "Homepage position for 'driving school software' (target top 15); management page CTR and position",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Scheduling page title/H1 now 'Driving School Booking & Scheduling Software' (booking queries 1,258 impr vs scheduling 768 in 90d). /driving-school-software-uk/ title -> 'Software for Multi-Instructor Driving Schools UK' (H1 and URL unchanged, ads paused) so it stops competing with the homepage",
+    "reason": "Page map: one page per search intent",
+    "expectedImpact": "Scheduling page position for booking queries (pos 40-70); less head-term cannibalisation",
+    "expectedTimeline": "4-6 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Signup links now carry utm_*/gclid/gbraid/wbraid/msclkid/fbclid + dsp_ref (external referrer host) + dsp_page via URL (no device storage); shared dsp_consent cookie on .driveschoolpro.com so the app can honour the site's banner answer; privacy policy updated",
+    "reason": "All 17 onboardings show as (direct) and Ads records 0 conversions: app GA only starts after its own consent banner and URL params are dropped on router.push. App-side capture tracked on Trello",
+    "expectedImpact": "Signup source recorded per account once the app stores the params; Ads conversions attributable",
+    "expectedTimeline": "2-4 weeks (after app change)"
   }
 ]

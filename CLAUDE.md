@@ -140,8 +140,7 @@ Every page you create on petcare.software must follow these rules — no excepti
 **Pillar pages** (dog-daycare-software, dog-boarding-software, kennel-software, cattery-software):
 - Minimum 1,800 words (competitors average 2,000–2,500)
 - 4+ screenshots (use ScreenshotPlaceholder.astro with descriptive captions until real images available)
-- 3 named testimonials (name, business, location) — use clearly marked [PLACEHOLDER] until real ones available
-- 1 case study block (business, problem, solution, specific metrics) — [PLACEHOLDER] OK
+- Testimonials and case studies: ONLY real, attributable customers who agreed in writing. Never publish placeholder, composite or invented testimonials, names, star ratings or case studies, even marked [PLACEHOLDER] (fake reviews are banned under the DMCC Act 2024; removed from petcare and BeltManager on 19 Oct 2026). Until real ones exist, leave the section out.
 - 5–7 question FAQ section with FAQ JSON-LD schema in `<head>`
 - 6–8 H2 sections following the pillar page structure template
 - CTA above fold AND below fold
