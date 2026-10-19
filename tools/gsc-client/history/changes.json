@@ -2410,5 +2410,16 @@
     "reason": "Relevant images and accurate claims; cover pupil app and block-booking searches",
     "expectedImpact": "Impressions on new feature pages; better image search relevance and social CTR",
     "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "driveschoolpro.com: DVSA category illustrations on 8 /driving-skills/ hero sections + per-category OG images; re-recorded pupil booking video; requested indexing for 4 new feature pages + /features/ + /features/reviews/",
+    "reason": "Relevant imagery on skill category pages; faster discovery of new feature pages",
+    "expectedImpact": "Indexing of new feature pages within 1-2 weeks; image search impressions on skill pages",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
