@@ -2218,5 +2218,197 @@
     "reason": "All 17 onboardings show as (direct) and Ads records 0 conversions: app GA only starts after its own consent banner and URL params are dropped on router.push. App-side capture tracked on Trello",
     "expectedImpact": "Signup source recorded per account once the app stores the params; Ads conversions attributable",
     "expectedTimeline": "2-4 weeks (after app change)"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New post /blog/making-tax-digital-driving-instructors/ (MTD cluster hub): thresholds £50k/£30k/£20k with dates, qualifying income = turnover, worked example table, quarterly deadlines, penalties, checklist, FAQ schema (7). Accounting page MTD FAQ now quotes thresholds and links to it",
+    "reason": "Total Drive has ~9 MTD pages; most full-time ADIs cross the £30k threshold on 6 Apr 2027, so search demand will rise through Q1 2027",
+    "expectedImpact": "Impressions for 'making tax digital driving instructor' queries; links into accounting page",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New compare pages /compare/driving-school-manager/ and /compare/goroadie/ (vendor-site facts checked 16 Oct, no competitor prices); added to compare hub list + summary and footer",
+    "reason": "AI answers and 'X alternative'/'X vs' queries shortlist from comparison pages; both are active UK competitors",
+    "expectedImpact": "Impressions for brand-vs queries; AI answer mentions",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "New brand logo (27-skill ring, Lexend wordmark) in nav/footer/landers; favicon replaced with simplified ring mark; apple-touch/192/512 icons; brand kit saved in repo /brand",
+    "reason": "John chose Direction C on 16 Oct; consistent brand mark in SERP favicon, app stores and social",
+    "expectedImpact": "SERP favicon recognition/CTR; brand consistency for entity signals",
+    "expectedTimeline": "2-4 weeks (favicon recrawl)"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New compare pages /compare/adi-network/ and /compare/easyweek/ (vendor facts checked 16 Oct); hub + footer updated; Reservio page free-plan row now shows our permanent Free plan",
+    "reason": "Complete the competitor set named in AI answers and 'alternative' queries",
+    "expectedImpact": "Brand-vs query impressions; AI answer coverage",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Three MTD spoke posts: record keeping, choosing MTD software, 2027-28 timeline",
+    "reason": "Complete MTD topic cluster around hub post",
+    "expectedImpact": "Impressions for MTD driving instructor queries",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Homepage hero badge now 'Driving school software for UK ADIs and multi-instructor schools'; /about/facts/ new 'School size' row (shared diary, per-instructor/staff logins, role-based access, clash checks)",
+    "reason": "AI baseline 16 Oct: Gemini described DriveSchoolPro as for 'single-car schools'",
+    "expectedImpact": "AI answers describe multi-instructor support correctly",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New page /driving-instructor-diary-app/ and /compare/total-drive-vs-mydrivetime/",
+    "reason": "AI baseline 16 Oct: no AI tool names DSP for diary app or TD vs MDT queries",
+    "expectedImpact": "Impressions + AI citations for diary app and TD vs MDT queries",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Added Facebook Page and YouTube channel (@driveschoolpro) to footer and Organization sameAs",
+    "reason": "New official social profiles created 16 Oct",
+    "expectedImpact": "Entity signals; brand SERP",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Footer link + Organization sameAs switched to Facebook vanity URL facebook.com/driveschoolpro",
+    "reason": "Facebook username claimed; stable branded URL for entity matching",
+    "expectedImpact": "Knowledge panel / AI entity association",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-16",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Instagram @driveschoolpro added to footer + Organization sameAs",
+    "reason": "New Instagram business account linked to Facebook Page",
+    "expectedImpact": "Entity association across social profiles",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-17",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Pricing page, offer schema and /about/facts now say text and WhatsApp reminders are coming soon (email only today)",
+    "reason": "Pages implied SMS/WhatsApp reminders were live on Solo; only email is live",
+    "expectedImpact": "Accurate claims for users and AI answers; fewer mismatched expectations",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "driveschoolpro.com",
+      "petcare.software",
+      "beltmanager.com",
+      "mytattoo.software"
+    ],
+    "category": "technical",
+    "description": "Bing Webmaster Tools set up: driveschoolpro.com + mytattoo.software imported from GSC; petcare.software + beltmanager.com added and verified via BingSiteAuth.xml; sitemaps submitted (plus image-sitemap for DSP). IndexNow keys added for petcare and beltmanager (DSP already had one); all URLs pinged.",
+    "reason": "Bing feeds ChatGPT search and Copilot; sites were not in Bing Webmaster Tools",
+    "expectedImpact": "Bing indexed pages and Bing/Copilot impressions; AI Performance report data",
+    "expectedTimeline": "1-3 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "beltmanager.com",
+      "petcare.software",
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Removed invented/placeholder testimonials (BeltManager home + 6 pillars; petcare 4 pillars) and composite case studies (petcare 4 pillars); company name updated LEAVE.REVIEW LTD -> JOHN POWELL LTD on about/contact/privacy/terms/Organization schema (BeltManager, petcare, mytattoo); IndexNow key added for mytattoo",
+    "reason": "Fake/placeholder reviews breach DMCC Act 2024 and undermine trust signals for AI search; legal entity renamed",
+    "expectedImpact": "Trust/E-E-A-T; no ranking drop expected",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Re-shot 14 app screenshots on driveschoolpro.com (old MyDriveSchool branding removed); alt text corrected; G2 description (WhatsApp claim removed), logos and 3 new screenshots",
+    "reason": "Brand consistency for users and AI entity matching; remove inaccurate claims",
+    "expectedImpact": "Trust, image search, conversion",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "driveschoolpro.com: added /features/online-booking/ and /features/vehicles/; corrected /features/reviews/ copy (auto-send on pass, fixed wording, 0-3 day delay) and swapped in a real review-requests screenshot; fixed irrelevant images/OG images on pricing, contact, how-progress-works, get-started; corrected captions",
+    "reason": "Expand feature coverage for long-tail searches (online booking, vehicle tracking) and make images and claims match the app",
+    "expectedImpact": "Impressions and clicks on new feature pages; better image relevance in search and social previews",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Added TikTok profile (tiktok.com/@driveschoolpro.com) to site footer and Organization sameAs",
+    "reason": "Link new social profile to the brand entity",
+    "expectedImpact": "Brand entity signals",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "driveschoolpro.com: added /features/pupil-app/ and /features/lesson-packages/; replaced all 50 blog hero/OG images (generic, US/foreign stock) with DVSA category illustrations and product screens with alt text; new default OG card; removed unsourced stats (78%, 70%, 50%) incl. scheduling meta description; footer feature links",
+    "reason": "Relevant images and accurate claims; cover pupil app and block-booking searches",
+    "expectedImpact": "Impressions on new feature pages; better image search relevance and social CTR",
+    "expectedTimeline": "4-8 weeks"
   }
 ]
