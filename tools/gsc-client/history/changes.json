@@ -2421,5 +2421,104 @@
     "reason": "Relevant imagery on skill category pages; faster discovery of new feature pages",
     "expectedImpact": "Indexing of new feature pages within 1-2 weeks; image search impressions on skill pages",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Google Business Profile: added Facebook, Instagram, YouTube, LinkedIn and TikTok social profile links (pending Google review)",
+    "reason": "GBP had no social profiles; aligns entity signals with site sameAs and footer",
+    "expectedImpact": "Stronger brand entity consistency for knowledge panel and AI answers",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Google Business Profile: replaced description (removed WhatsApp-reminder and Standards Check claims, fixed truncation; now matches /about/facts/)",
+    "reason": "GBP description claimed features not live and was cut off at 750 chars",
+    "expectedImpact": "Consistent, accurate entity facts across GBP, site and AI answers",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Google Business Profile: name DriveschoolPro -> DriveSchoolPro (pending review); secondary category 'Business management consultant' removed",
+    "reason": "Match brand name used on site, schema and other listings; drop inaccurate category",
+    "expectedImpact": "Consistent entity name for knowledge panel and AI answers",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Organization sameAs + /about/facts/ listings: added App Store, Google Play, FreeIndex, SaaSHub and social profiles",
+    "reason": "Tie all official profiles to one entity",
+    "expectedImpact": "Better entity recognition in Google/Bing knowledge graph and AI answers",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "Organization schema foundingDate 2024 -> 2005-03-31 (company incorporation; matches About page, Companies House, G2)",
+    "reason": "Conflicting founding dates across site and listings",
+    "expectedImpact": "Consistent entity facts for knowledge graph and AI answers",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Crunchbase profile updated (descriptions, founded 2005-03-31, HQ London, industries, social links); TrustRadius vendor access requested",
+    "reason": "Company-facts sources used by search engines and AI answers",
+    "expectedImpact": "Stronger entity facts and brand mentions",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "New directory listings: Cylex UK and Hotfrog UK (address hidden, website, description, categories, hours)",
+    "reason": "Consistent business citations for Google/Bing entity understanding",
+    "expectedImpact": "More consistent brand citations",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Added blog RSS feed /rss.xml (+ alternate link in head)",
+    "reason": "Lets Metricool share new blog posts automatically; feed readers/AI crawlers can discover posts",
+    "expectedImpact": "More consistent social distribution of blog posts",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-10-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Metricool: web tracker (consent-gated) + blog RSS connected; IG SmartLink buttons for featured guides; DIARY DM flow live; social calendar now starts 21 Oct",
+    "reason": "Fill the silent gap before 2 Nov and measure social traffic",
+    "expectedImpact": "Social referral sessions and signups via utm_source=instagram/facebook",
+    "expectedTimeline": "2-4 weeks"
   }
 ]

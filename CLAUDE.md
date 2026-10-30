@@ -44,6 +44,8 @@ Site → deploy path mapping (baked into the script):
 
 Always use the `lightsail` SSH alias, not the raw IP.
 
+The sites' GitHub "Deploy to Server" workflows are **disabled** (30 Oct 2026): they could not build on GitHub-hosted runners (`../scripts` imports, Node 20 vs `.ts` scripts) and public site repos get no agentbox runner. Pushing to `main` deploys nothing — always deploy with `./deploy.sh`.
+
 ### Build fix (if build fails)
 ```bash
 rm -rf node_modules dist .astro && npm install && npm run build
