@@ -4,7 +4,7 @@
 
 | Folder | Domain | Deploy Path | Status |
 |--------|--------|-------------|--------|
-| mydojo.software | beltmanager.com | /var/www/beltmanager.com/ | Active — migrated from mydojo.software (Sept 2026); old domain 301s to new |
+| beltmanager.com | beltmanager.com | /var/www/beltmanager.com/ | Active — formerly mydojo.software (migrated Sept 2026; folder renamed Oct 2026); old domain 301s to new |
 | mydriveschool.software | mydriveschool.software | /var/www/mydriveschool.software/ | Active |
 | mytattoo.software | mytattoo.software | /var/www/mytattoo.software/ | Active |
 | petcare.software | petcare.software | /var/www/petcare.software/ | Active — Astro rebuild |
@@ -38,7 +38,7 @@ curl -s https://{domain}/sitemap-0.xml | grep -o "<loc>" | wc -l
 
 Site → deploy path mapping (baked into the script):
 - `mydriveschool.software/` → `lightsail:/var/www/driveschoolpro.com/` (domain changed March 2026)
-- `mydojo.software/` → `lightsail:/var/www/beltmanager.com/` (domain changed September 2026)
+- `beltmanager.com/` → `lightsail:/var/www/beltmanager.com/` (domain changed September 2026)
 - `mytattoo.software/` → `lightsail:/var/www/mytattoo.software/`
 - `petcare.software/` → `lightsail:/var/www/petcare.software/`
 
@@ -63,8 +63,8 @@ CSS classes (all sites): `.btn-primary` · `.btn-secondary` · `.card` · `.cont
 
 ## Reference Site
 
-**mydojo.software** is the reference implementation. When building other sites:
-1. Copy structure from mydojo.software
+**beltmanager.com** is the reference implementation. When building other sites:
+1. Copy structure from beltmanager.com
 2. Update `astro.config.mjs` with correct `site:` URL
 3. Update Navigation.astro, Footer.astro, and src/pages/ with site-specific content
 

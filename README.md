@@ -10,7 +10,7 @@ This workspace contains 4 high-performance static Astro sites sharing a common a
 
 | Folder | Domain | Deploy Path | Status |
 |--------|--------|-------------|--------|
-| mydojo.software | [mydojo.software](https://mydojo.software) | /var/www/mydojo.software/ | ✅ Live |
+| beltmanager.com | [beltmanager.com](https://beltmanager.com) | /var/www/beltmanager.com/ | ✅ Live |
 | petcare.software | [petcare.software](https://petcare.software) | /var/www/petcare.software/ | ✅ Live |
 | mydriveschool.software | [mydriveschool.software](https://mydriveschool.software) | /var/www/mydriveschool.software/ | ✅ Live |
 | mytattoo.software | [mytattoo.software](https://mytattoo.software) | /var/www/mytattoo.software/ | ✅ Live |
@@ -21,7 +21,7 @@ This workspace contains 4 high-performance static Astro sites sharing a common a
 
 ```bash
 # Navigate to any site
-cd mydojo.software
+cd beltmanager.com
 
 # Install dependencies
 npm install
@@ -40,7 +40,7 @@ npm run preview
 
 1. **Copy the reference site structure:**
    ```bash
-   cp -r mydojo.software/ newsite.software/
+   cp -r beltmanager.com/ newsite.software/
    cd newsite.software/
    ```
 
@@ -362,7 +362,7 @@ Each site auto-deploys on push to `main` branch.
 ```yaml
 SSH_PRIVATE_KEY    # Deploy key for server access
 REMOTE_HOST        # 13.43.71.165
-SITE_DOMAIN        # e.g., mydojo.software
+SITE_DOMAIN        # e.g., beltmanager.com
 ```
 
 **Workflow file:** `.github/workflows/deploy.yml`
@@ -615,7 +615,7 @@ npm run build
 
 ## 📚 Reference Sites
 
-### Primary Reference: mydojo.software
+### Primary Reference: beltmanager.com
 
 Use this as the template for new sites:
 - ✅ Latest performance optimizations

@@ -19,11 +19,11 @@ AUTO="${2:-}"
 
 # folder -> "server-path|domain"  (domain is what the live sitemap is served under)
 case "$SITE" in
-  mydojo.software)        DEST="/var/www/beltmanager.com/";      DOMAIN="beltmanager.com" ;;  # folder != domain (migrated from mydojo.software)
+  beltmanager.com)        DEST="/var/www/beltmanager.com/";      DOMAIN="beltmanager.com" ;;
   mytattoo.software)      DEST="/var/www/mytattoo.software/";    DOMAIN="mytattoo.software" ;;
   petcare.software)       DEST="/var/www/petcare.software/";     DOMAIN="petcare.software" ;;
   mydriveschool.software) DEST="/var/www/driveschoolpro.com/";   DOMAIN="driveschoolpro.com" ;;  # folder != domain
-  *) echo "Unknown site folder: '$SITE'"; echo "Valid: mydojo.software | mytattoo.software | petcare.software | mydriveschool.software"; exit 1 ;;
+  *) echo "Unknown site folder: '$SITE'"; echo "Valid: beltmanager.com | mytattoo.software | petcare.software | mydriveschool.software"; exit 1 ;;
 esac
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
