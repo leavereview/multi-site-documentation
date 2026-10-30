@@ -9,7 +9,7 @@ const matter = require('gray-matter');
 // ============================================================================
 
 const SITES = [
-  'mydojo.software',
+  'beltmanager.com',
   'petcare.software',
   'mydriveschool.software',
   'mytattoo.software'
@@ -516,7 +516,7 @@ function findBestAnchorText(source, target) {
 
   // 3. Use industry-specific generic phrase
   const siteKeywords = {
-    'mydojo.software': 'martial arts',
+    'beltmanager.com': 'martial arts',
     'petcare.software': 'pet care',
     'mydriveschool.software': 'driving school',
     'mytattoo.software': 'tattoo studio'
@@ -754,7 +754,7 @@ function generateJsonData(contentItems, analysis) {
       generatedAt: new Date().toISOString(),
       totalItems: contentItems.length,
       sites: {
-        'mydojo.software': contentItems.filter(c => c.site === 'mydojo.software').length,
+        'beltmanager.com': contentItems.filter(c => c.site === 'beltmanager.com').length,
         'petcare.software': contentItems.filter(c => c.site === 'petcare.software').length,
         'mydriveschool.software': contentItems.filter(c => c.site === 'mydriveschool.software').length,
         'mytattoo.software': contentItems.filter(c => c.site === 'mytattoo.software').length

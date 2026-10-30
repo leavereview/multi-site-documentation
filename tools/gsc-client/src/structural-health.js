@@ -31,7 +31,7 @@ const SITE_CONFIG = {
     eeatPattern: /05408918|RevelationPets|Winchester|founded/g
   },
   'beltmanager.com': {
-    folder: 'mydojo.software',
+    folder: 'beltmanager.com',
     pillarHubs: [
       '/martial-arts-software', '/dojo-management-software', '/karate-school-software',
       '/mma-gym-software', '/bjj-gym-software', '/martial-arts-crm',
