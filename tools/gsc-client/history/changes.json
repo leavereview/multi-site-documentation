@@ -2575,5 +2575,16 @@
     "reason": "Reliability findings: 5 missing headers, 12 critical astro advisories",
     "expectedImpact": "Health check green; no ranking change expected",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Strengthened /blog/best-tattoo-booking-software/ (Google's chosen URL for 'best tattoo booking/studio software'): rewrite to ~2,300 words, title/H1 'Best Tattoo Booking & Studio Software 2026: How to Choose', UK prices re-checked 2 Nov, 7 FAQs + FAQPage schema, dateModified; /tattoo-booking-app/ H1+description lead with benefits; new inbound links from /tattoo-booking-app/ and /best-tattoo-studio-software/ (mytattoo-static PR #4, mytattoo#370)",
+    "reason": "GSC 90d: guide has 9.3k impr at pos ~21.7 for the cluster with 0 clicks ('best tattoo studio software' 20.8, 'beste tattoo booking software' 12.9); 'benefits of tattoo booking apps' pos 7.5 with 0 clicks on /tattoo-booking-app/",
+    "expectedImpact": "Guide into top 10 for best tattoo booking/studio software queries; first clicks from benefits query",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
