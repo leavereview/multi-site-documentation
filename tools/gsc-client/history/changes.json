@@ -2631,5 +2631,49 @@
     "reason": "8 'Screenshot Coming Soon' placeholders looked unfinished",
     "expectedImpact": "Engagement and trial clicks on CRM/software pillars",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Merged /blog/how-to-start-a-driving-school/ into /blog/starting-driving-school-guide/ (rewritten UK guide: 8 DVSA steps, fees checked on GOV.UK £603/£743, 7 FAQs + FAQPage schema, unsourced stats removed); nginx 301 old->new; title 'How to Start a Driving School in the UK: Costs and Steps' (PR #52)",
+    "reason": "Indexed guide had 4,337 impr/90d at pos 9.7, CTR 0.37%; duplicate was Crawled-not-indexed with 0 impr",
+    "expectedImpact": "CTR >1.5% and position <7 for driving school startup / cost to start / business requirements queries",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Insurance guide title/description rewritten: 'Driving School Insurance: What Cover UK Driving Instructors Need' (PR #52)",
+    "reason": "850 impr/90d at pos 9.5, CTR 0.59%",
+    "expectedImpact": "CTR >1.5%",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Accounting software page: new section + 2 FAQs (FAQPage) 'Do driving instructors need an accountant?' and what to ask; footer links MTD hub site-wide (PR #54, closes #27)",
+    "reason": "~250 impr/90d at pos 38-54 for driving instructor accountant queries with no answer on page; 4 MTD URLs splitting 'making tax digital for driving instructors'",
+    "expectedImpact": "Accountant queries into top 20; MTD hub consolidates head term into top 10",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "analytics",
+    "description": "Hero signup form forwards fbclid, msclkid, dsp_ref and dsp_page to app signup (PR #53)",
+    "reason": "GA4 showed 2 Facebook signup_starts on 31 Oct; app attribution showed 0 Facebook signups (in-app browser drops referrer)",
+    "expectedImpact": "Facebook-group signups attributable in the weekly growth report",
+    "expectedTimeline": "1-2 weeks"
   }
 ]
