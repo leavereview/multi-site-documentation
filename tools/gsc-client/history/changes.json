@@ -2520,5 +2520,60 @@
     "reason": "Fill the silent gap before 2 Nov and measure social traffic",
     "expectedImpact": "Social referral sessions and signups via utm_source=instagram/facebook",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Compare pages: MyDriveTime (one-word brand) and GoRoadie lead H1/title with the brand, new brand FAQs, re-checked 2 Nov (PR #45)",
+    "reason": "mydrivetime pos 56, goroadie pos 24 with no ranking page",
+    "expectedImpact": "Top 10 for mydrivetime and goroadie brand queries",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Pupil-app page retargeted to 'driving instructor app'; homepage title leads with 'Driving School Software UK' plus UK/CRM FAQs; best-software guide gains CRM + multi-car sections and GoRoadie review (PR #46)",
+    "reason": "driving instructor app no position; driving instructor software uk 20.2; crm for driving schools 17.1; driving school crm 19.7; head-term swings 9-31",
+    "expectedImpact": "Page 1 for the targeted terms; stable homepage ranking for driving school software",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "schema",
+    "description": "FAQ + FAQPage schema answering AI-panel questions where 0/4 answers name us (payments online, MTD compliance, best accounting app, best instructor app, learners booking online) (PR #47)",
+    "reason": "November AI panel: 0 of 4 mentions on these questions",
+    "expectedImpact": "DriveSchoolPro named in AI answers at the mid-November panel re-run",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New page /driving-instructor-booking-system/ (PR #48)",
+    "reason": "'driving instructor booking' vol 260 with no page",
+    "expectedImpact": "Ranking for driving instructor booking terms",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Security headers (HSTS, CSP, X-Frame-Options, nosniff, Referrer-Policy) in nginx; Astro 5 -> 7 upgrade (PRs #49, #51)",
+    "reason": "Reliability findings: 5 missing headers, 12 critical astro advisories",
+    "expectedImpact": "Health check green; no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
