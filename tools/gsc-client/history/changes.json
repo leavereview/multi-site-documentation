@@ -2586,5 +2586,28 @@
     "reason": "GSC 90d: guide has 9.3k impr at pos ~21.7 for the cluster with 0 clicks ('best tattoo studio software' 20.8, 'beste tattoo booking software' 12.9); 'benefits of tattoo booking apps' pos 7.5 with 0 clicks on /tattoo-booking-app/",
     "expectedImpact": "Guide into top 10 for best tattoo booking/studio software queries; first clicks from benefits query",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "Pillar pages: 13 grey screenshot placeholders replaced with real BeltManager app screenshots (WebP) on dojo-management, karate-school, martial-arts-billing and mma-gym pages (beltmanager.com#6, PR #17)",
+    "reason": "Placeholders looked unfinished; real screens show the product",
+    "expectedImpact": "Engagement and trial clicks on pillar pages",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "beltmanager.com",
+      "mytattoo.software"
+    ],
+    "category": "technical",
+    "description": "Security headers (HSTS, CSP, X-Frame-Options, nosniff, Referrer-Policy) on beltmanager.com and mytattoo.software via nginx; beltmanager.com upgraded to Astro 7.4.4 (beltmanager.com#13/#14, mytattoo#374)",
+    "reason": "Site-health findings: missing headers and dependency advisories",
+    "expectedImpact": "Site health score; no ranking change expected",
+    "expectedTimeline": "1-2 weeks"
   }
 ]
