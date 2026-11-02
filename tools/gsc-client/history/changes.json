@@ -2609,5 +2609,27 @@
     "reason": "Site-health findings: missing headers and dependency advisories",
     "expectedImpact": "Site health score; no ranking change expected",
     "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "/best-tattoo-studio-software/: removed implied multi-artist calendars (MyTattoo is single-artist); competitor prices re-verified 2 Nov 2026 on UK pricing pages (Fresha £14.95/£9.95, 20% min £4; Booksy £40+VAT, +£5/user; Vagaro £20/1 calendar; Square free per location, unlimited staff); unverifiable Vagaro $80-100 estimate removed. /blog/best-tattoo-studio-software/: title (2024) -> (2026), updatedDate 2026-11-02, single-artist note, unsourced stats removed (mytattoo-static#5)",
+    "reason": "False product claim and July/2024-stale pricing and titles",
+    "expectedImpact": "CTR on best tattoo studio software queries; trust",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-02",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "/martial-arts-software/: 4 screenshot placeholders replaced with real app screenshots (dashboard, belt progression, overdue billing, parent portal). /martial-arts-crm/: lead-pipeline and at-risk placeholders replaced with accurate descriptions of the Leads and Retention screens; follow-up-builder and marketing-ROI placeholders removed (no such screens) (beltmanager.com#19)",
+    "reason": "8 'Screenshot Coming Soon' placeholders looked unfinished",
+    "expectedImpact": "Engagement and trial clicks on CRM/software pillars",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
