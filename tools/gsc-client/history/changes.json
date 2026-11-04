@@ -2675,5 +2675,27 @@
     "reason": "GA4 showed 2 Facebook signup_starts on 31 Oct; app attribution showed 0 Facebook signups (in-app browser drops referrer)",
     "expectedImpact": "Facebook-group signups attributable in the weekly growth report",
     "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-11-03",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Removed false/unsupported claims (RevelationPets testimonials, Generic Booking columns, unbuilt features); corrected consent/reports denials (PR #6)",
+    "reason": "UK CAP Code compliance, approved by JP 3 Nov 2026",
+    "expectedImpact": "Compliance; no ranking impact expected",
+    "expectedTimeline": "n/a"
+  },
+  {
+    "date": "2026-11-04",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "Removed false/unsupported claims and unsourced stats blocks across all beltmanager.com pillar pages; rewrote scheduling, billing, CRM copy to real features; removed duplicate FAQPage JSON-LD on 5 pages (PR #24, not yet deployed)",
+    "reason": "Issue #20: CAP Code 3.7 substantiation, feature-gap discovery 2 Nov",
+    "expectedImpact": "Lower misleading-claim risk; possible small shift in rankings for removed keywords (waitlist, SMS, private lessons)",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
