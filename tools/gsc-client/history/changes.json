@@ -2697,5 +2697,16 @@
     "reason": "Issue #20: CAP Code 3.7 substantiation, feature-gap discovery 2 Nov",
     "expectedImpact": "Lower misleading-claim risk; possible small shift in rankings for removed keywords (waitlist, SMS, private lessons)",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-07",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "analytics",
+    "description": "BeltManager: UTM-tagged all app.beltmanager.com links via appLink helper; added consent-gated GA4 signup_click and pricing_view events; signup_click marked as key event (PR #31)",
+    "reason": "Attribute sign-up intent to page and CTA (issue #28)",
+    "expectedImpact": "signup_click by page and CTA visible in GA4; no ranking impact expected",
+    "expectedTimeline": "1-2 weeks"
   }
 ]
