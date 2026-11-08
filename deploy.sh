@@ -37,7 +37,7 @@ LOCAL=$(grep -o "<loc>" dist/sitemap-0.xml | wc -l | tr -d ' ')
 echo "  Fresh build: $LOCAL sitemap URLs"
 
 echo "════════ 2/6  Dry-run (what --delete will remove) ════════"
-rsync -avz --delete --dry-run dist/ "lightsail:$DEST" | grep '^deleting' || echo "  (nothing to delete)"
+rsync -avz --delete --exclude=.DS_Store --delete-excluded --dry-run dist/ "lightsail:$DEST" | grep '^deleting' || echo "  (nothing to delete)"
 
 if [ "$AUTO" != "--yes" ]; then
   read -r -p "Proceed with deploy? [y/N] " ans
@@ -45,7 +45,9 @@ if [ "$AUTO" != "--yes" ]; then
 fi
 
 echo "════════ 3/6  Deploy ════════"
-rsync -avz --delete dist/ "lightsail:$DEST"
+# macOS .DS_Store files leak folder listings (Intruder finding, 8 Nov 2026); never ship them,
+# and --delete-excluded removes any already on the server.
+rsync -avz --delete --exclude=.DS_Store --delete-excluded dist/ "lightsail:$DEST"
 
 echo "════════ 4/6  Verify live == local ════════"
 sleep 2
