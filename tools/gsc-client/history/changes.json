@@ -2708,5 +2708,27 @@
     "reason": "Attribute sign-up intent to page and CTA (issue #28)",
     "expectedImpact": "signup_click by page and CTA visible in GA4; no ranking impact expected",
     "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-11-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Corrected /compare/lessonbuddy/ after LessonBuddy reported errors: diary clash checks now Yes, added Google/Apple Calendar sync and Apple CarPlay, re-checked all cells 9 Nov; calendar-sync FAQ in best-driving-school-software updated",
+    "reason": "Competitor reported factual errors on comparison page",
+    "expectedImpact": "Accurate comparative claims; no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-09",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Re-checked all 12 /compare/ pages against vendor help centres + app stores after LessonBuddy complaint; corrected competitor cells (clash checks, reminders, calendar sync, apps, DSO sign-up closed, DSM no native app), added shared How-we-checked/trademark/correction-notice block and dated Updated notes; hub + best-software blog aligned",
+    "reason": "Competitor reported factual errors; comparative claims must be substantiated (ASA CAP 3.33-3.41)",
+    "expectedImpact": "Accurate comparative claims, lower complaint risk; possible freshness lift on compare pages",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
