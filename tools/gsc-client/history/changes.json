@@ -2730,5 +2730,126 @@
     "reason": "Competitor reported factual errors; comparative claims must be substantiated (ASA CAP 3.33-3.41)",
     "expectedImpact": "Accurate comparative claims, lower complaint risk; possible freshness lift on compare pages",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-11",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Published Terms v2026-11, new /pupil-terms/ and /subprocessors/ pages, privacy policy controller/processor + transfers update; FAQ data-protection answers corrected",
+    "reason": "9 Nov legal review H1/H4/H6/H7: terms didn't match the offer, no DPA or full sub-processor list",
+    "expectedImpact": "No ranking change expected; trust/procurement and legal risk reduction",
+    "expectedTimeline": "n/a"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Become a driving instructor hub + 7 guides (/become-a-driving-instructor/), Opus-reviewed, DVSA/GOV.UK facts checked",
+    "reason": "Issue #85: largest low-difficulty audience (how to become a driving instructor 5,400/mo, KD 19)",
+    "expectedImpact": "Impressions for 3+ target terms",
+    "expectedTimeline": "6 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New tool: driving instructor earnings calculator (franchise vs independent)",
+    "reason": "Issue #28: ~5,000 UK searches/mo for driving instructor earnings/salary",
+    "expectedImpact": "Impressions and clicks for 'how much do driving instructors earn'",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New tool: ADI Part 3 marking sheet / SC1 self-assessment (17 competencies)",
+    "reason": "Issue #87: ~1,200 searches/mo (adi part 3 marking sheet, sc1 form), KD 0",
+    "expectedImpact": "Impressions/clicks on part 3 marking sheet and SC1 queries",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "meta",
+    "description": "Compare pages Total Drive + MyDriveTime: brand-query titles/metas, switching sections, last-checked line",
+    "reason": "Issues #78/#81: 'total drive driving school' pos 22.8, 'mydrivetime' pos 66.6, 0 clicks",
+    "expectedImpact": "Position and CTR for both brand queries",
+    "expectedTimeline": "4-6 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Removed stale 'no bulk import' claims (8 places) now the CSV pupil importer is live; fixed G2 sameAs URL",
+    "reason": "Importer shipped; G2 slug is /products/driveschoolpro/",
+    "expectedImpact": "Switcher conversion; correct entity links for AI answers",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "technical",
+    "description": "Dependency upgrade clearing 6 runtime advisories (no page changes)",
+    "reason": "Issue #44",
+    "expectedImpact": "None on SEO; page and sitemap counts unchanged (130)",
+    "expectedTimeline": "n/a"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Outreach: Collingwood replied to John's email and will update their 'best apps for driving instructors' page to include DriveSchoolPro",
+    "reason": "Issue #77: Collingwood is the most-cited source in the AI panel (4 of 10 prompts); DSP not listed",
+    "expectedImpact": "AI answers naming DSP (26/76 on 12 Nov) and a referral link",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Outreach: PassReady comparison correction emailed to StagHill (pricing published, booking/pupil app live, 3% card fee)",
+    "reason": "Issue #77: PassReady's best-software page lists DSP with 3 wrong facts",
+    "expectedImpact": "Accurate DSP row on a ranking competitor page; better AI answers",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Outreach: Lesson Diary Total Drive alternatives correction sent via contact form (native apps, no trial, 3% card fee)",
+    "reason": "Issue #77: lessondiary.co.uk is the 2nd most-cited domain in the AI panel (13 citations); lists DSP with 3 wrong facts",
+    "expectedImpact": "Accurate DSP facts in AI answers citing Lesson Diary",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Outreach: Passly pricing correction sent via contact form (management software guide) plus request to add DSP to 7-compared apps page",
+    "reason": "Issue #77: Passly shows old DSP prices, a 14-day trial and Enterprise tier; passly.co.uk has 6 AI-panel citations",
+    "expectedImpact": "Correct DSP pricing on Passly; possible new listing",
+    "expectedTimeline": "2-6 weeks"
   }
 ]
