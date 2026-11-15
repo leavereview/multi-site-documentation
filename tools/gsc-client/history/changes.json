@@ -2851,5 +2851,71 @@
     "reason": "Issue #77: Passly shows old DSP prices, a 14-day trial and Enterprise tier; passly.co.uk has 6 AI-panel citations",
     "expectedImpact": "Correct DSP pricing on Passly; possible new listing",
     "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Outreach #77: Lesson Diary contact form confirmed received (auto-ack 12 Nov 14:05). Found same 3 wrong DSP facts (no native app, 14-day trial, no platform cut) on 5 more Lesson Diary pages incl. lesson-diary-vs-driveschoolpro and best-driving-instructor-apps; follow-up listing them drafted in Mail for John",
+    "reason": "Lesson Diary is the 2nd most-cited domain in the AI panel; its wrong facts repeat across its compare pages",
+    "expectedImpact": "AI answers stop saying DSP has no app / 14-day trial",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Added DriveBest to /blog/best-driving-school-software/ (now 13 compared): table rows, review, decision guide, 2 FAQs; vehicle-dates line now credits DriveBest too. Facts from drivebest.app 12 Nov. PR #108",
+    "reason": "DriveBest asked to be listed; a complete, fair roundup is more credible to readers and AI engines",
+    "expectedImpact": "Roundup stays the most complete UK list; AI citations for best driving school software",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Outreach #77: sent Lesson Diary follow-up listing 5 more pages with wrong DSP facts (12 Nov 15:00)",
+    "reason": "Same wrong facts repeated across Lesson Diary compare pages",
+    "expectedImpact": "AI answers stop saying DSP has no app / 14-day trial",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New /switch/total-drive/ and /switch/mydrivetime/ pages targeting 'Total Drive alternative' / 'MyDriveTime alternative' (import steps, dated price table, FAQPage schema); linked from both compare pages (#69, PR #110)",
+    "reason": "Switch intent is specific; compare pages cover features, not how to move. Pupil importer now live",
+    "expectedImpact": "Impressions and clicks for 'total drive alternative' / 'mydrivetime alternative'; signups from switch pages",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-11-12",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New /free-for-trainee-instructors/ page (Experiment E3) + trainee line on /pricing/, schema offer, /about/facts/, llms.txt; linked from ADI guides (#68, PR #110)",
+    "reason": "Free trainee plan to win trainees before they qualify; landing page for trainee group posts",
+    "expectedImpact": "Trainee signups (instructorStatus=TRAINEE); impressions for 'free software trainee driving instructor / PDI'",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-15",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Weeks 2-3: FAQ batch 1 from Facebook-group questions (blocks, repeat cancellers, Google Calendar vs diary app), payment-link row and FAQ on /features/getting-paid/ (PR #116)",
+    "reason": "AI panel misses on lesson payments and best diary app; Facebook-group questions",
+    "expectedImpact": "AI panel mentions (26 of 76 on 12 Nov, target 28); impressions on payment and diary-app queries",
+    "expectedTimeline": "4-6 weeks"
   }
 ]
