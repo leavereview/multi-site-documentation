@@ -3016,5 +3016,27 @@
     "reason": "App shipped the instructor calendar feed (#2243); pages still listed calendar sync as a DSP gap",
     "expectedImpact": "Accurate comparisons; fewer 'no calendar sync' objections",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New /driving-instructor-app/ page (2,900 words, FAQ, 4-app comparison) targeting 'driving instructor app'; /features/pupil-app/ title and description returned to pupil intent; inbound links from nav, footer, homepage FAQ, diary app, pupil app, free page, best-software post (Driveschoolpro.com PR #135)",
+    "reason": "'driving instructor app' is 320 UK searches a month and we were outside the returned results; the retitled pupil-app page earned no impressions for it and page one is all exact-match pages",
+    "expectedImpact": "Impressions for 'driving instructor app' variants on the new URL; first top-50 position",
+    "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "/free-driving-school-software/: 'free version' in title, H1 and headings; new 'Is the free version a download?' section and FAQ; visible Updated date; dateModified corrected from 18 Jan 2026 (PR #135)",
+    "reason": "Page was absent from results for 'driving school software free version' while our Play listing was #1; page one is download sites, so the page now answers the download intent",
+    "expectedImpact": "Page appears for 'driving school software free version' and 'free driving school software'",
+    "expectedTimeline": "2-6 weeks"
   }
 ]
