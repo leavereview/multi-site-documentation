@@ -3060,5 +3060,16 @@
     "reason": "The blog post is the page Google shows for 'driving instructor apps' (position 56-73); pass that relevance to the new dedicated page",
     "expectedImpact": "/driving-instructor-app/ replaces the blog post as the ranking URL for 'driving instructor app'",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Compare method note on /compare/total-drive/ and /compare/total-drive-vs-mydrivetime/ now says 'tested' cells come from our 10 Nov 2026 Total Drive trial (was 'We haven't used Total Drive's software')",
+    "reason": "Method note contradicted the trial-based cells on the same pages",
+    "expectedImpact": "Accurate comparative-advertising method statement; no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
