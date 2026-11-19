@@ -3071,5 +3071,16 @@
     "reason": "Method note contradicted the trial-based cells on the same pages",
     "expectedImpact": "Accurate comparative-advertising method statement; no ranking change expected",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "New blog post /blog/learner-driver-insurance-private-practice/ (instructor guide to learner insurance for private practice, 7 FAQs with schema); links to Collingwood's instructor programme and learner insurance pages in return for the DSP listing on their best-apps guide; inbound links from driving-school-insurance-guide and legal-responsibilities-driving (PR #139)",
+    "reason": "Reciprocal link agreed with Collingwood (Amy Andrews) after they listed DriveSchoolPro on 19 Nov; also targets 'learner driver insurance private practice' for instructors",
+    "expectedImpact": "Keeps the Collingwood listing and backlink; new impressions for learner insurance and private practice queries",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
