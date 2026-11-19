@@ -2961,5 +2961,38 @@
     "reason": "'benefits of tattoo booking apps' 797 impr/90d at pos 5.3 with 0 clicks (mytattoo#426)",
     "expectedImpact": "CTR >0 on that query; clicks to /tattoo-booking-app/",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Homepage title/meta/H1 lead with 'driving school software' + 'software for driving schools' H2; /compare/goroadie/ rebuilt for brand query (title, H1, what-is intro, 3 FAQs, one-way calendar feed + CSV import corrected); homepage links to it with descriptive anchor",
+    "reason": "'driving school software' pos 12.2, 'software for driving schools' 10.7; 'goroadie' (vol 480) ranked 24 on / instead of compare page (#120, #121)",
+    "expectedImpact": "/ top 10 for 'driving school software'; /compare/goroadie/ becomes ranking URL for 'goroadie'",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "/driving-instructor-diary-app/: 4-way comparison table (DSP, Total Drive, MyDriveTime, GoRoadie Pro; no competitor prices), new comparison FAQ; inbound links from /compare/ and /driving-school-scheduling-software/",
+    "reason": "AI answers to 'best driving instructor diary app' cite pages with comparisons + FAQs; page had neither (#82)",
+    "expectedImpact": "DSP named in AI diary-app answers; page impressions up",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "/driving-instructor-accounting-software/ retitled 'Best Accounting App for Driving Instructors UK (2026)' with comparison section + 10th FAQ; MTD post retitled for 'making tax digital driving instructors' with GOV.UK-cited thresholds and start-date FAQ",
+    "reason": "Accounting page pos 38.2 and DSP in 0/4 AI 'best accounting app' answers (#123); MTD post pos 11.3 (#122)",
+    "expectedImpact": "MTD post onto page 1; accounting page position and AI mentions up",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
