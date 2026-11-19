@@ -2994,5 +2994,27 @@
     "reason": "Accounting page pos 38.2 and DSP in 0/4 AI 'best accounting app' answers (#123); MTD post pos 11.3 (#122)",
     "expectedImpact": "MTD post onto page 1; accounting page position and AI mentions up",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "content",
+    "description": "Replaced unsourced market-price claims (£20-40/£80-150, 3-5% per booking, 'up to 30%' app-store commission, Stripe 2.9%+30p) with Nov 2026 vendor prices and Stripe UK 1.5%+20p on /tattoo-booking-app/, /pricing/, /tattoo-studio-software/, /tattoo-artist-software/",
+    "reason": "Accuracy: claims were undated/unsourced and the Stripe figure was wrong for UK cards",
+    "expectedImpact": "Trust/E-E-A-T; no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "DSP calendar now described as a one-way feed (subscribe in Google/Apple/Outlook; no two-way sync) on 9 compare pages (dated update notes), /features/scheduling/, /driving-school-scheduling-software/ and the best-software roundup; verify-claims now blocks two-way/instant sync claims",
+    "reason": "App shipped the instructor calendar feed (#2243); pages still listed calendar sync as a DSP gap",
+    "expectedImpact": "Accurate comparisons; fewer 'no calendar sync' objections",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
