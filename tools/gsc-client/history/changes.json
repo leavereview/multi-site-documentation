@@ -3049,5 +3049,16 @@
     "reason": "Blog and compare page contradicted each other on a competitor fact; re-checked TD site, help guides and app listings 19 Nov 2026",
     "expectedImpact": "Accurate comparative claims (ASA CAP 3.33-3.41); no ranking change expected",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Added two body links to /driving-instructor-app/ in the best-driving-school-software post and a card on /features/ (PR #137)",
+    "reason": "The blog post is the page Google shows for 'driving instructor apps' (position 56-73); pass that relevance to the new dedicated page",
+    "expectedImpact": "/driving-instructor-app/ replaces the blog post as the ranking URL for 'driving instructor app'",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
