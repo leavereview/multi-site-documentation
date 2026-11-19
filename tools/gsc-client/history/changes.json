@@ -2917,5 +2917,49 @@
     "reason": "AI panel misses on lesson payments and best diary app; Facebook-group questions",
     "expectedImpact": "AI panel mentions (26 of 76 on 12 Nov, target 28); impressions on payment and diary-app queries",
     "expectedTimeline": "4-6 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "US switching guides (Kicksite, Martialytics, Zen Planner): phone numbers import in any US format; astro 7.4.12",
+    "reason": "Match app #475 (US numbers without +1 now import); clear dependency advisories",
+    "expectedImpact": "Accurate import guidance for US switchers; no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "links",
+    "description": "Added site-wide footer + contextual links to /switch/total-drive/ and /switch/mydrivetime/ (from /compare/, /compare/total-drive-vs-mydrivetime/, /blog/best-driving-school-software/); requested indexing",
+    "reason": "Both switch pages 'URL is unknown to Google' with only 1 inbound link each (#124, #125)",
+    "expectedImpact": "Both switch pages indexed; DSP cited in 'alternatives to Total Drive/MyDriveTime' AI answers",
+    "expectedTimeline": "1-2 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Reworked /driving-instructor-booking-system/: new title/meta/H1 for 'driving instructor booking (system)', pupil booking-flow section, 7 FAQs with FAQPage schema, ~2,400 words",
+    "reason": "'driving instructor booking' (260) and '...booking system' (210) had no ranking page (#126)",
+    "expectedImpact": "GSC position appears for both queries; Booking pillar impressions up",
+    "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "mytattoo.software"
+    ],
+    "category": "meta",
+    "description": "/tattoo-booking-app/: benefits-first featured answer, new title 'Benefits of a Tattoo Booking App: 6 Ways It Saves You Time', new meta, benefits FAQ, stronger CTAs",
+    "reason": "'benefits of tattoo booking apps' 797 impr/90d at pos 5.3 with 0 clicks (mytattoo#426)",
+    "expectedImpact": "CTR >0 on that query; clicks to /tattoo-booking-app/",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
