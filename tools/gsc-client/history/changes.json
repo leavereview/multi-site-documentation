@@ -3038,5 +3038,16 @@
     "reason": "Page was absent from results for 'driving school software free version' while our Play listing was #1; page one is download sites, so the page now answers the download intent",
     "expectedImpact": "Page appears for 'driving school software free version' and 'free driving school software'",
     "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-19",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Aligned Total Drive calendar claim: /blog/best-driving-school-software/ no longer says plain 'two-way sync' (now: feed out + iPhone shows phone calendars, per TD help guides); dated update note on /compare/total-drive/",
+    "reason": "Blog and compare page contradicted each other on a competitor fact; re-checked TD site, help guides and app listings 19 Nov 2026",
+    "expectedImpact": "Accurate comparative claims (ASA CAP 3.33-3.41); no ranking change expected",
+    "expectedTimeline": "2-4 weeks"
   }
 ]
