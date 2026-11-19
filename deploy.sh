@@ -36,8 +36,14 @@ npm run build              # postbuild runs verify-seo.js; a non-zero exit abort
 LOCAL=$(grep -o "<loc>" dist/sitemap-0.xml | wc -l | tr -d ' ')
 echo "  Fresh build: $LOCAL sitemap URLs"
 
+# Server-only files that are not in dist/ and must survive --delete. driveschoolpro.com: social/video/*.mp4 and
+# social/video/auto/ (written by the agentbox social-autopost job). On 19 Nov 2026 auto/ was found deleted and that
+# week's posts could not be uploaded. Same filter as the site's deploy workflow.
+PROTECT=()
+[ "$SITE" = "mydriveschool.software" ] && PROTECT+=(--filter='P /social/**')
+
 echo "════════ 2/6  Dry-run (what --delete will remove) ════════"
-rsync -avz --delete --exclude=.DS_Store --delete-excluded --dry-run dist/ "lightsail:$DEST" | grep '^deleting' || echo "  (nothing to delete)"
+rsync -avz --delete ${PROTECT[@]+"${PROTECT[@]}"} --exclude=.DS_Store --delete-excluded --dry-run dist/ "lightsail:$DEST" | grep '^deleting' || echo "  (nothing to delete)"
 
 if [ "$AUTO" != "--yes" ]; then
   read -r -p "Proceed with deploy? [y/N] " ans
@@ -47,7 +53,7 @@ fi
 echo "════════ 3/6  Deploy ════════"
 # macOS .DS_Store files leak folder listings (Intruder finding, 8 Nov 2026); never ship them,
 # and --delete-excluded removes any already on the server.
-rsync -avz --delete --exclude=.DS_Store --delete-excluded dist/ "lightsail:$DEST"
+rsync -avz --delete ${PROTECT[@]+"${PROTECT[@]}"} --exclude=.DS_Store --delete-excluded dist/ "lightsail:$DEST"
 
 echo "════════ 4/6  Verify live == local ════════"
 sleep 2
