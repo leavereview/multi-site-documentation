@@ -3082,5 +3082,49 @@
     "reason": "Reciprocal link agreed with Collingwood (Amy Andrews) after they listed DriveSchoolPro on 19 Nov; also targets 'learner driver insurance private practice' for instructors",
     "expectedImpact": "Keeps the Collingwood listing and backlink; new impressions for learner insurance and private practice queries",
     "expectedTimeline": "2-4 weeks"
+  },
+  {
+    "date": "2026-11-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "content",
+    "description": "Rewrote /about/ from founder bio to team/company page; removed founder photo/CV; blog byline and Article schema author now DriveSchoolPro organisation",
+    "reason": "Owner wants about page to be about the team, not an individual",
+    "expectedImpact": "Neutral; E-E-A-T signal shifts from person to organisation",
+    "expectedTimeline": "4 weeks"
+  },
+  {
+    "date": "2026-11-20",
+    "sites": [
+      "driveschoolpro.com"
+    ],
+    "category": "conversion",
+    "description": "Added real Trustpilot review quotes (home, pricing, about, get-started, ads lander); removed illustrative testimonials; footer Trustpilot link",
+    "reason": "Social proof from real reviews",
+    "expectedImpact": "Higher trial signup conversion on home/pricing",
+    "expectedTimeline": "4 weeks"
+  },
+  {
+    "date": "2026-11-21",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "US-first site: US home page, UK moved to /uk/, /us/ redirected, $ pricing, US wording on money pages, stale sitemap.xml removed",
+    "reason": "US is the priority market; US searchers were served the UK page (2,868 home impressions vs 24 for /us/)",
+    "expectedImpact": "US impressions at positions 1-20 rise from 151 per 19 days; dojo terms move toward page 1",
+    "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-11-21",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "5 new US pages: /taekwondo-school-software/, /kickboxing-gym-software/, /judo-club-software/, /attendance-sheet-template/ (printable sheet + 2 CSVs), /blog/belt-testing-how-often-what-to-charge/. Linked from nav, footer and home page. PR #48",
+    "reason": "Top 5 of the 21 Nov 2026 keyword and Search Console check: GSC US impressions on taekwondo, kickboxing, judo, attendance and belt testing queries with no page to rank",
+    "expectedImpact": "US impressions and clicks on taekwondo/judo/kickboxing software, attendance sheet template and belt testing queries",
+    "expectedTimeline": "2-6 weeks"
   }
 ]
