@@ -3137,5 +3137,16 @@
     "reason": "Ranks 6 and 7 in the BM content ideas list (US): instructor pay and insurance/waivers/LLC, written from primary sources checked 21 Nov 2026",
     "expectedImpact": "US impressions and clicks on instructor pay, martial arts insurance, waiver and LLC queries",
     "expectedTimeline": "4-8 weeks"
+  },
+  {
+    "date": "2026-11-22",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "Batch 3: three new US pages (/black-belt-timeline-calculator/, /blog/martial-arts-pricing/, /martial-arts-terms/) with footer, navigation and belt testing article links; /blog/martial-arts-instructor-pay/ updated with the contractor rule's Federal Register citation (91 FR 75646) and effective date. PR #52",
+    "reason": "Ranks 8, 9 and 11 in the BM content ideas list (US): black belt timeline, tuition and contracts, glossary of terms, written from primary sources checked 22 Nov 2026; contractor rule now has a publication date",
+    "expectedImpact": "US impressions and clicks on how long to get a black belt, martial arts pricing, class price and kyu/dan/stripes term queries",
+    "expectedTimeline": "4-8 weeks"
   }
 ]
