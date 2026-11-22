@@ -3126,5 +3126,16 @@
     "reason": "Top 5 of the 21 Nov 2026 keyword and Search Console check: GSC US impressions on taekwondo, kickboxing, judo, attendance and belt testing queries with no page to rank",
     "expectedImpact": "US impressions and clicks on taekwondo/judo/kickboxing software, attendance sheet template and belt testing queries",
     "expectedTimeline": "2-6 weeks"
+  },
+  {
+    "date": "2026-11-22",
+    "sites": [
+      "beltmanager.com"
+    ],
+    "category": "content",
+    "description": "Batch 2: two new blog posts (/blog/martial-arts-instructor-pay/, /blog/martial-arts-insurance/), footer links to both, link from belt testing article; karate page wording (sign-up/entries); retention post image swapped",
+    "reason": "Ranks 6 and 7 in the BM content ideas list (US): instructor pay and insurance/waivers/LLC, written from primary sources checked 21 Nov 2026",
+    "expectedImpact": "US impressions and clicks on instructor pay, martial arts insurance, waiver and LLC queries",
+    "expectedTimeline": "4-8 weeks"
   }
 ]
